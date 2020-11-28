@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var Observable_1=require("rxjs/Observable");require("rxjs/add/observable/fromEvent");var ElectronEventService=function(){function e(){}return e.on=function(e){return Observable_1.Observable.fromEvent(window,e)},e}();exports.ElectronEventService=ElectronEventService;

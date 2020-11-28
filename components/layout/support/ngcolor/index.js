@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var color_picker_module_1=require("./color-picker.module");exports.NgColorModule=color_picker_module_1.NgColorModule;

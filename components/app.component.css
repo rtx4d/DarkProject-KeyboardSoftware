@@ -1,0 +1,937 @@
+@charset "UTF-8";
+/*#region Share*/
+#backHome {
+  background-image: url("./image/Share/Off/BackToFisrtPage.png"); }
+
+#backHome:hover {
+  background-image: url("./image/Share/On/BackToFisrtPage.png"); }
+
+#AdvancedBtnL0 {
+  background-image: url("./image/Advanced/Off/LAdd.png"); }
+
+#AdvancedBtnL0:hover {
+  background-image: url("./image/Advanced/On/LAdd.png"); }
+
+#AdvancedBtnL1 {
+  background-image: url("./image/Advanced/Off/LDelete.png"); }
+
+#AdvancedBtnL1:hover {
+  background-image: url("./image/Advanced/On/LDelete.png"); }
+
+#AdvancedBtnL2 {
+  background-image: url("./image/Advanced/Off/LUp.png"); }
+
+#AdvancedBtnL2:hover {
+  background-image: url("./image/Advanced/On/LUp.png"); }
+
+#AdvancedBtnL3 {
+  background-image: url("./image/Advanced/Off/LDown.png"); }
+
+#AdvancedBtnL3:hover {
+  background-image: url("./image/Advanced/On/LDown.png"); }
+
+#AdvancedBtnL4 {
+  background-image: url("./image/Advanced/Off/LCopy.png"); }
+
+#AdvancedBtnL4:hover {
+  background-image: url("./image/Advanced/On/LCopy.png"); }
+
+#AdvancedBtnR0 {
+  background-image: url("./image/Advanced/Off/RAdd.png"); }
+
+#AdvancedBtnR0:hover {
+  background-image: url("./image/Advanced/On/RAdd.png"); }
+
+#AdvancedBtnR1 {
+  background-image: url("./image/Advanced/Off/RDelete.png"); }
+
+#AdvancedBtnR1:hover {
+  background-image: url("./image/Advanced/On/RDelete.png"); }
+
+#AdvancedBtnR2 {
+  background-image: url("./image/Advanced/Off/RUp.png"); }
+
+#AdvancedBtnR2:hover {
+  background-image: url("./image/Advanced/On/RUp.png"); }
+
+#AdvancedBtnR3 {
+  background-image: url("./image/Advanced/Off/RDown.png"); }
+
+#AdvancedBtnR3:hover {
+  background-image: url("./image/Advanced/On/RDown.png"); }
+
+#AdvancedBtnR4 {
+  background-image: url("./image/Advanced/Off/RCopy.png"); }
+
+#AdvancedBtnR4:hover {
+  background-image: url("./image/Advanced/On/RCopy.png"); }
+
+#CloseProgram {
+  background-image: url("./image/Share/Off/CloseProgram.png"); }
+
+#CloseProgram:hover {
+  background-image: url("./image/Share/On/CloseProgram.png"); }
+
+#Bell {
+  background-image: url("./image/Share/Off/Bell.png"); }
+
+#Bell:hover {
+  background-image: url("./image/Share/On/Bell.png"); }
+
+#SystemSettingIcon {
+  background-image: url("./image/Share/Off/SystemSettingIcon.png"); }
+
+#SystemSettingIcon:hover {
+  background-image: url("./image/Share/On/SystemSettingIcon.png"); }
+
+#ZoomOut {
+  background-image: url("./image/Share/Off/ZoomOut.png"); }
+
+#ZoomOut:hover {
+  background-image: url("./image/Share/On/ZoomOut.png"); }
+
+#DecreaseBrightness {
+  background-image: url("./image/Keyboard/Off/DecreaseBrightness.png"); }
+
+#DecreaseBrightness:hover {
+  background-image: url("./image/Keyboard/On/DecreaseBrightness.png"); }
+
+#IncreaseBrightness {
+  background-image: url("./image/Keyboard/Off/IncreaseBrightness.png"); }
+
+#IncreaseBrightness:hover {
+  background-image: url("./image/Keyboard/On/IncreaseBrightness.png"); }
+
+#SwitchCustomMode {
+  background-image: url("./image/Keyboard/Off/SwitchCustomMode.png"); }
+
+#SwitchCustomMode:hover {
+  background-image: url("./image/Keyboard/On/SwitchCustomMode.png"); }
+
+#SwitchLEDMode {
+  background-image: url("./image/Keyboard/Off/SwitchLEDMode.png"); }
+
+#SwitchLEDMode:hover {
+  background-image: url("./image/Keyboard/On/SwitchLEDMode.png"); }
+
+#SwitchLEDMode {
+  background-image: url("./image/Keyboard/Off/SwitchLEDMode.png"); }
+
+#SwitchLEDMode:hover {
+  background-image: url("./image/Keyboard/On/SwitchLEDMode.png"); }
+
+#DecreaseLEDSpeed {
+  background-image: url("./image/Keyboard/Off/DecreaseLEDSpeed.png"); }
+
+#DecreaseLEDSpeed:hover {
+  background-image: url("./image/Keyboard/On/DecreaseLEDSpeed.png"); }
+
+#IncreaseLEDSpeed {
+  background-image: url("./image/Keyboard/Off/IncreaseLEDSpeed.png"); }
+
+#IncreaseLEDSpeed:hover {
+  background-image: url("./image/Keyboard/On/IncreaseLEDSpeed.png"); }
+
+#BT1 {
+  background-image: url("./image/Keyboard/Off/BT1.png"); }
+
+#BT1:hover {
+  background-image: url("./image/Keyboard/On/BT1.png"); }
+
+#BT2 {
+  background-image: url("./image/Keyboard/Off/BT2.png"); }
+
+#BT2:hover {
+  background-image: url("./image/Keyboard/On/BT2.png"); }
+
+#BT3 {
+  background-image: url("./image/Keyboard/Off/BT3.png"); }
+
+#BT3:hover {
+  background-image: url("./image/Keyboard/On/BT3.png"); }
+
+#FNlock {
+  background-image: url("./image/Keyboard/Off/FNlock_C.png"); }
+
+#FNlock:hover {
+  background-image: url("./image/Keyboard/On/FNlock_C.png"); }
+
+#CloseLED {
+  background-image: url("./image/Keyboard/Off/CloseLED.png"); }
+
+#CloseLED:hover {
+  background-image: url("./image/Keyboard/On/CloseLED.png"); }
+
+#Endurance {
+  background-image: url("./image/Keyboard/Off/Endurance.png"); }
+
+#Endurance:hover {
+  background-image: url("./image/Keyboard/On/Endurance.png"); }
+
+.KeyRightSetStyle {
+  /* margin-left: 5px; */
+  width: 50px;
+  height: 50px;
+  background-color: #0000;
+  float: left; }
+
+/*#endregion Share*/
+/*#region Select*/
+.SelectTemplate {
+  position: absolute;
+  height: 68vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 14.5vh;
+  width: 21.3vw;
+  background: url(./image/ColorSet/SelectBG.png);
+  background-size: 100% 100%; }
+
+.SelectTemplate ::-webkit-scrollbar-track {
+  /* border: 1px solid red;
+    padding: 2px 0;
+    background-color: blue; */
+  background-repeat: no-repeat; }
+
+.SelectTemplate::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* border: 1px solid yellow; */
+  background-repeat: no-repeat;
+  background-color: #4C4C4C; }
+
+.SelectTemplate::-webkit-scrollbar {
+  width: 15px; }
+
+.SelectTemplate::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("./image/ColorSet/UpArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.SelectTemplate::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("./image/ColorSet/DownArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.ProjectItem {
+  line-height: 3vh;
+  width: 100%;
+  height: 3vh;
+  color: #fff;
+  font-size: 87%;
+  margin-bottom: 2%;
+  border-radius: 3px;
+  box-sizing: border-box; }
+
+.ProjectSelect {
+  position: absolute;
+  height: 34vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 5vh;
+  width: 21.3vw;
+  background-color: #ff0;
+  background: url(./image/ColorSet/SelectBG.png); }
+
+.ProjectSelect::-webkit-scrollbar-track {
+  /* border: 1px solid red;
+    padding: 2px 0;
+    background-color: blue; */
+  background-repeat: no-repeat; }
+
+.ProjectSelect::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* border: 1px solid yellow; */
+  background-repeat: no-repeat;
+  background-color: #4C4C4C; }
+
+.ProjectSelect::-webkit-scrollbar {
+  width: 15px; }
+
+.ProjectSelect::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("./image/ColorSet/UpArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.ProjectSelect::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("./image/ColorSet/DownArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#MacroSetting {
+  position: absolute;
+  height: 28.3vh;
+  margin-top: 52vh;
+  width: 21.3vw;
+  background-color: #ff0;
+  background: url(./image/ColorSet/SelectBG.png); }
+
+#KeyBoardMacroSearchSetting {
+  position: absolute;
+  height: 22vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 44.2vh;
+  width: 21.3vw;
+  background-color: #141414;
+  background: url(./image/ColorSet/SelectBG.png); }
+
+#KeyBoardMacroSearchSetting::-webkit-scrollbar-track {
+  /* border: 1px solid red;
+    padding: 2px 0;
+    background-color: blue; */
+  background-repeat: no-repeat; }
+
+#KeyBoardMacroSearchSetting::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* border: 1px solid yellow; */
+  background-repeat: no-repeat;
+  background-color: #4C4C4C; }
+
+#KeyBoardMacroSearchSetting::-webkit-scrollbar {
+  width: 15px; }
+
+#KeyBoardMacroSearchSetting::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("./image/ColorSet/UpArrow.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 0; }
+
+#KeyBoardMacroSearchSetting::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("./image/ColorSet/DownArrow.png");
+  height: 0;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#ScriptClassSelect {
+  position: absolute;
+  height: 32vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 18vh;
+  width: 21.3vw;
+  background-color: #ff0;
+  background: url(./image/ColorSet/SelectBG.png); }
+
+#ScriptClassSelect::-webkit-scrollbar-track {
+  /* border: 1px solid red;
+    padding: 2px 0;
+    background-color: blue; */
+  background-repeat: no-repeat; }
+
+#ScriptClassSelect::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* border: 1px solid yellow; */
+  background-repeat: no-repeat;
+  background-color: #4C4C4C; }
+
+#ScriptClassSelect::-webkit-scrollbar {
+  width: 15px; }
+
+#ScriptClassSelect::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("./image/ColorSet/UpArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#ScriptClassSelect::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("./image/ColorSet/DownArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#MacroFileSelectList {
+  position: absolute;
+  width: 65vw;
+  height: 38vh;
+  margin-left: 23.6vw;
+  margin-top: 9.4vh;
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
+#MacroFileSelectList::-webkit-scrollbar-track {
+  /* border: 1px solid red;
+    padding: 2px 0;
+    background-color: blue; */
+  background-repeat: no-repeat; }
+
+#MacroFileSelectList::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* border: 1px solid yellow; */
+  background-repeat: no-repeat;
+  background-color: #4C4C4C; }
+
+#MacroFileSelectList::-webkit-scrollbar {
+  width: 16px; }
+
+#MacroFileSelectList::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("./image/ColorSet/UpArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#MacroFileSelectList::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("./image/ColorSet/DownArrow.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#SystemSettingDrop {
+  position: absolute;
+  display: block;
+  top: 31.8%;
+  left: 46%;
+  width: 11.8vw;
+  background-color: #13101082;
+  text-align: center; }
+
+#SystemSettingDrop::-webkit-scrollbar-track {
+  /* border: 1px solid red;
+    padding: 2px 0;
+    background-color: blue; */
+  background-repeat: no-repeat; }
+
+#SystemSettingDrop::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* border: 1px solid yellow; */
+  background-repeat: no-repeat;
+  background-color: #4C4C4C; }
+
+#SystemSettingDrop::-webkit-scrollbar {
+  width: 15px; }
+
+#SystemSettingDrop::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("./image/ColorSet/UpArrow.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 0; }
+
+#SystemSettingDrop::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("./image/ColorSet/DownArrow.png");
+  height: 0;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+#ShareSelectList {
+  overflow-y: visible;
+  position: absolute;
+  width: 10vw;
+  margin-left: 0vw;
+  margin-top: 0vh;
+  height: 10vh; }
+
+/*#endregion Select*/
+/*#region WebInputUI*/
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0; }
+
+input[type="checkbox"].autoStartCheckBox {
+  width: 1.5vh;
+  height: 1.5vh;
+  border: 2px solid #FFF; }
+
+input[type="checkbox"].autoStartCheckBox:checked {
+  background: yellow;
+  width: 1.5vh;
+  height: 1.5vh;
+  border: 2px solid #FFF; }
+
+.InputObject input[type="checkbox"] {
+  display: inline-flex;
+  width: 1.5vh;
+  height: 1.5vh;
+  border: 2px solid #FFF; }
+
+.InputObject input[type="checkbox"]:checked {
+  background: yellow; }
+
+input[type="range"].LedOptionInputRange {
+  -webkit-appearance: none;
+  /* 去除默认样式 */
+  background: -webkit-linear-gradient(#2e9cfb, #2e9cfb) no-repeat, #4C4C4C;
+  background-size: 0 100%;
+  width: 42.5%;
+  height: 20%;
+  border-radius: 15px;
+  vertical-align: middle; }
+
+/* 去除获取焦点时的边框 */
+input[type="range"].LedOptionInputRange:focus {
+  outline: none; }
+
+/* chrome自定义滑动轨道 */
+input[type="range"].LedOptionInputRange::-webkit-slider-runnable-track {
+  /* border-radius: 15px; */
+  /* background-color: rgb(47, 0, 255); */
+  height: 250%; }
+
+/* chrome自定义滑块 */
+input[type="range"].LedOptionInputRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10%;
+  height: 110%;
+  background: #808080;
+  border-radius: 50%; }
+
+/*#endregion WebInputUI*/
+/*#region Page1:LEDmode*/
+.PageBtnStyle {
+  position: absolute;
+  width: 63px;
+  height: 63px;
+  margin-top: 3.5%;
+  box-sizing: border-box;
+  background-size: 100% 100%; }
+
+#LedAdjustable {
+  overflow-y: scroll;
+  height: 80%;
+  width: 35%; }
+
+#LedAdjustable::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #4C4C4C;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+
+#LedAdjustable::-webkit-scrollbar {
+  width: 15px; }
+
+.LedInputTxtStyle {
+  width: 18%;
+  height: 100%;
+  padding: 0;
+  text-align: center;
+  color: white;
+  background-color: #000;
+  box-sizing: border-box;
+  border: 1px #0000 solid; }
+
+.circle {
+  position: absolute;
+  z-index: 9999;
+  border: 2px solid blue;
+  width: 1.5vw;
+  height: 1.5vw;
+  border-radius: 50%; }
+
+.LEDModeSelect {
+  line-height: 3vh;
+  width: 100%;
+  height: 3vh;
+  font-size: 1vw;
+  font-weight: bold;
+  margin-top: 2%;
+  border-radius: 2px;
+  box-sizing: border-box; }
+
+.APModeSelect {
+  width: 70%;
+  float: left;
+  line-height: 3vh;
+  height: 3vh;
+  margin-left: 11px;
+  text-align: left;
+  font-size: 1.6vh;
+  border-radius: 2px; }
+
+/*#endregion Page1:LEDmode*/
+/*#region Page2:KeyAssign*/
+.CustomInputText {
+  position: absolute;
+  border: 0;
+  outline: 0;
+  color: #FFF;
+  /* 關掉焦點外框 */
+  pointer-events: none;
+  /* 關閉功能 */
+  background: transparent;
+  padding: 0;
+  line-height: 3vh;
+  margin-left: 0.6vw;
+  text-overflow: ellipsis;
+  width: 86%; }
+
+.color_quantity {
+  position: absolute;
+  top: 59%;
+  left: 23%;
+  width: 9%;
+  height: 11%;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px #0000 solid;
+  text-align: center;
+  background-color: #000;
+  color: #fff; }
+
+input[type="range"].color_quantity::-webkit-inner-spin-button {
+  background-color: #f00;
+  width: 12px;
+  height: 41px;
+  cursor: pointer;
+  /* -webkit-appearance: none; */
+  opacity: 1; }
+
+input.InputBtnStyle:focus {
+  outline: none !important; }
+
+input.InputBtnStyle:hover {
+  background-color: #ff6b6b; }
+
+.InputBtnStyle {
+  position: absolute;
+  color: #FFF;
+  background-repeat: no-repeat;
+  border: none;
+  width: 2.9vw;
+  height: 3.6vh;
+  font-size: 1.5vh;
+  box-sizing: border-box;
+  background-color: #4C4C4C; }
+
+#KeyAssignPrompt {
+  height: 6.5vh;
+  position: absolute;
+  width: fit-content;
+  z-index: 9998;
+  line-height: 3.2vh;
+  border: 2px solid #4d5b6f;
+  border-radius: 0.4vw;
+  box-sizing: border-box;
+  background-color: #1c1c1c;
+  color: #fff;
+  pointer-events: none;
+  font-size: 1vw; }
+
+.KeyPageAssignBtnStyle {
+  height: 28px;
+  width: 100px;
+  text-align: center;
+  font-size: 1vw;
+  float: left;
+  line-height: 3.7vh;
+  white-space: nowrap;
+  color: #fff;
+  background-repeat: no-repeat; }
+
+/*#endregion Page2:KeyAssign*/
+/*#region Page3:Macro*/
+.MacroFiletItem {
+  width: 7%;
+  display: inline-block;
+  box-sizing: border-box;
+  margin-left: 1.8vw;
+  margin-top: 0.9vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #1fadf4e0;
+  text-align: center;
+  height: 10vh;
+  white-space: nowrap;
+  font-size: 1.9vh; }
+
+#MacroContentArea::-webkit-scrollbar-track {
+  /* border: 1px solid red;
+    padding: 2px 0;
+    background-color: blue; */
+  background: transparent;
+  /*軌道的樣子*/ }
+
+#MacroContentArea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-repeat: no-repeat;
+  background-color: #4C4C4C; }
+
+#MacroContentArea::-webkit-scrollbar {
+  width: 15px; }
+
+#MacroContentArea::-webkit-scrollbar-button:vertical:decrement {
+  background: transparent;
+  width: 0;
+  height: 0; }
+
+#MacroContentArea::-webkit-scrollbar-button:vertical:increment {
+  background: transparent;
+  width: 0;
+  height: 0; }
+
+.MacroContentItem {
+  width: 100%;
+  height: 14%;
+  border-bottom: 2px #4C4C4C solid; }
+
+/*#endregion Macro*/
+/*#region Page4:ProgramPage*/
+#PGSettingOption {
+  position: absolute;
+  height: 29vh;
+  margin-top: 42vh;
+  width: 21.3vw;
+  background-size: 100% 100%;
+  background: url(./image/ColorSet/SelectBG.png); }
+
+input[type="range"].PGInputRange {
+  position: absolute;
+  margin-left: 15.6vw;
+  margin-top: 1.8vw;
+  -webkit-appearance: none;
+  /* 去除默认样式 */
+  background: -webkit-linear-gradient(#2e9cfb, #2e9cfb) no-repeat, #4C4C4C;
+  background-size: 0 100%;
+  width: 5vw;
+  height: 0.6vh;
+  border-radius: 15px;
+  vertical-align: middle; }
+
+/* 去除获取焦点时的边框 */
+input[type="range"].PGInputRange:focus {
+  outline: none; }
+
+/* chrome自定义滑动轨道 */
+input[type="range"].PGInputRange::-webkit-slider-runnable-track {
+  /* border-radius: 15px; */
+  /* background-color: rgb(47, 0, 255); */
+  height: 250%; }
+
+/* chrome自定义滑块 */
+input[type="range"].PGInputRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.2vh;
+  height: 1.3vh;
+  background: #808080;
+  border-radius: 50%;
+  background-image: url("./image/P7/InputIcon.png");
+  transform: translateY(1px); }
+
+/*#endregion Page4:ProgramPage*/
+/*#region ColorPicker*/
+.colorBase {
+  position: absolute;
+  width: 1.2vw;
+  border-radius: 10px;
+  height: 1.2vw;
+  border: 1px #2e2f2e solid; }
+
+.AdvancedColorBase {
+  float: left;
+  background-color: #c7cc33;
+  width: 1.8vw;
+  height: 1.8vw;
+  border: 1px solid #2e2f2e;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  border-radius: 13px; }
+
+.PickingArea {
+  background: url("https://mdn.mozillademos.org/files/5707/picker_mask_200.png") center center;
+  background: -webkit-linear-gradient(top, #fff 0%, #fff0 50%, #0000 50%, #000 100%), -webkit-linear-gradient(left, #808080 0%, #80808000 100%);
+  background-color: #F00; }
+
+.circle {
+  width: 1vh;
+  height: 1vh;
+  background: transparent;
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid blue;
+  border-radius: 50%; }
+
+/* 去除获取焦点时的边框 */
+input[type="range"]#ColorSliderH:focus {
+  outline: none; }
+
+input[type="range"]#ColorSliderH::-webkit-slider-thumb {
+  height: 1.6vw;
+  width: 4%;
+  background-repeat: no-repeat;
+  background-image: url(./image/skin/colorBarH_ico.png);
+  -webkit-appearance: none;
+  background-size: 100% 100%; }
+
+input[type="range"]#ColorSliderS::-webkit-slider-thumb {
+  height: 10px;
+  width: 5px;
+  background-repeat: no-repeat;
+  background-image: url("./image/skin/colorBarH_ico.png"); }
+
+input[type="range"]#ColorSliderV::-webkit-slider-thumb {
+  height: 10px;
+  width: 5px;
+  background-repeat: no-repeat;
+  background-image: url("./image/skin/colorBarH_ico.png"); }
+
+.RBtn1cs {
+  background-image: url("./image/ScriptSet/Off/RBtn1.png"); }
+
+.RBtn2cs {
+  background-image: url("./image/ScriptSet/Off/RBtn2.png"); }
+
+.RBtn3cs {
+  background-image: url("./image/ScriptSet/Off/RBtn3.png"); }
+
+.RBtn4cs {
+  background-image: url("./image/ScriptSet/Off/RBtn4.png"); }
+
+.RBtn5cs {
+  background-image: url("./image/ScriptSet/Off/RBtn5.png"); }
+
+.RBtn1cs:hover {
+  background-image: url("./image/ScriptSet/On/RBtn1.png"); }
+
+.RBtn2cs:hover {
+  background-image: url("./image/ScriptSet/On/RBtn2.png"); }
+
+.RBtn3cs:hover {
+  background-image: url("./image/ScriptSet/On/RBtn3.png"); }
+
+.RBtn4cs:hover {
+  background-image: url("./image/ScriptSet/On/RBtn4.png"); }
+
+.RBtn5cs:hover {
+  background-image: url("./image/ScriptSet/On/RBtn5.png"); }
+
+#ColorSliderH {
+  position: absolute;
+  top: 23%;
+  left: 39%;
+  width: 9.5VW;
+  height: 1.1vw;
+  background-color: #0000;
+  transform: rotate(-90deg);
+  background-image: url(./image/skin/colorBarH.png);
+  -webkit-appearance: none;
+  background-size: 100% 100%;
+  background-repeat: no-repeat; }
+
+#ColorSliderH.CustomH2 {
+  position: absolute;
+  top: 90%;
+  left: 0%;
+  width: 14.9VW;
+  height: 1.2vw;
+  background-color: #0000;
+  transform: rotate(0deg);
+  background-image: url(./image/skin/colorBarH.png);
+  -webkit-appearance: none;
+  background-size: 100% 100%;
+  background-repeat: no-repeat; }
+
+#ColorSliderS {
+  position: absolute;
+  top: 14%;
+  left: 54%;
+  width: 41%;
+  height: 10%;
+  /* background: -webkit-linear-gradient(left,#FFFFFF,black); */ }
+
+#ColorSliderV {
+  position: absolute;
+  top: 26%;
+  left: 54%;
+  width: 41%;
+  height: 10%;
+  /* background: -webkit-linear-gradient(left,#FFFFFF,black); */ }
+
+/*#endregion ColorPicker*/
+/*#region Animation*/
+#loading1 {
+  position: absolute;
+  color: white;
+  background: black;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; }
+
+.loadingImage {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: #2e98df;
+  border-radius: 50px;
+  animation: loadingImage 1.5s infinite linear; }
+
+.loadingImage::after {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-top: 10px solid #b160d1;
+  border-bottom: 10px solid #b160d1;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-radius: 50px;
+  content: '';
+  top: -20px;
+  left: -20px;
+  animation: loadingImage_after 1.5s infinite linear; }
+
+@keyframes loadingImage {
+  0% {
+    transform: rotate(0deg); }
+  50% {
+    transform: rotate(180deg);
+    background: #2ecc71; }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes loadingImage_after {
+  0% {
+    border-top: 10px solid #b160d1;
+    border-bottom: 10px solid #b160d1; }
+  50% {
+    border-top: 10px solid #2e98df;
+    border-bottom: 10px solid #2e98df; }
+  100% {
+    border-top: 10px solid #b160d1;
+    border-bottom: 10px solid #b160d1; } }
+
+/*#endregion Animation*/
+/*#region 7:AdvancedEdit*/
+.AdvancedEditProjectSelect {
+  line-height: 3vh;
+  width: 100%;
+  height: 3vh;
+  font-size: 1vw;
+  margin-top: 2%;
+  margin-left: 2%; }
+
+/*#endregion Animation*/
+#main-app {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-image: url("./image/Share/AllBg.png");
+  user-select: none;
+  overflow: hidden; }
+  #main-app .dragableArea {
+    position: absolute;
+    height: 93px;
+    width: 80%;
+    margin-left: 10vw;
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
+    -webkit-app-region: drag;
+    background-color: #f00; }
+  #main-app .content {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    color: white; }
+    #main-app .content .MainPageBtn1 {
+      background-image: url("./image/FirstPage/BTN1.png"); }
+    #main-app .content .MainPageBtn2 {
+      background-image: url("./image/FirstPage/BTN2.png"); }
+    #main-app .content .MenuArea {
+      width: 1166px;
+      height: 285px;
+      background-color: #00f; }

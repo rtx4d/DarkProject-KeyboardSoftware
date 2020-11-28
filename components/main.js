@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var core_1=require("@angular/core"),platform_browser_dynamic_1=require("@angular/platform-browser-dynamic"),app_module_1=require("./app.module");core_1.enableProdMode(),platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule).catch(function(r){return console.error(r)});
