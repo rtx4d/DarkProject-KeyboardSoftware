@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" /> 
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="js/fontawesome/css/all.css">
+        <script src="./node_modules/core-js/client/shim.min.js"></script>
+        <script src="./node_modules/zone.js/dist/zone.js"></script>
+        <script src="./node_modules/reflect-metadata/Reflect.js"></script>
+        <script src="./node_modules/systemjs/dist/system.src.js"></script>
+        <script src="./node_modules/hammerjs/hammer.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.js"></script> 
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/jquery.limitslider.js"></script>
+        <script src="js/bootstrap.min.js"></script>  
+        <base href="./">
+        <title>DarkProject-KD3</title> 
+          <script src="./systemjs.config.js"></script>         
+         <script>
+            System.import('App').catch(function (err) { console.error(err); });   
+            document.ondragover = document.ondrop = function(e) {
+                e.preventDefault();
+                return false;
+            };       
+            console.log = function() {}
+        </script> 
+        <!-- <script src="//connect.facebook.net/en_US/sdk.js"></script> -->
+  
+        <style>  
+            body {  
+                width:100%; 
+                height:100%;
+                position: absolute;
+                overflow: hidden;  
+                margin:0px
+            }
+            #loading {
+                background: black;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 999;
+            }
+            
+            .loadingImage {
+                position: relative;
+                width: 30px;
+                height: 30px;
+                background: #2e98df;
+                border-radius: 50px;
+                animation: loadingImage 1.5s infinite linear;
+            }
+
+            .loadingImage::after {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                border-top: 10px solid #b160d1;
+                border-bottom: 10px solid #b160d1;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-radius: 50px;
+                content: '';
+                top: -20px;
+                left: -20px;
+                animation: loadingImage_after 1.5s infinite linear;
+            }
+
+            @keyframes loadingImage {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                50% {
+                    transform: rotate(180deg);
+                    background: #2ecc71;
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes loadingImage_after {
+                0% {
+                    border-top: 10px solid #b160d1;
+                    border-bottom: 10px solid #b160d1;
+                }
+
+                50% {
+                    border-top: 10px solid #2e98df;
+                    border-bottom: 10px solid #2e98df;
+                }
+
+                100% {
+                    border-top: 10px solid #b160d1;
+                    border-bottom: 10px solid #b160d1;
+                }
+            }
+        </style>  
+    </head>
+    <body>   
+        <!-- <div id="loading">
+            <div class="loadingImage"></div>
+        </div>     -->
+        <sm-app> </sm-app>
+    </body>
+</html>

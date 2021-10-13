@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var FirewareManager=function(){function e(){this.hasUpdate=!1,this.onFireWareUI=!1,this.nowVersion="",this.version="",this.updateContent=["連接失敗","連接失敗","連接失敗"]}return e}();exports.FirewareManager=FirewareManager;

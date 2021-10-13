@@ -1,0 +1,2395 @@
+
+
+
+
+
+
+
+<div id="ShowLoadingMessage" style="position: absolute;height: 100vh;z-index: 9999;width: 100vw;  
+margin-top: 0;background: #0000008a;" [style.display]="onLoading?'block':'none'">
+    <img src="./image/Share/Loading.gif" alt="Loading.gif" style="position: absolute;left: 48vw;top: 47vh;"/>
+</div>
+
+<div class="SelectTemplate" id="ShowAdvancedList"
+    style="position: absolute;height: 100vh;z-index: 9999;width: 100vw;  margin-top: 0;background: rgba(0, 0, 0, 0.78);"
+    [style.display]="ShowAdvancedList?'block': 'none'">
+    <div id="RecordLedUI" class="SelectTemplate" style="height: 33vh;width: 19vw;margin-top: 33vh;left: 42vw;">
+        <div class="AdvancedEditProjectSelect" *ngFor="let item of LCFM.LedChainFrames ;let i = index"
+            (click)="recordCustomLedindex=i;"
+            [style.background-color]="(recordCustomLedindex==i)?'#0066F1':'transparent'">
+            <div style="position: absolute;color: #f00;">{{LCFM.LedChainFrames[i].projectName}}</div>
+        </div>
+    </div>
+
+
+    <input data-index="取消index" class="InputBtnStyle" type="button" value="取消" (click)="ShowAdvancedList=false"
+        [value]="i18nManager.getTarget().System.CANCEL"
+        style="top: 66.3vh;left: 45vw;width: 5.1vw;position: absolute;background-color: #77609729;color: white;">
+    <input data-index="保存index" class="InputBtnStyle" type="button" value="保存" (click)="setSelectionKeyLed();"
+        [value]="i18nManager.getTarget().System.SAVE"
+        style="top: 66.3vh;left: 53vw;width: 5.1vw;position: absolute;background-color: #77609729;color: white;">
+</div>
+
+
+<div *ngIf="this.P_S_OSetting" id="ProfileSettingOption"
+    style="position: absolute;height: 100vh;z-index: 9999;width: 100vw;  margin-top: 0;background: rgba(0, 0, 0, 0.78);">
+    <div id="RecordPSOUI" style="height: 33vh;
+    width: 23vw;
+    margin-top: 33vh;
+    left: 42vw;
+    position: absolute;
+    background-size: 100% 100%;
+    background: rgba(0, 0, 0, 0.78);">
+    <div style="position: absolute;line-height: 2.3vh;margin-right: 25.5vw;width: 100%;margin-top: 1vh;text-align: center;color: white;">
+        {{this.i18nManager.getTarget().P2.POLLINGRATE}}
+    </div>
+        <div id="ReportRateUI"
+            style="height: 2.5vh;
+            position: absolute;
+            width: 100%;
+            margin-left: 1.7vw;
+            margin-top: 14%;
+            z-index: 9998;
+            color: #fff;
+            font-size: 1.8vh;">
+            <img [src]="KeyBoardManager.getTarget().reportRateIndex==0? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
+            (click)="KeyBoardManager.getTarget().reportRateIndex=0" style="width: 1.3vw;height: 1.3vw;float: left;">
+            <div style="line-height: 2.3vh;
+            float: left;margin-right: 0.5vw;">
+                125HZ</div>
+            <img [src]="KeyBoardManager.getTarget().reportRateIndex==1? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
+            (click)="KeyBoardManager.getTarget().reportRateIndex=1" style="width: 1.3vw;height: 1.3vw;float: left;">
+            <div style="    line-height: 2.3vh;
+            float: left;margin-right: 0.5vw;">
+                250HZ</div>
+            <img [src]="KeyBoardManager.getTarget().reportRateIndex==2? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
+            (click)="KeyBoardManager.getTarget().reportRateIndex=2" style="width: 1.3vw;height: 1.3vw;float: left;"> 
+            <div style="    line-height: 2.3vh;
+            float: left;margin-right: 0.5vw;">
+                500HZ</div>
+            <img [src]="KeyBoardManager.getTarget().reportRateIndex==3? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
+            (click)="KeyBoardManager.getTarget().reportRateIndex=3" style="width: 1.3vw;height: 1.3vw;float: left;">
+            <div style="    line-height: 2.3vh;
+            float: left;margin-right: 0.5vw;">
+                1000HZ</div>     
+        </div>
+    </div>
+    <input data-index="確定index" class="InputBtnStyle" type="button" value="保存" (click)="this.P_S_OSetting=false"
+        [value]="i18nManager.getTarget().Warning.Apply"
+        style="top: 66.3vh;left: 51.3vw;width: 5.1vw;position: absolute;background-color: #77609729;color: white;">
+</div>
+
+<div id="ImportExportMask" [style.display]="onAppImportExport?'block':'none'" style="
+position: absolute;
+z-index: 9999;
+height: 100vh;
+width: 100vw;
+background-color:rgba(0, 0, 0, 0.54);
+">
+</div>
+<div id="ShowAlertMessage" style="position: absolute;height: 100vh;z-index: 9999;width: 100vw;  
+margin-top: 0;background: #0000008a;" [style.display]="alertMessageBool?'block':'none'">
+    <div style="position: absolute;color: #f00;
+background: url(./image/DarkAlert.jpg);
+background-size: 100% 100%;
+width: 100vw;font-size: 3vw;
+height: 100vh;">
+        <div style="position: absolute;left: 25vw;top: 25vh;
+        color: #fcfcfc;background-size: 100% 100%;
+        text-align: center;font-size: 3vw;
+        line-height: 50vh;height: 50vh;"> {{this.i18nManager.getTarget().Warning.MESSAGE}}</div>
+        <input
+            style="width: 4vw;height: 3vw;left: 48%;top: 63%;background-color: #77609729;color: white;position: absolute;padding: 0;"
+            type="button" value="確定" [value]="this.i18nManager.getTarget().Warning.Apply" (click)="alertMessageBool=false">
+        
+        </div>
+
+</div>
+<!-- {{i18nManager.getTarget().System.UPDATE+" :"+this.FWManager.updateContent[i18nManager.onUsingLangindex]}} -->
+
+<div id="FireWareUpdate" [style.display]="this.FWManager.onFireWareUI?'block':'none'"
+ style="position: absolute; z-index: 9999; height: 100vh; width: 100vw; background-color: rgba(0, 0, 0, 0.78); display: block;">
+    <img  alt="不存在" src="./image/Share/SystemSettingBG.png" 
+    style="position: absolute;top: 50%;left: 50%;margin-top: -222px;margin-left: -163px;">  
+    <div  style="position: absolute;margin-left: 39.2vw;margin-top: 24.9vh;color: white;">
+        {{i18nManager.getTarget().System.VERSION+" :"+this.FWManager.version}}
+    </div>
+    
+    <div id="updateContent" class="SelectTemplate" 
+    style="position: absolute;
+    margin-left: 39.2vw;
+    margin-top: 28.9vh;
+    color: white;
+    width: 22vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: url('');
+    height: 25vw;" [innerHtml]="this.FWManager.updateContent[i18nManager.onUsingLangindex]">
+>
+    </div>
+    <input [attr.disabled]="this.FWManager.hasUpdate?null:'' " (click)="this.FWManager.onFireWareUI=false;this.LaunchFWUpdateToServer();"
+    [style.color]="this.FWManager.hasUpdate?'white':'black'"
+    style="margin-left: 11.7vw;
+            margin-top: 15.4vh;
+            position: absolute;
+            top: 57%;
+            left: 37.3%;
+            color: white;
+            height: 26px;
+            background: url(./image/Share/SystemSettingBtn.png);
+            width: 71px;
+            border: 0;
+            " type="button" value="Update" [value]="i18nManager.getTarget().System.UPDATE">
+    <input (click)="this.FWManager.onFireWareUI=false;"
+    style="margin-left: 11.7vw;
+            margin-top: 15.4vh;
+            position: absolute;
+            top: 57%;
+            left: 44.3%;
+            color: white;
+            height: 26px;
+            background: url(./image/Share/SystemSettingBtn.png);
+            width: 71px;
+            border: 0;
+            " type="button" value="Cancel" [value]="i18nManager.getTarget().System.CANCEL">      
+</div>
+<div id="SystemSettingPage" [style.display]="onSystemSetting?'block':'none'" style="
+position: absolute;z-index: 9999;height: 100vh;width: 100vw;
+background-color:rgba(0, 0, 0, 0.78);;
+">
+    <img src="./image/Share/SystemSettingBG.png" alt="不存在"
+        style="position: absolute;top: 50%;left: 50%;margin-top: -222px;margin-left: -163px;">
+
+    <img src="./image/Share/SystemSettingClose.png" alt="不存在" style="position: absolute;
+    top: 23.2%;left: 60.5%;" (click)="i18nManager.back();onSystemSetting=false;">
+    <input style="position: absolute;height: 21px;width: 151px;border: 0;
+            top: 28.9%;left: 46%;color: white;
+            background: url(./image/Share/SystemSettingDropUI.png);           
+            " type="button" (click)="pulldownable=!pulldownable" [value]="i18nManager.getLangUITxt()">
+    <div id="SystemDefault" style="position: absolute;
+    height: auto;
+    top: 72.2%;
+    left: 38.4%;
+    width: 122px;
+    text-align: center;
+    line-height: 29px;
+    color: rgb(255, 255, 255);
+    font-size: 13px;" 
+        (mouseenter)="isActive='mouseenter'" (mouseup)="isActive='mouseup'" (mouseleave)="isActive='mouseleave'"
+        [style.background-image]="this.ReturnBackBtnImage(isActive)" (click)="i18nManager.recovery[0]=!i18nManager.recovery[0]">
+        {{this.i18nManager.getTarget().System.DEFAULT}}
+    </div>
+
+    <div class="autoStartCheckBox" data-index="Kcombination"
+        style="    margin-left: 39.5vw;
+        position: absolute;
+        top: 36.9%;
+        width: 25.9px;
+        height: 14px;"
+        [style.background-image]="i18nManager.autoStart[0]?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+        (click)="i18nManager.autoStart[0]=!i18nManager.autoStart[0]">
+    </div>
+
+    
+    <div style="
+    position: absolute;
+    margin-left: 43vw;
+    margin-top: 36.5vh;
+    color: white;
+    font-size: 1vw;
+    ">
+        {{i18nManager.getTarget().System.AUTOSTART}}
+    </div>
+
+
+    <div id="SystemSettingDrop" [style.display]="pulldownable?'block':'none'">
+        <div *ngFor="let item of i18nManager.langList;let i = index" style=" margin-top: 4%;margin-left: 5%;"
+            (click)="pulldownable=false;this.i18nManager.chooseLangindex = i;" (mouseover)="chooseLangindex=i"
+            [style.background-color]="chooseLangindex==i?'#c8cabb4f':'transparent'">
+            <div style="display: inline-block; color: white;vertical-align: middle;">
+                {{i18nManager.getTempTarget().name[i]}}</div>
+        </div>
+    </div>
+
+
+    <div style="position: absolute;margin-left: 39.2vw;margin-top: 24.9vh;color: white;">
+        {{i18nManager.getTarget().System.SETTING}}
+    </div>
+    <div style="position: absolute;margin-left: 39.2vw;margin-top: 28.9vh;color: white;
+    ">{{i18nManager.getTarget().System.LANGUAGES}}
+    </div>
+    <input style="
+            margin-left: 11.7vw;
+            margin-top: 15.4vh;
+            position: absolute;
+            top: 57%;
+            left: 37.3%;
+            color: white;
+            height: 26px;
+            background: url(./image/Share/SystemSettingBtn.png);
+            width: 71px;
+            border: 0;
+            " type="button" (click)="i18nSave();" [value]="i18nManager.getTarget().System.SAVE" value="Save">
+    <input style="
+            margin-left: 11.7vw;
+            margin-top: 15.4vh;
+            position: absolute;
+            top: 57%;
+            left: 44.3%;
+            color: white;
+            height: 26px;
+            background: url(./image/Share/SystemSettingBtn.png);
+            width: 71px;
+            border: 0;
+            " type="button" (click)="i18nManager.back();onSystemSetting=false"
+        [value]="i18nManager.getTarget().System.CANCEL" value="Cancel">
+
+</div>
+<div id="main-app" (mousemove)="EM.movelog($event)" (click)="customMouseEventClickLog($event)">
+
+
+    <div id="Bell" style="position: absolute;
+        margin-top: 0.6%;
+        height: 19px;
+        width: 26px;
+        right: 7.7vw;
+        background-image:'url(./image/Share/On/Bell.png)';"
+        [style.background-image]="this.FWManager.hasUpdate?'url(./image/Share/On/Bell.png)':'url(./image/Share/Off/Bell.png)'"
+        (click)="this.FWManager.onFireWareUI=true;">
+    </div>
+
+
+
+    <div *ngIf="this.FWManager.hasUpdate" id="BellTIP" style="height: 3.5vh;
+    position: absolute;
+    width: auto;
+    line-height: 3.2vh;
+    border: 2px solid #0066F1;
+    left: 88vw;
+    top: 4vh;
+    border-radius: 0.4vw;
+    box-sizing: border-box;
+    background-color: #1c1c1c;
+    color: #fff;
+    pointer-events: none;
+    font-size: 1vw;">
+        {{i18nManager.getTarget().System.HASNEWVERSION}}
+    </div>
+
+
+
+    <div id="SystemSettingIcon" style="position: absolute;
+            margin-top: 0.6%;height: 19px;width: 26px;right: 5.5vw;" (click)="onSystemSetting=true">
+    </div>
+    <div id="ZoomOut" style="position: absolute;
+            height: 19px;
+            margin-top: 0.6%;
+            width: 26px;
+            right: 3.2vw;" (click)="changeWinSystemTaskBar('minimize')">
+    </div>
+    <div id="CloseProgram" style="position: absolute;
+            margin-top: 0.6%;
+            height: 19px;
+            width: 26px;
+            right: 1vw;" (click)="changeWinSystemTaskBar('leave')">
+    </div>
+
+    <div id="backHome" [style.display]="CurrentPageIndex>0?'block':'none'" style="background-color: transparent;
+    position: absolute;
+    height: 76px;
+    width: 76px;
+    margin-left: 5vw;
+    margin-top: 2.1vh;" (click)="setPageIndex(1)">
+    </div>
+    <div id="MacroPageMask" [style.display]="onRecord ||macroContentInEdit?'block':'none'" style="
+        position: absolute;
+        z-index: 9990;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.30);
+        ">
+    </div>
+
+    <div id="拖曳視窗" class="dragableArea" style="background-color: transparent;">
+    </div>
+
+    <div id="畫格隔離" style="height: 93px;background-color: transparent;">
+    </div>
+
+
+    <div *ngIf="CurrentPageIndex==0" class="content" id="content">
+        <div id="LmaskLeft" style="position: absolute;position: absolute;
+    z-index: 3;
+    width: 3.92vw;
+    height: 36.1vh;
+    background-color: #0000;">
+        </div>
+        <div id="RmaskLeft" style="position: absolute;
+    z-index: 3;
+    width: 4.1vw;
+    height: 36.2vh;
+    right: 0.1%;
+    background-color:  #0000;">
+        </div>
+        <div class="LeftArrow" style="position: absolute;
+        z-index: 9998;
+        width: 1.72vw;
+        height: 3.1vh;top: 14%;left: 1.3%;
+        background-image: url(./image/FirstPage/ArrowLeft.png);">
+        </div>
+        <div class="RightArrow" style="position: absolute;
+        width: 22px;height: 25px;
+        background-image: url(./image/FirstPage/ArrowRight.png);
+        right: 1.5%;top: 14%; ">
+        </div>
+        <!-- KEYBOARD<BR>RGB -->
+        <div class="MenuArea" style="width: 91.7vw;height: 36%;margin-left: 4%;background-color: #0000;">
+
+            <div class="Item1" (click)="setPageIndex(1)" style="display: inline-block;
+                        width: 24%;height: 100%;background-color: #141414;margin-left: 0.6%;"
+                [style.background-image]="MultipleDeviceConnectStatus[0]?'url(./image/FirstPage/KB3Connect.png)':'url(./image/FirstPage/KB3Disconnect.png)' ">
+                <div id="BatteryStep" style="
+                 margin-top: 31.4vh;
+                 width: 15px;
+                 height: 34px;
+                 margin-left: 15px;
+                 /* background-color: #3d62b78c; */
+                 background-image: url(./image/FirstPage/20%.png);
+                 background-repeat: no-repeat;
+                 " [style.background-image]="MultipleDeviceConnectStatus[0]?ImgPath.BatteryStats[BatteryStep]:'' ">
+                </div>
+            </div>
+            <!-- (click)="setPageIndex(1)" -->
+            <div class="Item2" (click)="setPageIndex(1)" style="display: inline-block;
+                                        width: 24%;height: 100%;background-color: #141414;margin-left: 0.6%;
+                                        background-image: url(./image/FirstPage/KB2Connect.png);"
+                [style.background-image]="MultipleDeviceConnectStatus[1]?'url(./image/FirstPage/KB3Connect.png)':'url(./image/FirstPage/KB3Disconnect.png)' ">
+            </div>
+
+
+
+
+
+
+            <div id="BatteryStep" style="
+       margin-top: 31.4vh;
+       width: 15px;
+       height: 34px;
+       margin-left: 15px;
+       /* background-color: #3d62b78c; */
+       background-image: url(./image/FirstPage/20%.png);
+       background-repeat: no-repeat;
+       " [style.background-image]="MultipleDeviceConnectStatus[1]?ImgPath.BatteryStats[BatteryStep]:'' ">
+            </div>
+        </div>
+        <div id="極客圈" class="MainPageBtn1"
+            style="position: absolute;width: 437px;height: 151px; margin-left: 4%; margin-top: 2%;">
+            <img src="./image/FirstPage/Link1.png" alt="" style="position: absolute;top: 41%;left: 8%;">
+            <div id="KeyboardName" style="position: absolute;
+            height: 33px;
+            width: 17vw;
+            line-height: 50%;
+            color: #4C4C4C;
+            font-size: 19px;
+            font-weight: bold;
+            top: 50%;
+            left: 21%;
+            ">{{i18nManager.getTarget().P0.HARDWARE}}
+            </div>
+
+        </div>
+        <div id="硬體檢測" class="MainPageBtn1"
+            style="position: absolute;width: 437px;height: 151px;margin-left: 4%;margin-top: 15.7%; ">
+            <img src="./image/FirstPage/Link2.png" alt="" style="position: absolute;top: 41%;left: 8%;">
+            <div id="KeyboardName" style="position: absolute;
+            height: 33px;
+            width: 17vw;
+            line-height: 50%;
+            color: #4C4C4C;
+            font-size: 19px;
+            font-weight: bold;
+            top: 50%;
+            left: 21%;">{{i18nManager.getTarget().P0.GEEKCIRCLE}}
+            </div>
+        </div>
+        <div id="連結區"
+            style="position: absolute;width: 434.1px;height: 29px;margin-left: 4.1vw;margin-top: 45.7vh;background-color: #0000;">
+            <img alt="" (mouseover)="Link0over=true" (mouseleave)="Link0over=false" (click)="HyperLinkGO(0)"
+                [style.display]="i18nManager.getTarget().connectionLimit[0]?'inline-block':'none'"
+                [src]="Link0over?'./image/FirstPage/On/P1Link0.png':'./image/FirstPage/Off/P1Link0.png'">
+            <img alt="" (mouseover)="Link1over=true" (mouseleave)="Link1over=false" (click)="HyperLinkGO(1)"
+                [style.display]="i18nManager.getTarget().connectionLimit[1]?'inline-block':'none'"
+                [src]="Link1over?'./image/FirstPage/On/P1Link1.png':'./image/FirstPage/Off/P1Link1.png'">
+            <img alt="" (mouseover)="Link2over=true" (mouseleave)="Link2over=false" (click)="HyperLinkGO(2)"
+                [style.display]="i18nManager.getTarget().connectionLimit[2]?'inline-block':'none'"
+                [src]="Link2over?'./image/FirstPage/On/P1Link2.png':'./image/FirstPage/Off/P1Link2.png'">
+            <img alt="" (mouseover)="Link3over=true" (mouseleave)="Link3over=false" (click)="HyperLinkGO(3)"
+                [style.display]="i18nManager.getTarget().connectionLimit[3]?'inline-block':'none'"
+                [src]="Link3over?'./image/FirstPage/On/P1Link3.png':'./image/FirstPage/Off/P1Link3.png'">
+            <img alt="" (mouseover)="Link4over=true" (mouseleave)="Link4over=false" (click)="HyperLinkGO(4)"
+                [style.display]="i18nManager.getTarget().connectionLimit[4]?'inline-block':'none'"
+                [src]="Link4over?'./image/FirstPage/On/P1Link4.png':'./image/FirstPage/Off/P1Link4.png'">
+            <img alt="" (mouseover)="Link5over=true" (mouseleave)="Link5over=false" (click)="HyperLinkGO(5)"
+                [style.display]="i18nManager.getTarget().connectionLimit[5]?'inline-block':'none'"
+                [src]="Link5over?'./image/FirstPage/On/P1Link5.png':'./image/FirstPage/Off/P1Link5.png'">
+            <img alt="" (mouseover)="Link6over=true" (mouseleave)="Link6over=false" (click)="HyperLinkGO(6)"
+                [style.display]="i18nManager.getTarget().connectionLimit[6]?'inline-block':'none'"
+                [src]="Link6over?'./image/FirstPage/On/P1Link6.png':'./image/FirstPage/Off/P1Link6.png'">
+            <img alt="" (mouseover)="Link7over=true" (mouseleave)="Link7over=false" (click)="HyperLinkGO(7)"
+                [style.display]="i18nManager.getTarget().connectionLimit[7]?'inline-block':'none'"
+                [src]="Link7over?'./image/FirstPage/On/P1Link7.png':'./image/FirstPage/Off/P1Link7.png'">
+
+        </div>
+
+        <video style="max-width: 1280px;
+        max-height: 800px;
+        position: absolute;
+        background-image: url(./image/FirstPage/BTN2.png);
+        width: 713px;
+        height: 325px;
+        margin-left: 40%;
+        margin-top: 2%;" width="320" height="240" controls>
+            <source
+                src="https://www.kemovebbs.com/video/Cheap%20Keyboards%20Are%20Getting%20SOOO%20GOOD%20-%20DIERYA%20x%20KEMOVE%20DK61%20[720p].mp4"
+                type="video/mp4">
+        </video>
+
+    </div>
+    <div (mouseleave)="switchEffectUI=false" [style.display]="switchEffectUI?'block':'none'" id="LightModeList" style="z-index: 9990; background-color: #151516;   
+        color: #FFF; box-sizing: border-box;display: none;
+        position: absolute;width: 8vw;height: auto;border: 1px solid #91A9BF;">
+        <div *ngFor="let item of Led.mode_name ;let i = index" (mouseenter)="ActiveInt=i" (click)="switchEffectMode(i)"
+            [style.background-color]="(i==ActiveInt)?'#0066F1':'transparent'"
+            style="border-bottom: 1px solid #3E5C72;height: 3vh;">
+            <img style="float: left;vertical-align: middle;text-align: center;margin-left: 5px;
+                            width: 14%;height: 22px;object-fit: none;"
+                [src]="(i==ActiveInt)?Led.modeClassArr[i].iconpath[1]:Led.modeClassArr[i].iconpath[0]">
+    
+            <a class="APModeSelect">{{item}}
+            </a>
+        </div>
+    </div>
+    
+    
+    <div id="conslogtestText" style="  position: absolute;
+    word-break: break-all;
+    z-index: 9999;display:none;
+    width: 41%;
+    background: #00f;
+    height: 40%;
+    color: #ff0;">{{this.conslogtestText}}
+    </div>
+    
+    
+    <div id="SettingBtn" (click)="CRUDCheck=!CRUDCheck" style="z-index: 9999;
+    background-color: #0000;
+    position: absolute;
+    left: 300px;
+    width: 25px;
+    top: 96px;
+    height: 25px;">
+    </div>
+
+
+    <div id="MainFrame" *ngIf="CurrentPageIndex>0"
+        style="/* background-color: #fff; */position: absolute;height: 89%;width: 91%;margin-left: 4.5%;">
+
+        <div id="CRUD" [style.display]="CRUDCheck?'block': 'none'" style="z-index: 9991;
+        background-color: #141414;
+        color: #fff;
+        position: absolute;
+        left: 24.3%;
+        width: 2.3%;
+        background-repeat: repeat;
+        background-size: 100% 100%;
+        background-image: url(./image/Share/CRUDBG.png);
+        display: block;">
+            <div style=" width: 12px; 
+        margin-top: 17%;
+        margin-left: 26%;
+        height:12px;
+        background-repeat: repeat;
+        background-image: url(./image/Share/CRUD_Add.png);" (click)="newHtmlDomElement();CRUDCheck=!CRUDCheck;"
+                [style.display]="pageIconSet[0]?'block': 'none'"></div>
+            <div style="width: 12px;
+            margin-top: 26%;
+            margin-left: 26%;
+            height:12px;
+            background-repeat: repeat;
+            background-image: url(./image/Share/CRUD_UpLoad.png);" (click)="ExportProfile();CRUDCheck=!CRUDCheck;"
+                [style.display]="pageIconSet[1]?'block': 'none'"></div>
+            <div style="width: 12px;
+            margin-top: 26%;
+            margin-left: 26%;
+            height: 12px;
+            background-repeat: repeat;
+            background-image: url(./image/Share/CRUD_DownLoad.png);" (click)="ImportProfile();CRUDCheck=!CRUDCheck;"
+                [style.display]="pageIconSet[2]?'block': 'none'"></div>
+            <div style="width: 12px;
+        margin-top: 26%;
+        margin-left: 26%;
+        height:12px;
+        background-repeat: repeat;
+        background-image: url(./image/Share/CRUD_Delete.png);" (click)="deleteHtmlDomElement();CRUDCheck=!CRUDCheck;"
+                [style.display]="pageIconSet[3]?'block': 'none'">
+            </div>
+        </div>
+
+        <div id="SettingBG" style="position: absolute;width: 277px;height: 36px;
+        background-image: url('./image/Share/SettingBG.png');background-size: 100%;">
+            <div id="BGTitleCH" style="
+            position: absolute;
+            height: 4.7vh;
+            width: 2.4vw;
+            margin-left: 12.4%;
+            line-height: 4.8vh;
+            color: #ffffff;
+            text-align: center;
+            font-size: 78%;
+            /* background-color: red; */
+            font-weight: bold;
+            ">{{i18nManager.getTarget().Share.CONFIGURATION}}</div>
+        </div>
+        <div id="swicthPage">
+            <div id="Page1" class="PageBtnStyle" (click)=" setPageIndex(1)" (mouseover)="pageMouseoverStatus[0]=1"
+                (mouseleave)="pageMouseoverStatus[0]=0"
+                [ngStyle]="{'background-image': CurrentPageIndex==1 ? ImgPath.Page1[2]:ImgPath.Page1[pageMouseoverStatus[0]]}">
+            </div>
+            <div id="Page2" class="PageBtnStyle" (click)="setPageIndex(2)" style="margin-left: 6%;"
+                (mouseover)="pageMouseoverStatus[1]=1" (mouseleave)="pageMouseoverStatus[1]=0"
+                [ngStyle]="{'background-image': CurrentPageIndex==2 ? ImgPath.Page2[2]:ImgPath.Page2[pageMouseoverStatus[1]]}">
+            </div>
+
+            <div id="Page3" class="PageBtnStyle" (click)=" setPageIndex(3)" style="margin-left: 12%;"
+                (mouseover)="pageMouseoverStatus[2]=1" (mouseleave)="pageMouseoverStatus[2]=0"
+                [ngStyle]="{'background-image': CurrentPageIndex==3 ? ImgPath.Page3[2]:ImgPath.Page3[pageMouseoverStatus[2]]}">
+            </div>
+            <div id="Page4" class="PageBtnStyle" (click)="setPageIndex(4)" (mouseover)="pageMouseoverStatus[3]=1"
+                (mouseleave)="pageMouseoverStatus[3]=0" style="margin-left: 18%;" [ngStyle]="{
+                    'background-image': CurrentPageIndex==4 ? ImgPath.Page4[2]:ImgPath.Page4[pageMouseoverStatus[3]]
+                }">
+            </div>
+        </div>
+
+        <div *ngIf="this.CurrentPageIndex!=1" id="SaveToKeyBoard" (click)="setDeviceToServer()" style="margin-left: 25.9vw;
+        margin-top: 3.6vh;
+        position: absolute;
+        height: 5.7vh;
+        background: url(./image/Keyboard/Off/SaveCN.png);
+        width: 3.7vw;" (mousedown)="stb='mouseenter'" (mouseenter)="stb='mouseenter'" (mouseup)="stb='mouseup'"
+            (mouseleave)="stb='mouseleave'"
+            [style.background-image]="stb=='mouseenter'?i18nManager.getTarget().saveImg[1]:i18nManager.getTarget().saveImg[0]">
+        </div>
+
+
+        <div class="ModeBG" style="position: absolute;
+                                width: 181px;height: 61px;
+                                margin-left: 80.5%;margin-bottom: 10%;
+                                ">
+            <div [style.display]="hasMultipleDevice?'block': 'none'" class="ModeL" style="
+                                        position: absolute;
+                                        width: 22px;height: 23px;
+                                        background-image: url('./image/Share/ModeArrowL.png');
+                                        left: -18%; top: 30%;
+                                        ">
+            </div>
+            <div [style.display]="hasMultipleDevice?'block': 'none'" class="ModeR" style="
+                                        position: absolute;
+                                        width: 22px;height: 23px;
+                                        background-image: url('./image/Share/ModeArrowR.png');
+                                        right: -19%; top: 30%;
+                                        ">
+            </div>
+            <!-- <div id="KeyboardName" style="
+                height: 33px;
+                width: 99px;
+                line-height: 20px;
+                color: #0066F1;
+                font-size: 16px;
+                font-weight: bold;
+                margin-top: 7%;
+                margin-left: 12%;
+                word-break: break-word;
+                display: inline-block;
+                ">KEYBOARDRGB
+        </div> -->
+            <!-- <div (click)="setPageIndex(0)" class="DemoUI" style="
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url(./image/Share/AlternateKB1.png);">
+            </div> -->
+        </div>
+
+        <div id="TitleCH" style="
+            position: absolute;
+            height:27px;
+            width: 20vw;
+            margin-left: 28.4%;
+            line-height: 23px;
+            color: #0066F1;
+            font-size: 19px;
+            font-weight: bold;
+            text-transform: uppercase;
+            ">{{getPageTitleText()}}
+        </div>
+
+
+        <!-- <div id="高級編輯" style="
+            position: absolute;height: auto;left: 65%;width:105px;
+            padding-left: 1.5%;text-align: center;line-height:29px;
+            color: rgb(255, 255, 255);font-size: 13px;" (mousedown)="isActive='mousedown'"
+            (mouseenter)="isActive='mouseenter'" (mouseup)="isActive='mouseup'" (mouseleave)="isActive='mouseleave'"
+            [style.background-image]="this.ReturnAdvancedBtnImage(isActive)" (click)="setPageIndex(7)">
+            {{this.i18nManager.getTarget().Share.EDIT}}
+
+        </div> -->
+
+        <!--  [style.pointer-events]="(LCFM.currentChooseIndex==i&&InEdit)?'auto':'none'"-->
+        <section *ngIf="CurrentPageIndex==7" id="AdvancedEditColorPage">
+            <div id="AdvancedSelect" class="SelectTemplate" style="height: 33vh;">
+                <div id="AdvancedEditProjectSelect" class="AdvancedEditProjectSelect"
+                    (click)="LCFM.projectSelect(i);setCustomPreviewToServer('byAdvancedSelect');"
+                    *ngFor="let item of LCFM.LedChainFrames ;let i = index"
+                    [style.background-color]="(LCFM.currentChooseIndex==i)?'#0066F1':'transparent'">
+
+                    <img (click)="InEdit=true;LCFM.updeteEditName();"
+                        (mouseleave)="EM.ForceFocusUIByClass('AdvancedClassName',i);"
+                        [src]="(LCFM.currentChooseIndex==i)?ImgPath.EditNameIcon[1]:ImgPath.EditNameIcon[0]" Alt="找不到圖片"
+                        style="margin-top: 1%;float: right;margin-right: 1vw;">
+
+                    <div style="width: 17.1vw;position: absolute;color: #FFFFFF;" (blur)="InEdit=false">
+                        {{item.projectName}}</div>
+
+                    <input class="AdvancedClassName" style="width: 17.1vw;position: absolute;" maxlength="15"
+                        (keypress)='EM.regexCustom($event)'
+                        [style.display]="(LCFM.currentChooseIndex==i&&InEdit)?'block': 'none'"
+                        [(ngModel)]="LCFM.onEditName" type="text" placeholder=""
+                        (blur)="LCFMFileNameChange($event);InEdit=false;"
+                        (keyup)="EM.onkeyupEnter($event)?InEdit=false:'';"
+                        (change)="LCFMFileNameChange($event)">
+                </div>
+            </div>
+            <div id="Advance[BA]BG" style="background-image: url(./image/ColorSet/BottomAreaBG.png);
+               position: absolute;
+               margin-left: 28.5%;
+               margin-top: 56.8vh;
+               height: 28vh;
+               width: 57.8vw;
+               background-size: 100% 100%;
+                        ">
+            </div>
+            <div class="AdvanceEdit-BottomArea" style="background: transparent;
+                    position: absolute;
+                    margin-left: 25.9vw;
+           margin-top: 53.4vh;
+           height: 30vh;
+           width: 57.9vw;">
+                <div id="DownRegion1" style="position: absolute;height: 27px;width: 43.5%;
+                        background-image: url(./image/Advanced/DownRegion1.png);
+                        line-height: 23px;color: white;font-size: 13px;
+                        background-color: rgba(0, 0, 0, 0);">
+                    <div
+                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 9%;">
+                        {{this.i18nManager.getTarget().P7.NO_}}
+                    </div>
+                    <div
+                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 48%;background-color: rgba(0, 0, 0, 0);">
+                        {{this.i18nManager.getTarget().P7.NAME}}
+                    </div>
+                    <div
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 80%;background-color: rgba(0, 0, 0, 0);">
+                        {{this.i18nManager.getTarget().P7.MS100}}
+                    </div>
+                </div>
+
+                <div id="DownRegion2" style="position: absolute;
+                        height: 27px;
+                        width: 55%;
+                        line-height: 23px;
+                        background-image: url(./image/Advanced/DownRegion2.png);
+                        color: white;
+                        font-size: 13px;
+                        margin-left: 44.5%;
+                        background-color: rgba(0, 0, 0, 0);">
+                    <div
+                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 8%;">
+                        {{this.i18nManager.getTarget().P7.NO_}}
+                    </div>
+                    <div
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 30%;background-color: rgba(0, 0, 0, 0);">
+                        {{this.i18nManager.getTarget().P7.EFFECT}}</div>
+                    <div
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 52%;background-color: rgba(0, 0, 0, 0);">
+                        {{this.i18nManager.getTarget().P7.COLORSETTING}}</div>
+                    <div
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 78%;background-color: rgba(0, 0, 0, 0);">
+                        {{this.i18nManager.getTarget().P7.LIGHTINGSPEED}}</div>
+                </div>
+
+                <div id="AdvancedDownSelect1" class="SelectTemplate"
+                    style="height: 24.7vh;width: 25.4vw;margin-top: 3.5vh;">
+                    <div id="Advancedframe_item" class="AdvancedEditProjectSelect"
+                        (click)="LCFM.frame_item_click(i);"
+                        *ngFor="let item of LCFM.getClass().matrix_frames;let i = index"
+                        [style.background-color]="(LCFM.getClass().currentFramesIndex==i)?'#0066F1':'transparent'">
+                        <div
+                            style="position: absolute;color: rgb(255, 255, 255);left: 30px;width: 2vw;height: 2vw;text-align: center;">
+                            {{i}}</div>
+                        <div style="position: absolute;color: #ffffff;left: 12vw;">
+                            {{LCFM.getClass().matrix_frames[i].name}}</div>
+                        <input id="Frames"
+                            style="position: absolute;right: 1vw;width: 3vw;
+                            text-align: center;background: #0000;color: #fff;margin-top: 0vh;border: #5618637a 2px solid;" type="tel"
+                            min="1" max="655" step="1" [(ngModel)]="LCFM.getClass().matrix_frames[i].frame_time"
+                            (keypress)='EM.regexOnlyNumber($event)' (blur)='customLedFrameChange($event)'
+                            (keyup)="EM.onkeyupEnter($event)? customLedFrameChange($event):' '; ">
+                    </div>
+                </div>
+                <div id="AdvancedDownSelect2" class="SelectTemplate"
+                    style="height: 24.7vh;left: 25.7vw;width: 32.2vw;margin-top: 3.5vh;">
+                    <div id="AdvancedColor_item_click" class="AdvancedEditProjectSelect"
+                        (click)="LCFM.color_item_click(i);"
+                        *ngFor="let item of LCFM.getClass().matrix_ColorMode;let i = index"
+                        [style.background-color]="(LCFM.getClass().currentModeIndex==i)?'#0066F1':'transparent'"
+                        style="background-color: transparent; ">
+                        <div
+                            style="position: absolute;color: rgb(255, 255, 255);left: 30px;width: 2vw;height: 2vw;text-align: center;">
+                            {{i}}</div>
+                        <div style="position: absolute;color: #ffffff;left: 9.6vw;">
+                            {{LCFM.getClass().matrix_ColorMode[i].modeName}}</div>
+                        <div id="AdvancedDownSelectColor" style="left: 15.8vw;position: absolute;color:yellow;width: 6vw;height: 2.5vh;
+                                             background-color: red;text-align: center;margin-top: 0.3vh;"
+                            [style.background-color]="LCFM.getClass().matrix_ColorMode[i].color"
+                            [style.display]="LCFM.getClass().matrix_ColorMode[i].adjustable[0]>0?'block':'none'">
+                        </div>
+                        <input id="ColorParameter" max="255" min="100"
+                            [style.display]="LCFM.getClass().matrix_ColorMode[i].adjustable[1]?'block':'none'"
+                            [(ngModel)]="LCFM.getClass().matrix_ColorMode[i].speed"
+                            (keypress)="EM.regexOnlyNumber($event);" (focus)="LCFM.color_item_click(i)"
+                            (blur)="customColorParameterChange($event,'speed',i)"
+                            (keyup)="EM.onkeyupEnter($event)? customColorParameterChange($event,'speed',i):' '; "
+                            step="1" style="position: absolute;
+                                                right: 0.5vw;
+                                                width: 6.3vw;
+                                                text-align: center;
+                                                margin-top: 0vh;
+                                                background: #0000;
+                                                color: #fff;
+                                                border: 2px solid #5618637a;
+                                                display: block;" type="tel">
+
+                        <input id="SpeedM_1" max="255" min="100"
+                            [style.display]="LCFM.getClass().matrix_ColorMode[i].adjustable[2]?'block':'none'"
+                            [(ngModel)]="LCFM.getClass().matrix_ColorMode[i].speed"
+                            (keypress)="EM.regexOnlyNumber($event);" (focus)="LCFM.color_item_click(i)"
+                            (blur)="customColorParameterChange($event,'speed',i)"
+                            (keyup)="EM.onkeyupEnter($event)? customColorParameterChange($event,'speed',i):' '; "
+                            step="1" style="position: absolute;
+                                                                        right: 4.2vw;
+                                                                        width: 2.6vw;
+                                                                        text-align: center;
+                                                                        background: #0000;
+                                                                        margin-top: 0vh;
+                                                                        color: #fff;
+                                                                        border: 2px solid #5618637a;
+                                                                        display: block;
+                        " type="tel">
+
+                        <input id="SpeedM_2" max="255" min="100"
+                            [style.display]="LCFM.getClass().matrix_ColorMode[i].adjustable[3]?'block':'none'"
+                            [(ngModel)]="LCFM.getClass().matrix_ColorMode[i].speed2"
+                            (keypress)="EM.regexOnlyNumber($event);" (focus)="LCFM.color_item_click(i)"
+                            (blur)="customColorParameterChange($event,'speed2',i)"
+                            (keyup)="EM.onkeyupEnter($event)? customColorParameterChange($event,'speed2',i):' '; "
+                            step="1" style="position: absolute;right: 0.4vw;width: 2.6vw;text-align: center;
+                            background: #0000;margin-top: 0vh;color: #fff;border: 2px solid #5618637a;display: block;
+                            " type="tel">
+                    </div>
+                </div>
+                <div id="AdvancedBtnL0" (click)="LCFM.getClass().framesOrder('Add');LCFM.frame_item_Auto_Switch();"
+                    alt="" style="position: absolute;left: 0%;top: 92%;width: 5vw;height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnL1" (click)="LCFM.getClass().framesOrder('Delete');LCFM.frame_item_Auto_Switch();"
+                    alt="" style="position: absolute;left: 5.1vw;top: 92%;width: 5vw;height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnL2" (click)="LCFM.getClass().framesOrder('moveUp')" alt=""
+                    style="position: absolute;left: 10.2vw;top: 92%;width: 5vw;height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnL3" (click)="LCFM.getClass().framesOrder('moveDown')" alt=""
+                    style="position: absolute;left: 15.3vw;top: 92%;width: 5vw;height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnL4" (click)="LCFM.getClass().framesOrder('clone');LCFM.frame_item_Auto_Switch();"
+                    alt="" style="position: absolute;left: 20.4vw;top: 92%;width: 5vw;height: 3.4vh;">
+                </div>
+
+
+
+
+                <div id="AdvancedBtnR0" (click)="LCFM.showAddColorUI=!LCFM.showAddColorUI" alt="" style="position: absolute;left: 26vw;top: 92%;width: 6.5vw;
+               height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnR1" (click)="LCFM.getClass().colorModeOrder('Delete');LCFM.color_Auto_Switch();"
+                    alt="" style="position: absolute;left: 32.4vw;top: 92%;width: 6.5vw;
+               height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnR2" (click)="LCFM.getClass().colorModeOrder('moveUp')" alt="" style="position: absolute;left: 38.8vw;top: 92%;width: 6.5vw;
+               height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnR3" (click)="LCFM.getClass().colorModeOrder('moveDown')" alt="" style="position: absolute;left: 45.1vw;top: 92%;width: 6.5vw;
+               height: 3.4vh;">
+                </div>
+                <div id="AdvancedBtnR4" (click)="LCFM.getClass().colorModeOrder('clone');LCFM.color_Auto_Switch();"
+                    alt="" style="position: absolute;left: 51.5vw;top: 92%;
+               width: 6.4vw;
+               height: 3.4vh;">
+                </div>
+                <div (click)="LCFM.getClass().colorModeOrder('Add',0);LCFM.color_Auto_Switch();LCFM.showAddColorUI=!LCFM.showAddColorUI"
+                    [style.display]="LCFM.showAddColorUI?'block':'none'" style="position: absolute;color: #ffffff;line-height: 3.4vh;left: 26vw;top: 76%;width: 5.7vw;
+                    background-color: #027156db;height: 3.4vh;text-align: center;">{{modeNameTable[0]}}</div>
+                <div (click)="LCFM.getClass().colorModeOrder('Add',1);;LCFM.color_Auto_Switch();LCFM.showAddColorUI=!LCFM.showAddColorUI"
+                    [style.display]="LCFM.showAddColorUI?'block':'none'" style="position: absolute;color: #ffffff;line-height: 3.4vh;left: 32.4vw;top: 76%;width: 5.7vw;
+                    background-color: #027156db;height: 3.4vh;text-align: center;">{{modeNameTable[1]}}</div>
+                <div (click)="LCFM.getClass().colorModeOrder('Add',2);;LCFM.color_Auto_Switch();LCFM.showAddColorUI=!LCFM.showAddColorUI"
+                    [style.display]="LCFM.showAddColorUI?'block':'none'" style="position: absolute;color: #ffffff;line-height: 3.4vh;left: 38.8vw;top: 76%;width: 5.7vw;
+                    background-color: #027156db;height: 3.4vh;text-align: center;">{{modeNameTable[2]}}</div>
+                <div (click)="LCFM.getClass().colorModeOrder('Add',3);;LCFM.color_Auto_Switch();LCFM.showAddColorUI=!LCFM.showAddColorUI"
+                    [style.display]="LCFM.showAddColorUI?'block':'none'" style="position: absolute;color: #ffffff;line-height: 3.4vh;left: 45.2vw;top: 76%;width: 5.7vw;
+                   background-color: #027156db;height: 3.4vh;text-align: center;">{{modeNameTable[3]}}</div>
+
+
+
+            </div>
+            <!-- [style.display]="LCFM.getClass().hasColorMode()?'block':'none'" -->
+            <section data-Adjustable="1" id="調色盤">
+                <div id="AdvanceEdit-ColorPicker" [style.display]="LCFM.getClass().canSeeColorpicker==1?'block':'none'"
+                    style="position: absolute;z-index: 2;top: 61%;height: 31%;width: 21.4vw;
+                    /* background-color: #4f43bf17; */">
+
+                    <div id="customLedColorPickingArea" class="PickingArea" style="
+                                                            position: absolute;
+                                                            height: 15vw;width: 15vw;
+                                                            background-size: 100% 100%;    
+                                                            border: 2px #2b342b solid;
+                                                            box-sizing: border-box;
+                                                            "
+                        [style.background-color]="customLedColor.gradientBGcolor">
+                        <div id="customLedColorCircle" class="circle">
+
+                        </div>
+
+                    </div>
+                    <input id="ColorSliderH" class="CustomH2" type="range" min="0" max="359" step="1"
+                        [(ngModel)]="customLedColor.Hue" (ngModelChange)='customColorHueChange($event)'>
+
+                    <!-- <input id="ColorSliderS" type="range" min="0" max="100" step="1" [ngStyle]="connectSBGcolor()"
+                                                    [(ngModel)]="LedColor.Saturation" (ngModelChange)='hueChange()'>
+                                                <input id="ColorSliderV" [ngStyle]="connectVBGcolor()" type="range" min="0" max="100" step="1"
+                                                    [(ngModel)]="LedColor.Value" (ngModelChange)='hueChange()'> -->
+                    <div id="RecordColorArea"
+                        style="position: absolute;left:76%;width: 6.4vw;height: 216px;/* background-color: #00f; */">
+
+                        <div class="AdvancedColorBase"
+                            *ngFor="let item of customLedColor.CreateFakeArray(16);let i = index"
+                            (click)="customLedColor.onclickColorDefault($event.target,i);updateColorBlockP7();"
+                            [style.background-color]="customLedColor.preDefineColor[i]">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="Cycle7色專用" [style.display]="LCFM.getClass().canSeeColorpicker==2?'block':'none'"
+                    style="position: absolute;left: 20%;width: 2.4vw;height: 200px;display: block;margin-top: 54vh;">
+
+                    <div (click)="sevenColorExclusiveFn($event)" class="AdvancedColorBase"
+                        style="background-color: #ff0000;">
+                    </div>
+                    <div (click)="sevenColorExclusiveFn($event)" class="AdvancedColorBase"
+                        style="background-color: #ffff00;">
+                    </div>
+                    <div (click)="sevenColorExclusiveFn($event)" class="AdvancedColorBase"
+                        style="background-color: #00ff00;">
+                    </div>
+                    <div (click)="sevenColorExclusiveFn($event)" class="AdvancedColorBase"
+                        style="background-color: #00ffff;">
+                    </div>
+                    <div (click)="sevenColorExclusiveFn($event)" class="AdvancedColorBase"
+                        style="background-color: #0000ff;">
+                    </div>
+                    <div (click)="sevenColorExclusiveFn($event)" class="AdvancedColorBase"
+                        style="background-color: #ff00ff;">
+                    </div>
+                    <div (click)="sevenColorExclusiveFn($event)" class="AdvancedColorBase"
+                        style="background-color: #ffffff;">
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+
+
+            </section>
+        </section>
+
+
+        <section *ngIf="CurrentPageIndex==2" id="KeyBoardPage" style="margin-top: 9vh;">
+
+            <img id="FNModeUI1"
+            (click)="KeyBoardManager.getTarget().setFnModeMartrix(0);" alt=""
+            style="position: absolute; left: 29.8vw;top: 4.6vh;" (mousedown)="FActive1='mouseenter'" (mouseenter)="FActive1='mouseenter'"
+            (mouseup)="FActive1='mouseup'" (mouseleave)="FActive1='mouseleave'"
+            [src]="KeyBoardManager.getTarget().fnModeMartrix[0]||FActive1=='mouseenter'?ImgPath.FNIcon[1]:ImgPath.FNIcon[0]">
+
+
+            <div id="KeyBoardMacroSearchSettingTitle" style="position: absolute;
+        height: 3.7vh;width: 21.3vw;left: 0vw;
+        background-color: #00ffcd0f;margin-top: 40vh;
+                            ">
+                <div style="color: #fff;
+                            margin-left: 5%;
+                            margin-top: 2%;
+                            height: 100%;">{{i18nManager.getTarget().Share.MACROSETTINGS}}
+                </div>
+            </div>
+
+
+            <div id="KeyBoardProjectSelect" style="height: 15vh;
+                    margin-top: 5vh;
+                    position: absolute;
+                    width: 21.3vw;
+                    background-color: #0066F1;
+                    background: url(./image/ColorSet/SelectBG.png);border-bottom: 2px solid #0066F1;">
+                <div style="width: 100%;" class="ProjectItem"
+                    *ngFor="let item of KeyBoardManager.KeyBoardArray ;let i = index" (click)="project_select($event,i)"
+                    [style.background-color]="KeyBoardManager.currentChooseKeyBoard==i?'#0066F1':'transparent'">
+                    <img style="float: left;margin-top: 0.7vh;margin-left: 5px;" src="./image/Keyboard/pointIcon.png">
+                    <input (blur)="clickEdit=false"
+                        [style.pointer-events]="KeyBoardManager.currentChooseKeyBoard==i&&clickEdit?'auto':'none'"
+                        class="CustomInputText" type="text" placeholder="" [(ngModel)]="item.projectName">
+                    <img id="P_S_OSetImg" [src]="KeyBoardManager.currentChooseKeyBoard==i?ImgPath.P_S_OSettingOpen[1]:ImgPath.P_S_OSettingOpen[0]"
+                        (click)="this.P_S_OSetting=true" style="float: right;width: 13px;height: 13px;margin-right: 1vw;margin-right: 1.5vw;
+                               margin-top: 0.7vh;
+                               ">
+                </div>
+            </div>
+
+            <div id="KeyBoardFiveLedProject" style="height: 19vh;
+                                margin-top: 20.4vh;
+                                position: absolute;
+                                width: 21.3vw;
+                                background-color: #ff0;
+                                background: url(./image/ColorSet/SelectBG.png);">
+            
+                            <div class="ProjectItem"
+                                *ngFor="let item of KeyBoardManager.getTarget().fiveDefaultLedCode ;let i = index">
+                                <div style="position: absolute;color: #f00;">{{item.projectName}}
+                                </div>
+                                <div id="KeybordFiveRecycle" style="width: 1vw;
+                                margin-top: 0.3vw;
+                                margin-right: 0.8vw;
+                                float: right;
+                                height: 1.5vh;
+                                background-image: url(./image/Share/CRUD_Delete.png);
+                                    " (click)="KeyBoardManager.getTarget().resetAssignFive(i)">
+                                </div>
+                                <div style="width: 1.7vw;
+                                float: right;
+                                height: 1.7vw;
+                                background-image: url(./image/Keyboard/KeyAddLEDIcon.png);
+                                "
+                                    (click)="on_AdvancedFive=true;ShowAdvancedList=true;KeyBoardManager.getTarget().fiveRecordIndex=i;">
+                                </div>
+                            </div>     
+            </div>
+
+
+
+            <div *ngIf="!MacroManager.hasClass()" id="KeyBoardMacroSearchSetting">
+            </div>
+            <div *ngIf="MacroManager.hasClass()" id="KeyBoardMacroSearchSetting">
+                <div *ngFor="let item of MacroManager.getClass().MacroFiletItem;let i = index"
+                    style=" margin-top: 4%;margin-left: 5%;" (click)="macro_assign_click(i)"
+                    [style.background-color]="MacroManager.getClass().currentChooseMacro==i?'#c8cabb4f':'transparent'">
+                    <img [src]="ImgPath.FileSmallIcon[0]" style="vertical-align: middle;" Alt="找不到圖片">
+                    <div style="display: inline-block; color: white;vertical-align: middle;"> {{item.name}}</div>
+                </div>
+            </div>
+
+            <div class="MacroSettingOption" style="
+        position: absolute;height: 3vh;width: 21.3vw;top: 615px; left: 0.1%;
+        color: white;
+        background-color: #141414;">
+
+                <input type="radio" name="次數" (change)="customConsolelog('KeyBoardManager',MacroManager.radioOptions);"
+                    [(ngModel)]="KeyBoardManager.radioOptions" [value]="65534">
+
+                <input id="CustomFrequency" placeholder="次數" style="
+                         width: 17%;color: #FFF;
+                         height: 2vh;text-align: center;
+                         background-color: transparent;
+                         border: 0; " type="text" [(ngModel)]="KeyBoardManager.radioOptionsFrequency"
+                    [style.pointer-events]="KeyBoardManager.radioOptions==65534?'auto':'none'"
+                    onkeyup="value=value.replace(/[^\d]/g,'');if(value>=65535){value=65534} if(value<1){value=1}"
+                    (keyup)="NullThenUpdateValue(KeyBoardManager,'radioOptionsFrequency',1);">
+                <div style="display: inline-block;color: #FFF;">{{this.i18nManager.getTarget().P3.TIMESTOSTOP}} </div>
+                <br>
+
+                <div style="background-color: #141414;">
+                    <input type="radio" name="鬆開停止"
+                        (change)="customConsolelog('KeyBoardManager',KeyBoardManager.radioOptions);"
+                        [(ngModel)]="KeyBoardManager.radioOptions"
+                        [value]="65535">{{this.i18nManager.getTarget().P3.RELEASETOSTOP}} <br>
+                    <input type="radio" name="再次按下停止"
+                        (change)="customConsolelog('KeyBoardManager',KeyBoardManager.radioOptions);"
+                        [(ngModel)]="KeyBoardManager.radioOptions"
+                        [value]="65536">{{this.i18nManager.getTarget().P3.PRESSAGAINTOSTOP}} <br>
+
+                    <input class="InputBtnStyle" style="leFt: 17.6vw;top: 2.1vw;position: absolute;color: #FFF;
+                      background-repeat: no-repeat;border: none;width: 2.9vw;height: 3.6vh;font-size: 1.6vh;
+                      box-sizing: border-box;background-color: #4C4C4C;" type="button"
+                        [style.pointer-events]="MacroManager.hasClass()?'auto':'none'" (click)="setSelectionKeyMacro()"
+                        value="使用" [value]="i18nManager.getTarget().P2.USE">
+                </div>
+
+            </div>
+
+
+
+            <div data-Note="BottomSwitchBtn"
+                style="position: absolute;margin-left: 28%;margin-top: 41vh;height: 5vh;width: 800px;">
+                <div id="1" (click)="KeyBoardSetPageBtn=1" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[0]=true"
+                    (mouseleave)="KBSPBUI[0]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==1 ||KBSPBUI[0] ? ImgPath.KBottomBtn[1]:ImgPath.KBottomBtn[0]}">
+                    &emsp;&emsp;&emsp;{{i18nManager.getTarget().P2.FUNCTION}}
+                </div>
+                <div id="2" (click)="KeyBoardSetPageBtn=2" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[1]=true"
+                    (mouseleave)="KBSPBUI[1]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==2 ||KBSPBUI[1] ? ImgPath.KBottomBtn[3]:ImgPath.KBottomBtn[2]}">
+                    &emsp;&emsp;{{i18nManager.getTarget().P2.NUM}}
+                </div>
+                <div id="3" (click)="KeyBoardSetPageBtn=3" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[2]=true"
+                    (mouseleave)="KBSPBUI[2]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==3 ||KBSPBUI[2] ? ImgPath.KBottomBtn[5]:ImgPath.KBottomBtn[4]}">
+                    &emsp;&emsp;{{i18nManager.getTarget().P2.MEDIA}}
+                </div>
+                <div id="4" (click)="KeyBoardSetPageBtn=4" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[3]=true"
+                    (mouseleave)="KBSPBUI[3]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==4 ||KBSPBUI[3] ? ImgPath.KBottomBtn[7]:ImgPath.KBottomBtn[6]}">
+                    &emsp;&emsp;{{i18nManager.getTarget().P2.SYSTEM}}
+                </div>
+                <div id="5" (click)="KeyBoardSetPageBtn=5" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[4]=true"
+                    (mouseleave)="KBSPBUI[4]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==5 ||KBSPBUI[4] ? ImgPath.KBottomBtn[9]:ImgPath.KBottomBtn[8]}">
+                    &emsp;&emsp;{{i18nManager.getTarget().P2.MOUSE}}
+                </div>
+
+                <div id="6" (click)="KeyBoardSetPageBtn=6" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[5]=true"
+                    (mouseleave)="KBSPBUI[5]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==6 ||KBSPBUI[5] ? ImgPath.KBottomBtn[11]:ImgPath.KBottomBtn[10]}">
+                    &emsp;&emsp;&emsp;{{i18nManager.getTarget().P2.DISABLE}}
+                </div>
+
+                <div id="7" (click)="KeyBoardSetPageBtn=7" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[6]=true"
+                    (mouseleave)="KBSPBUI[6]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==7 ||KBSPBUI[6] ? ImgPath.KBottomBtn[13]:ImgPath.KBottomBtn[12]}">
+                    &emsp;&emsp;{{i18nManager.getTarget().P2.LAYER}}
+                </div>
+
+                <div id="8" (click)="KeyBoardSetPageBtn=8" class="KeyPageAssignBtnStyle" (mouseover)="KBSPBUI[7]=true"
+                    (mouseleave)="KBSPBUI[7]=false"
+                    [ngStyle]="{'background-image': KeyBoardSetPageBtn==8 ||KBSPBUI[7] ? ImgPath.KBottomBtn[15]:ImgPath.KBottomBtn[14]}">
+                    &emsp;&emsp;{{i18nManager.getTarget().P2.COMPLEX}}
+                </div>
+            </div>
+            <div id="RightSetSelectionKeyData" style="position: absolute;
+            height: 32vh;
+            width: 110px;
+            left: 86vw;
+            background-color: rgba(0, 0, 0, 0);
+            margin-top: 9vh;
+            display: block;
+            " [style.display]="KeyBoardManager.getTarget().fnModeindex?'block': 'none'">
+                <div id="IncreaseBrightness" class="KeyRightSetStyle" data-index="KRset2"
+                    (click)="setRBtnFnKeyData($event)"></div>
+                <div id="DecreaseBrightness" class="KeyRightSetStyle" data-index="KRset1"
+                    (click)="setRBtnFnKeyData($event)"></div>
+                <!-- <div id="SwitchCustomMode" class="KeyRightSetStyle" data-index="KRset3"
+                    (click)="setRBtnFnKeyData($event)"></div>
+                     -->
+                <!-- <div id="SwitchLEDMode" class="KeyRightSetStyle" data-index="KRset4" (click)="setRBtnFnKeyData($event)">
+                </div> -->
+
+                <div id="DecreaseLEDSpeed" class="KeyRightSetStyle" data-index="KRset5"
+                    (click)="setRBtnFnKeyData($event)"></div>
+                <div id="IncreaseLEDSpeed" class="KeyRightSetStyle" data-index="KRset6"
+                    (click)="setRBtnFnKeyData($event)"></div>
+                <!-- <div id="BT1" class="KeyRightSetStyle" data-index="KRset7" (click)="setRBtnFnKeyData($event)"></div>
+                <div id="BT2" class="KeyRightSetStyle" data-index="KRset8" (click)="setRBtnFnKeyData($event)"></div>
+                <div id="BT3" class="KeyRightSetStyle" data-index="KRset9" (click)="setRBtnFnKeyData($event)"></div> -->
+                <div id="FNlock" class="KeyRightSetStyle" data-index="KRset10" (click)="setRBtnFnKeyData($event)"></div>
+                <div id="CloseLED" class="KeyRightSetStyle" data-index="KRset11" (click)="setRBtnFnKeyData($event)">
+                </div>
+                <!-- <div id="Endurance" class="KeyRightSetStyle" data-index="KRset12" (click)="setRBtnFnKeyData($event)">
+                </div> -->
+
+            </div>
+
+
+            <section class="BottomArea"
+                style="background-size: 100% 100%; position: absolute;margin-left: 28%; margin-top: 47vh;height: 27.9vh;width: 62.6vw;">
+                <div id="基本功能" [style.display]="KeyBoardSetPageBtn==1?'block': 'none'" style="position: absolute;">
+                    <!-- <img src="./image/Keyboard/Test1.png"  alt=""
+                    style="background-repeat: no-repeat;position: absolute;height: 27.9vh;width: 100vh;"> -->
+                    <input (click)="setSelectionKeyData($event)" data-index="K11" class="InputBtnStyle"
+                        style="left: 0.1vw;" type="button" value="ESC">
+                    <input (click)="setSelectionKeyData($event)" data-index="K12" class="InputBtnStyle"
+                        style="left: 3.6vw;" type="button" value="⊘">
+                    <input (click)="setSelectionKeyData($event)" data-index="K13" class="InputBtnStyle"
+                        style="leFt: 7.1vw;" type="button" value="F1">
+                    <input (click)="setSelectionKeyData($event)" data-index="K14" class="InputBtnStyle"
+                        style="leFt: 10.6vw;" type="button" value="F2">
+                    <input (click)="setSelectionKeyData($event)" data-index="K15" class="InputBtnStyle"
+                        style="leFt: 14.1vw;" type="button" value="F3">
+                    <input (click)="setSelectionKeyData($event)" data-index="K16" class="InputBtnStyle"
+                        style="leFt: 17.6vw;" type="button" value="F4">
+                    <input (click)="setSelectionKeyData($event)" data-index="K17" class="InputBtnStyle"
+                        style="leFt: 22.9vw;" type="button" value="F5">
+                    <input (click)="setSelectionKeyData($event)" data-index="K18" class="InputBtnStyle"
+                        style="leFt: 26.4vw;" type="button" value="F6">
+                    <input (click)="setSelectionKeyData($event)" data-index="K19" class="InputBtnStyle"
+                        style="leFt: 29.9vw;" type="button" value="F7">
+                    <input (click)="setSelectionKeyData($event)" data-index="K110" class="InputBtnStyle"
+                        style="leFt: 33.5vw;" type="button" value="F8">
+                    <input (click)="setSelectionKeyData($event)" data-index="K111" class="InputBtnStyle"
+                        style="leFt: 38.7vw;" type="button" value="F9">
+                    <input (click)="setSelectionKeyData($event)" data-index="K112" class="InputBtnStyle"
+                        style="leFt: 42.2vw;" type="button" value="F10">
+                    <input (click)="setSelectionKeyData($event)" data-index="K113" class="InputBtnStyle"
+                        style="leFt: 45.8vw;" type="button" value="F11">
+                    <input (click)="setSelectionKeyData($event)" data-index="K114" class="InputBtnStyle"
+                        style="leFt: 49.3vw;" type="button" value="F12">
+                    <input (click)="setSelectionKeyData($event)" data-index="K115" class="InputBtnStyle"
+                        style="left: 52.7vw;" type="button" value="PS">
+                    <input (click)="setSelectionKeyData($event)" data-index="K116" class="InputBtnStyle"
+                        style="left: 56.2vw;" type="button" value="SL">
+                    <input (click)="setSelectionKeyData($event)" data-index="K117" class="InputBtnStyle"
+                        style="left: 59.6vw;" type="button" value="PB">
+                    <input (click)="setSelectionKeyData($event)" data-index="K118" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 0.1vh;" type="button" value="`">
+                    <input (click)="setSelectionKeyData($event)" data-index="K119" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 5.9vh;" type="button" value="1">
+                    <input (click)="setSelectionKeyData($event)" data-index="K120" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 11.3vh;" type="button" value="2">
+                    <input (click)="setSelectionKeyData($event)" data-index="K121" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 17vh;" type="button" value="3">
+                    <input (click)="setSelectionKeyData($event)" data-index="K122" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 22.6vh;" type="button" value="4">
+                    <input (click)="setSelectionKeyData($event)" data-index="K123" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 28.2vh;" type="button" value="5">
+                    <input (click)="setSelectionKeyData($event)" data-index="K124" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 33.8vh;" type="button" value="6">
+                    <input (click)="setSelectionKeyData($event)" data-index="K125" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 39.5vh;" type="button" value="7">
+                    <input (click)="setSelectionKeyData($event)" data-index="K126" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 45.1vh;" type="button" value="8">
+                    <input (click)="setSelectionKeyData($event)" data-index="K127" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 50.7vh;" type="button" value="9">
+                    <input (click)="setSelectionKeyData($event)" data-index="K128" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 56.2vh;" type="button" value="0">
+                    <input (click)="setSelectionKeyData($event)" data-index="K129" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 61.7vh;" type="button" value="-">
+                    <input (click)="setSelectionKeyData($event)" data-index="K130" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 67.7vh;" type="button" value="+">
+                    <input (click)="setSelectionKeyData($event)" data-index="K131" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 73vh;width: 10.4vh;" type="button" value="Backspace">
+                    <input (click)="setSelectionKeyData($event)" data-index="K132" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 84.2vh;" type="button" value="INS">
+                    <input (click)="setSelectionKeyData($event)" data-index="K133" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 89.8vh;" type="button" value="HM">
+                    <input (click)="setSelectionKeyData($event)" data-index="K134" class="InputBtnStyle"
+                        style="top: 5.1vh;left: 95.4vh;" type="button" value="PU">
+                    <input (click)="setSelectionKeyData($event)" data-index="K135" class="InputBtnStyle"
+                        style="top: 9.6vh;width: 7.8vh;left: 0.1vh;" type="button" value="Tab">
+                    <input (click)="setSelectionKeyData($event)" data-index="K136" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 8.7vh;" type="button" value="Q">
+                    <input (click)="setSelectionKeyData($event)" data-index="K137" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 14.3vh;" type="button" value="W">
+                    <input (click)="setSelectionKeyData($event)" data-index="K138" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 19.6vh;" type="button" value="E">
+                    <input (click)="setSelectionKeyData($event)" data-index="K139" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 25.3vh;" type="button" value="R">
+                    <input (click)="setSelectionKeyData($event)" data-index="K140" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 31vh;" type="button" value="T">
+                    <input (click)="setSelectionKeyData($event)" data-index="K141" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 36.6vh;" type="button" value="Y">
+                    <input (click)="setSelectionKeyData($event)" data-index="K142" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 42.2vh;" type="button" value="U">
+                    <input (click)="setSelectionKeyData($event)" data-index="K143" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 47.7vh;" type="button" value="I">
+                    <input (click)="setSelectionKeyData($event)" data-index="K144" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 53.2vh;" type="button" value="O">
+                    <input (click)="setSelectionKeyData($event)" data-index="K145" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 58.9vh;" type="button" value="P">
+                    <input (click)="setSelectionKeyData($event)" data-index="K146" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 64.3vh;" type="button" value="[">
+                    <input (click)="setSelectionKeyData($event)" data-index="K147" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 70.3vh;" type="button" value="]">
+                    <input (click)="setSelectionKeyData($event)" data-index="K148" class="InputBtnStyle"
+                        style="top: 9.6vh;width: 7.5vh;left: 76.1vh;" type="button" value="\">
+                    <input (click)="setSelectionKeyData($event)" data-index="K149" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 84.4vh;" type="button" value="DEL">
+                    <input (click)="setSelectionKeyData($event)" data-index="K150" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 89.8vh;" type="button" value="END">
+                    <input (click)="setSelectionKeyData($event)" data-index="K151" class="InputBtnStyle"
+                        style="top: 9.6vh;left: 95.4vh;" type="button" value="PD">
+                    <input (click)="setSelectionKeyData($event)" data-index="K152" class="InputBtnStyle"
+                        style="top: 14.6vh;width: 9.4vh;left: 0.1vh;" type="button" value="Caps">
+                    <input (click)="setSelectionKeyData($event)" data-index="K153" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 10.5vh;" type="button" value="A">
+                    <input (click)="setSelectionKeyData($event)" data-index="K154" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 15.9vh;" type="button" value="S">
+                    <input (click)="setSelectionKeyData($event)" data-index="K155" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 21.5vh;" type="button" value="D">
+                    <input (click)="setSelectionKeyData($event)" data-index="K156" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 27.2vh;" type="button" value="F">
+                    <input (click)="setSelectionKeyData($event)" data-index="K157" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 32.9vh;" type="button" value="G">
+                    <input (click)="setSelectionKeyData($event)" data-index="K158" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 38.6vh;" type="button" value="H">
+                    <input (click)="setSelectionKeyData($event)" data-index="K159" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 44.2vh;" type="button" value="J">
+                    <input (click)="setSelectionKeyData($event)" data-index="K160" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 49.8vh;" type="button" value="K">
+                    <input (click)="setSelectionKeyData($event)" data-index="K161" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 55.7vh;" type="button" value="L">
+                    <input (click)="setSelectionKeyData($event)" data-index="K162" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 61vh;" type="button" value=":">
+                    <input (click)="setSelectionKeyData($event)" data-index="K163" class="InputBtnStyle"
+                        style="top: 14.6vh;left: 66.3vh;" type="button" value="&quot;">
+                    <input (click)="setSelectionKeyData($event)" data-index="K164" class="InputBtnStyle"
+                        style="top: 14.6vh;width: 11.6vh;left: 71.9vh;" type="button" value="Enter">
+                    <input (click)="setSelectionKeyData($event)" data-index="K165" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 0.1vh;width:7.1vw;" type="button" value="LShift">
+                    <input (click)="setSelectionKeyData($event)" data-index="K166" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 7.9vw;" type="button" value="Z">
+                    <input (click)="setSelectionKeyData($event)" data-index="K167" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 18.1vh;" type="button" value="X">
+                    <input (click)="setSelectionKeyData($event)" data-index="K168" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 23.6vh;" type="button" value="C">
+                    <input (click)="setSelectionKeyData($event)" data-index="K169" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 29.2vh;" type="button" value="V">
+                    <input (click)="setSelectionKeyData($event)" data-index="K170" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 34.7vh;" type="button" value="B">
+                    <input (click)="setSelectionKeyData($event)" data-index="K171" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 40.2vh;" type="button" value="N">
+                    <input (click)="setSelectionKeyData($event)" data-index="K172" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 45.6vh;" type="button" value="M">
+                    <input (click)="setSelectionKeyData($event)" data-index="K173" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 32vw;" type="button" value=",">
+                    <input (click)="setSelectionKeyData($event)" data-index="K174" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 35.4vw;" type="button" value=".">
+                    <input (click)="setSelectionKeyData($event)" data-index="K175" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 39.5vw;" type="button" value="/">
+                    <input (click)="setSelectionKeyData($event)" data-index="K176" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 43vw;width: 14.9vh;" type="button" value="RShift">
+                    <input (click)="setSelectionKeyData($event)" data-index="K177" class="InputBtnStyle"
+                        style="top: 19.3vh;left: 89.8vh;" type="button" value="↑">
+                    <input (click)="setSelectionKeyData($event)" data-index="K178" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 0.1vh;width: 6.1vh;" type="button" value="LCtrl">
+                    <input (click)="setSelectionKeyData($event)" data-index="K179" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 7.3vh;width: 6.1vh;" type="button" value="LWin">
+                    <input (click)="setSelectionKeyData($event)" data-index="K180" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 13.9vh;width: 6.1vh;" type="button" value="LAlt">
+                    <input (click)="setSelectionKeyData($event)" data-index="K181" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 20.6vh;width: 36.5vh;" type="button" value="Space">
+                    <input (click)="setSelectionKeyData($event)" data-index="K182" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 58.1vh;width: 6.1vh;" type="button" value="RAlt">
+                    <input (click)="setSelectionKeyData($event)" data-index="K183" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 65vh;" type="button" value="RWin">
+                    <input (click)="setSelectionKeyData($event)" data-index="K184" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 70.7vh;width: 6vh;" type="button" value="Menu">
+                    <input (click)="setSelectionKeyData($event)" data-index="K185" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 77.3vh;width: 6.1vh;" type="button" value="RCtrl">
+                    <input (click)="setSelectionKeyData($event)" data-index="K186" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 84.1vh;" type="button" value="←">
+                    <input (click)="setSelectionKeyData($event)" data-index="K187" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 89.7vh;" type="button" value="↓">
+                    <input (click)="setSelectionKeyData($event)" data-index="K188" class="InputBtnStyle"
+                        style="top: 24.1vh;left: 95.3vh;" type="button" value="→">
+
+                    <input [style.display]="KeyBoardManager.getTarget().fnModeindex==0?'block': 'none'"
+                        (click)="setSelectionKeyData($event)" data-index="K189" class="InputBtnStyle" style="top: 14.6vh;left: 52.6vw;width: 3.1vw;color: rgb(0, 0, 0);
+                    " type="button" value="Fn" (mouseover)="FNIn=true" (mouseleave)="FNIn=false"
+                        [style.background-color]="FNIn?'rgb(255, 107, 107)':'#0066F1'">
+
+
+                </div>
+                <div id="數字區" [style.display]="KeyBoardSetPageBtn==2?'block': 'none'"
+                    style="position: absolute;width: 100%; height: 100%;">
+                    <input data-index="K21" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;" type="button" value="NumLock">
+                    <input data-index="K22" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;LEFT: 9%;" type="button" value="Num/">
+                    <input data-index="K23" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;LEFT: 18%;" type="button" value="Num*">
+                    <input data-index="K24" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;LEFT: 27%;" type="button" value="Num-">
+                    <input data-index="K25" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 17%;LEFT: 0%;" type="button" value="Num7">
+                    <input data-index="K26" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 17%;LEFT: 9%;" type="button" value="Num8">
+                    <input data-index="K27" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 17%;LEFT: 18%;" type="button" value="Num9">
+                    <input data-index="K28" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 17%;LEFT:27%;" type="button" value="Num+">
+                    <input data-index="K29" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 34%;LEFT: 0%;" type="button" value="Num4">
+                    <input data-index="K218" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 34%;LEFT: 9%;" type="button" value="Num5">
+                    <input data-index="K210" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 34%;LEFT: 18%;" type="button" value="Num6">
+
+                    <input data-index="K211" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 51%;LEFT: 0%;" type="button" value="Num1">
+
+                    <input data-index="K212" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 51%;LEFT: 9%;" type="button" value="Num2">
+                    <input data-index="K213" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 51%;LEFT: 18%;" type="button" value="Num3">
+
+                    <input data-index="K215" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 17%;TOP: 68%;LEFT: 0%;" type="button" value="Num0">
+                    <input data-index="K216" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 68%;LEFT: 18%;" type="button" value="Num.">
+                    <input data-index="K217" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 8%;TOP: 68%;LEFT: 27%;" type="button" value="Num←">
+                </div>
+                <div id="媒體" [style.display]="KeyBoardSetPageBtn==3?'block': 'none'"
+                    style="position: absolute;width: 100%; height: 100%;">
+                    <input data-index="K31" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;" type="button" value="媒體播放器"
+                        [value]="i18nManager.getTarget().P2.MEDIAPLAYER">
+                    <input data-index="K32" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 12%;" type="button" value="播放/暫停"
+                        [value]="i18nManager.getTarget().P2.PLAYPAUSE">
+                    <input data-index="K33" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 24%;" type="button" value="停止"
+                        [value]="i18nManager.getTarget().P2.STOP">
+                    <input data-index="K34" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 0%;" type="button" value="上一曲"
+                        [value]="i18nManager.getTarget().P2.PREVIOUS">
+                    <input data-index="K35" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 12%;" type="button" value="下一曲"
+                        [value]="i18nManager.getTarget().P2.NEXT">
+                    <input data-index="K36" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 34%;LEFT: 0%;" type="button" value="音量加"
+                        [value]="i18nManager.getTarget().P2.VOLUMEUP">
+                    <input data-index="K37" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 34%;LEFT: 12%;" type="button" value="音量減"
+                        [value]="i18nManager.getTarget().P2.VOLUMEDOWN">
+                    <input data-index="K38" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 34%;LEFT: 24%;" type="button" value="靜音"
+                        [value]="i18nManager.getTarget().P2.MUTE">
+                </div>
+                <div id="系統網路" [style.display]="KeyBoardSetPageBtn==4?'block': 'none'"
+                    style="position: absolute;width: 100%; height: 100%;">
+                    <input data-index="K41" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;" type="button" value="瀏覽器後退" [value]="i18nManager.getTarget().P2.PAGEBACK">
+                    <input data-index="K42" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 12%;" type="button" value="瀏覽器前進"
+                        [value]="i18nManager.getTarget().P2.PAGEFORWARD">
+                    <input data-index="K43" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 24%;" type="button" value="瀏覽器刷新"
+                        [value]="i18nManager.getTarget().P2.REFRESHPAGE">
+                    <input data-index="K44" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 36%;" type="button" value="瀏覽器收藏"
+                        [value]="i18nManager.getTarget().P2.BROWSERCOLLECT">
+                    <input data-index="K45" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 48%;" type="button" value="瀏覽器主頁"
+                        [value]="i18nManager.getTarget().P2.HOMEPAGE">
+                    <input data-index="K46" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 0%;" type="button" value="Email"
+                        [value]="i18nManager.getTarget().P2.EMAIL">
+                    <input data-index="K47" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 12%;" type="button" value="我的電腦"
+                        [value]="i18nManager.getTarget().P2.MYCOMPUTER">
+                    <input data-index="K48" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 24%;" type="button" value="黏貼"
+                        [value]="i18nManager.getTarget().P2.PASTE">
+                    <input data-index="K49" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 36%;" type="button" value="複製"
+                        [value]="i18nManager.getTarget().P2.COPY">
+                </div>
+                <div id="鼠標" [style.display]="KeyBoardSetPageBtn==5?'block': 'none'"
+                    style="position: absolute;width: 100%; height: 100%;">
+                    <input data-index="K50" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;" type="button" value="單擊左建" [value]="i18nManager.getTarget().P2.LEFTCLICK">
+                    <input data-index="K51" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 12%;" type="button" value="單擊右鍵"
+                        [value]="i18nManager.getTarget().P2.RIGHTCLICK">
+                    <input data-index="K52" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 24%;" type="button" value="單擊滾輪"
+                        [value]="i18nManager.getTarget().P2.SCROLLCLICK">
+                    <input data-index="K53" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 36%;" type="button" value="後退"
+                        [value]="i18nManager.getTarget().P2.BACK">
+                    <input data-index="K54" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 48%;" type="button" value="前進"
+                        [value]="i18nManager.getTarget().P2.FORWARD">
+                </div>
+                <div id="禁用" [style.display]="KeyBoardSetPageBtn==6?'block': 'none'"
+                    style="position: absolute;width: 100%; height: 100%;">
+                    <input data-index="K12" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;" type="button" value="⊘">
+                    <input data-index="K62" (click)="prohibit_btn_KB1Data('All')" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 12%;" type="button" value="禁用全部"
+                        [value]="i18nManager.getTarget().P2.DISABLEALL">
+                    <input data-index="K63"
+                        (click)="KeyBoardManager.getTarget().cancel_prohibit(); setDBDataToServer('KeyAssign');"
+                        class="InputBtnStyle" style="width: 11%;LEFT: 24%;" type="button" value="取消禁用"
+                        [value]="i18nManager.getTarget().P2.UNDISABLE">
+                    <input data-index="K64" (click)="prohibit_btn_KB1Data('Num')" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 0%;" type="button" value="禁用數字鍵"
+                        [value]="i18nManager.getTarget().P2.DISABLENUMKEYS">
+                    <!-- <input data-index="K65" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 17%;LEFT: 12%;" type="button" value="禁用pad"> -->
+                    <!-- <input data-index="K66" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 17%;LEFT: 24%;" type="button" value="禁用F1-F12">  -->
+                    <input data-index="K67" (click)="prohibit_btn_KB1Data('ABC')" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 24%;" type="button" value="禁用字母"
+                        [value]="i18nManager.getTarget().P2.DISABLELETTERS">
+                    <input data-index="K68" (click)="prohibit_btn_KB1Data('Symbol')" class="InputBtnStyle"
+                        style="width: 11%;TOP: 34%;LEFT: 0%;" type="button" value="禁用符號"
+                        [value]="i18nManager.getTarget().P2.DISABLESYMBOL">
+                    <input data-index="K69" (click)="prohibit_btn_KB1Data('Control')" class="InputBtnStyle"
+                        style="width: 11%;TOP: 17%;LEFT: 12%;" type="button" value="禁用控制鍵"
+                        [value]="i18nManager.getTarget().P2.DISABLECONTROLKEYS">
+                    <!-- <input data-index="K610" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 34%;LEFT: 24%;" type="button" value="禁用九鍵">  -->
+                    <!-- <input data-index="K611" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 34%;LEFT: 36%;" type="button" value="禁用方向鍵"> -->
+                </div>
+                <div id="層順時開關" [style.display]="KeyBoardSetPageBtn==7?'block': 'none'"
+                    style="position: absolute;width: 100%; height: 100%;">
+                    <input data-index="K71" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;" type="button" value="硬體配置1"
+                        [value]="i18nManager.getTarget().P2.HARDWARECONFIGURATION+''+1">
+                    <input data-index="K72" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 12%;" type="button" value="硬體配置2"
+                        [value]="i18nManager.getTarget().P2.HARDWARECONFIGURATION+''+2">
+                    <input data-index="K73" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 24%;" type="button" value="硬體配置3"
+                        [value]="i18nManager.getTarget().P2.HARDWARECONFIGURATION+''+3">
+                    <input data-index="K74" (click)="setSelectionKeyData($event)" class="InputBtnStyle"
+                        style="width: 11%;LEFT: 36%;" type="button" value="硬體配置4"
+                        [value]="i18nManager.getTarget().P2.HARDWARECONFIGURATION+''+4">
+                </div>
+                <div id="使用說明" [style.display]="KeyBoardSetPageBtn==8?'block': 'none'"
+                    style="position: absolute;width: 100%; height: 100%;">
+                    <div class="InputObject" style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                        <div style="display: inline-flex;  width: 28%;"> Alt</div>
+
+
+                        <div id="Alt" data-index="Kcombination"
+                            style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                            [style.background-image]="KeyBoardManager.combination[0].check?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                            (click)="KeyBoardManager.combination[0].check=!KeyBoardManager.combination[0].check;">
+                        </div>
+                    </div>
+
+
+                    <div class="InputObject" style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                        <div style="display: inline-flex;  width: 28%;"> Shift</div>
+
+                        <div id="Shift" data-index="Kcombination"
+                            style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                            [style.background-image]="KeyBoardManager.combination[1].check?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                            (click)="KeyBoardManager.combination[1].check=!KeyBoardManager.combination[1].check;">
+                        </div>
+
+                    </div>
+                    <div class="InputObject" style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                        <div style="display: inline-flex;  width: 28%;"> Ctrl</div>
+
+
+                        <div id="Ctrl" data-index="Kcombination"
+                            style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                            [style.background-image]="KeyBoardManager.combination[2].check?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                            (click)="KeyBoardManager.combination[2].check=!KeyBoardManager.combination[2].check;">
+                        </div>
+                    </div>
+                    <div class="InputObject" style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                        <div style="display: inline-flex;  width: 28%;"> Win</div>
+
+
+                        <div id="win/Command" data-index="Kcombination"
+                            style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                            [style.background-image]="KeyBoardManager.combination[3].check?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                            (click)="KeyBoardManager.combination[3].check=!KeyBoardManager.combination[3].check;">
+                        </div>
+                    </div>
+
+
+
+                    <input id="combinationkey" placeholder="組合鍵" maxlength="1" style="width: 47%;
+                                    color: #FFF;
+                                    height: 3.8vh;
+                                    margin-top: 2vh;
+                                    text-align: center;
+                                    background-color: #26503b99;
+                                    border: 0; " type="text"
+                        placeholder="{{this.i18nManager.getTarget().P2.COMBINATIONKEY}}"
+                        [(ngModel)]="KeyBoardManager.combinationkey" (keyup)="combinationkey($event.keyCode)">
+
+
+                    <input class="InputBtnStyle" style="position: absolute;
+                                    color: #FFF;
+                                    background-repeat: no-repeat;
+                                    border: none;
+                                    width: 2.9vw;
+                                    height: 3.9vh;
+                                    margin-top: 2.1vh;
+                                    margin-left: 1vw;
+                                    font-size: 1.6vh;
+                                    box-sizing: border-box;
+                                    background-color: #4C4C4C;" type="button" (click)="setSelectionKeyCombination()"
+                        value="使用" [value]="i18nManager.getTarget().P2.USE">
+                </div>
+            </section>
+        </section>
+
+
+
+
+
+
+        <section *ngIf="CurrentPageIndex==3 &&MacroManager.hasClass()" id="MacroPage">
+
+            <section name="leftArea">
+                <div class="MacroClassTitle" style="position: absolute;    
+                height: 4.7vh;
+                width: 21.3vw;
+                background-image: url(./image/ScriptSet/MacroClassTitle.png);
+                margin-top: 13vh;
+                background-repeat: no-repeat;">
+                    <span
+                        style="position: absolute;top: 1.4vh; left: 13%;color: #fff;font-weight: bold;">{{i18nManager.getTarget().P3.MACROTYPE}}</span>
+                </div>
+
+                <div id="ScriptClassSelect">
+                    <div class="ProjectItem" *ngFor="let item of MacroManager.macroClassItem ;let i = index"
+                        (click)="switchMacroClass(i)"
+                        [style.background-color]="MacroManager.currentChooseMacroClass==i?'#0066F1':'transparent'">
+
+                        <div style="width: 17.1vw;position: absolute;color: #FFFFFF;" (blur)="MacroCsInEdit=false">
+                            {{item.className}}
+                        </div>
+
+
+                        <input class="MacroCSName" type="text" placeholder="" style="width: 17.1vw;position: absolute;"
+                            maxlength="15" (keypress)='EM.regexCustom($event)'
+                            [style.display]="(MacroManager.currentChooseMacroClass==i&&MacroCsInEdit)?'block': 'none'"
+                            [(ngModel)]="MacroManager.onEditCSName"
+                            (blur)="MacroCSNameChange($event);MacroCsInEdit=false;"
+                            (keyup)="EM.onkeyupEnter($event)? MacroCSNameChange($event):' ';">
+
+                        <img (click)="MacroManager.currentChooseMacroClass==i?MacroCsInEdit=true:MacroCsInEdit=false;
+                            MacroManager.updeteEditClassName()" (mouseleave)="EM.ForceFocusUIByClass('MacroCSName',i);"
+                            [src]="MacroManager.currentChooseMacroClass==i?ImgPath.EditNameIcon[1]:ImgPath.EditNameIcon[0]"
+                            Alt="找不到圖片" style="margin-left: 85%;margin-top: 1.3%; ">
+                    </div>
+                </div>
+                <div id="MacroSetting">
+                    <span
+                        style="position: absolute;top: 3%;left: 4%;font-size: 2vh;color: #FFF;">{{i18nManager.getTarget().P3.MACRONAME}}</span>
+                    <input [style.display]="this.MacroManager.getClass().hasFile()?'block': 'none'" type="text"
+                        id="FileName" name="firstname" style="position: absolute;
+                    background-color: transparent;color: #fff;border: 1.4px solid #fff;
+                    top: 14%;left: 4%;width: 80%;" placeholder="" (keypress)="EM.regexCustom($event);"
+                        (blur)="MacroFileNameChange($event)"
+                        (keyup)="EM.onkeyupEnter($event)? MacroFileNameChange($event):' ';"
+                        [(ngModel)]="MacroManager.nowEditName">
+                    <span style="position: absolute;
+                    top: 27%;
+                    left: 4%;font-size: 2vh;
+                    color: #fff;">{{i18nManager.getTarget().P3.DELAYMODE}}</span>
+                    <div class="MacroSettingOption" style="position: absolute;
+                    height: 9.7vh;
+                    width: 31vh;
+                    top: 38%;
+                    left: 4%;color: #FFF;
+                    background-repeat: no-repeat;">
+                        <input type="radio" name="紀錄延遲"
+                            (change)="customConsolelog('MacroRadio',MacroManager.radioOptions);"
+                            [(ngModel)]="MacroManager.radioOptions"
+                            [value]="0">{{i18nManager.getTarget().P3.DELAYRECORD}}<br>
+                        <input type="radio" name="最低延遲5ms"
+                            (change)="customConsolelog('MacroRadio',MacroManager.radioOptions);"
+                            [(ngModel)]="MacroManager.radioOptions"
+                            [value]="1">{{i18nManager.getTarget().P3.FIVEMINDELAY}}<br>
+                        <input type="radio" name="毫秒"
+                            (change)="customConsolelog('MacroRadio',MacroManager.radioOptions);"
+                            [(ngModel)]="MacroManager.radioOptions" [value]="2">
+                        <input id="customMs" placeholder="" style="
+                    width: 17%;color: #FFF;
+                    height: 2vh;text-align: center;
+                    background-color: transparent;
+                    border: 0; " type="text" value="0"
+                            onkeyup="value=value.replace(/[^\d]/g,'');if(value>32767){value=32767}if(value<1){value=0}">
+                        <div style="display: inline-block;color: #FFF;">{{i18nManager.getTarget().P3.MSDELAY}}</div>
+                    </div>
+                </div>
+            </section>
+            <div id="MacroFileSelectList">
+                <div class="MacroFiletItem" *ngFor="let item of MacroManager.getClass().MacroFiletItem ;let i = index">
+                    <div [style.background-image]="MacroManager.getClass().currentChooseMacro==i?ImgPath.FileIcon[1]:ImgPath.FileIcon[0]"
+                        (click)="switch_current_script(i);" style="background-size: 100% 100%;width: 4.5vw;
+                    height: 4.5vw;">
+                    </div>{{item.name}}
+                </div>
+            </div>
+            <div class="BottomArea" [style.pointer-events]="MacroManager.getClass().hasFile()?'auto':'none'"
+                style="background-size: 100% 100%;background-image: url('./image/ColorSet/BottomAreaBG.png');
+                                    position: absolute;margin-left: 23.6vw; margin-top: 52vh;height: 28.3vh;width: 65vw;">
+                <img id="IconRecord" (click)="onRecordClick()"
+                    [src]="onRecord?ImgPath.IconRecord[1]:ImgPath.IconRecord[0]" alt=""
+                    style="position: absolute;left: 7%;top: 7%;" [style.z-index]="onRecord?'9991':'9'">
+
+                <img id="MacroEdit" (mouseover)="IconEdit=true" (mouseleave)="IconEdit=false" alt=""
+                    style="position: absolute;left: 7%;top: 19%;" [style.z-index]="macroContentInEdit?'9991':'9'"
+                    [src]="macroContentInEdit?ImgPath.IconEdit[1]:ImgPath.IconEdit[0]"
+                    (click)="macroContentInEdit=!macroContentInEdit">
+
+                <img (mouseover)="IconDelete=true" (mouseleave)="IconDelete=false"
+                    [src]="IconDelete?ImgPath.IconDelete[1]:ImgPath.IconDelete[0]" alt=""
+                    style="position: absolute;left: 7%;top: 30%;" (click)="MacroManager.tempMacroContent.deleteRow();">
+
+                <img (mouseover)="IconMoveUP=true" (mouseleave)="IconMoveUP=false"
+                    [src]="IconMoveUP?ImgPath.IconMoveUP[1]:ImgPath.IconMoveUP[0]" alt=""
+                    style="position: absolute;left: 7%;top: 42%;"
+                    (click)="MacroManager.tempMacroContent.move_up_row();">
+
+                <img (mouseover)="IconMoveDown=true" (mouseleave)="IconMoveDown=false"
+                    [src]="IconMoveDown?ImgPath.IconMoveDown[1]:ImgPath.IconMoveDown[0]" alt=""
+                    style="position: absolute;left: 7%;top: 54%;"
+                    (click)="MacroManager.tempMacroContent.move_down_row();">
+
+
+                <img (mouseover)="IconAdd=true" (mouseleave)="IconAdd=false"
+                    [src]="IconAdd?ImgPath.IconAdd[1]:ImgPath.IconAdd[0]" alt=""
+                    style="position: absolute;left: 7%;top: 65%;"
+                    (click)="this.MacroManager.tempMacroContent.createInsert();">
+
+
+                <!-- border-bottom: 1px #00f solid;  onkeyup="value=value.replace(/[^\d]/g,'');if(value>32767){value=32767}if(value<1){value=0}"
+                    (keypress)='EM.regexCustom($event)' -->
+
+                <div id="MacroContentArea" style="position: absolute;z-index: 9991;
+                width: 49vw; margin-left: 12vw;height: 28vh;overflow-y: scroll;"
+                    [style.pointer-events]="onRecord?'none':'auto'">
+                    <div class="MacroContentItem" *ngFor="let item of MacroManager.tempMacroContent.Data;let i = index"
+                        (click)="MacroManager.tempMacroContent.currentlySelectiedPosition=i"
+                        [style.background-color]="MacroManager.tempMacroContent.currentlySelectiedPosition==i?'#0066F1':'transparent'">
+
+                        <input (keyup)="$event.target.value<1?item.byDelay=0:''"
+                            (keyup)="$event.target.value>32767?item.byDelay=32767:''"
+                            (blur)="$event.target.value>32767?item.byDelay=32767:''"
+                            (blur)="$event.target.value<1?item.byDelay=0:''" id="byDelayEdit" type="number"
+                            placeholder="" style="position: absolute;
+                                                                                    color: rgb(19, 16, 16);
+                                                                                    margin-left: 0.7%;
+                                                                                    width: 9%;margin-top: 0.3vh;"
+                            maxlength="15"
+                            [style.display]="(MacroManager.tempMacroContent.currentlySelectiedPosition==i&&macroContentInEdit)?'block': 'none'"
+                            [(ngModel)]="item.byDelay">
+                        <input id="byKeyCodeEdit" type="text" placeholder="" style="position: absolute;
+                        color: rgb(19, 16, 16);
+                        margin-left: 15.8%;
+                        width: 13.9%;
+                        margin-top: 0.3vh;
+                        display: block;" maxlength="15"
+                            [style.display]="(MacroManager.tempMacroContent.currentlySelectiedPosition==i&&macroContentInEdit)?'block': 'none'"
+                            (keydown)="$event.preventDefault();MacroEditkeyCodeFn($event);item.byKeyCode=$event.keyCode;"
+                            (keyup)="$event.preventDefault();MacroEditkeyCodeFn($event);item.byKeyCode=$event.keyCode;"
+                            (mouseup)="$event.preventDefault();item.byKeyCode=(9999-$event.button);"
+                            [value]="EM.getkeyCodeTxt(item.byKeyCode)">
+                        <div id="DelayText" style="
+                                    display: inline-block;
+                                    margin-top: 1.5%;
+                                    color: #FFF;
+                                    margin-left: 0.7%;
+                                    width: 9%;
+                                    vertical-align: middle;
+                                    "> {{item.byDelay+"ms"}} </div>
+
+                        <div id="TypeIcon" [style.background-image]="ImgPath.MacroIcon[item.bKeyDown]" style="display: inline-block;
+                                    margin-top: 1.5%;
+                                    height: 43.5%;
+                                    margin-left: 2%;
+                                    width: 2%;
+                                    vertical-align: middle;
+                                    background-size: 100% 100%;">
+                        </div>
+
+                        <div id="KeyCodeText" style="display: inline-block;
+                                                            color: #FFF;
+                                                            margin-top: 1.5%;
+                                                            line-height: 18px;
+                                                            vertical-align: middle;
+                                                            margin-left: 1.7%;
+                                                            width: 3%;">
+                            {{EM.getkeyCodeTxt(item.byKeyCode)}}
+                        </div>
+                    </div>
+
+                </div>
+                <div id="RBtn1" class="RBtn1cs" style="position: absolute;left: 52px;top: -12%;    
+            height: 11%; width: 3%;background-size: 100% 100%;"
+                    [style.pointer-events]="MacroManager.hasClass()?'auto':'none'" (click)="MacroManager.createClassMacroFile(i18nManager.getTarget().P3.MACRO);
+                setDBDataToServer('MacroManager');">
+                </div>
+                <div id="RBtn2" class="RBtn2cs" style="position: absolute;left: 85px;top: -12%;
+            height: 11%;width: 3%;background-size: 100% 100%;"
+                    (click)="MacroManager.cloneClassMacro();setDBDataToServer('MacroManager');">
+                </div>
+                <div id="RBtn3" class="RBtn3cs" style="position: absolute;left: 117px;top: -12%;height: 11%;
+            width: 3%;background-size: 100% 100%;" (click)="
+                KeyBoardManager.clearRecordMacroData(MacroManager.getClass().getTarget().name);
+                MacroManager.getClass().deleteMacro();MacroManager.updeteEditName();
+                setDBDataToServer('MacroManager');
+                ">
+                </div>
+                <div id="RBtn4" class="RBtn4cs" style="position: absolute;left: 148px;top: -12%;height: 11%;
+                width: 3%;background-size: 100% 100%;" (click)="ExportProfile()">
+                </div>
+                <div id="RBtn5" class="RBtn5cs" style="position: absolute;left: 180px;top: -12%;     height: 11%;
+                width: 3%;background-size: 100% 100%;" [style.pointer-events]="MacroManager.hasClass()?'auto':'none'"
+                    (click)="ImportProfile()">
+                </div>
+            </div>
+        </section>
+        <section *ngIf="CurrentPageIndex==3 &&!MacroManager.hasClass()" [style.pointer-events]="'none'"
+            id="MacroPageNone">
+
+            <section name="leftArea">
+                <div class="MacroClassTitle" style="position: absolute;    
+               height: 4.7vh;
+               width: 21.3vw;
+               background-image: url(./image/ScriptSet/MacroClassTitle.png);
+               margin-top: 13vh;
+               background-repeat: no-repeat;">
+                    <span
+                        style="position: absolute;top: 0.8vh; left: 13%;color: #fff;font-weight: bold;">{{i18nManager.getTarget().P3.MACROTYPE}}</span>
+                </div>
+
+                <div id="ScriptClassSelect">
+                    <div class="ProjectItem">
+                    </div>
+                </div>
+                <div id="MacroSetting">
+                </div>
+            </section>
+            <div id="MacroFileSelectList">
+            </div>
+            <div class="BottomArea"
+                style="background-size: 100% 100%;background-image: url('./image/ColorSet/BottomAreaBG.png');
+                                   position: absolute;margin-left: 23.6vw; margin-top: 52vh;height: 28.3vh;width: 65vw;">
+                <img id="IconRecord" [src]="onRecord?ImgPath.IconRecord[1]:ImgPath.IconRecord[0]" alt=""
+                    style="z-index:9991;position: absolute;left: 7%;top: 7%;">
+                <img [src]="ImgPath.IconEdit[0]" alt="" style="position: absolute;left: 7%;top: 19%;">
+
+                <img (mouseover)="IconDelete=true" (mouseleave)="IconDelete=false" [src]="ImgPath.IconDelete[0]" alt=""
+                    style="position: absolute;left: 7%;top: 30%;">
+
+                <img (mouseover)="IconMoveUP=true" (mouseleave)="IconMoveUP=false" [src]="ImgPath.IconMoveUP[0]" alt=""
+                    style="position: absolute;left: 7%;top: 42%;">
+
+                <img (mouseover)="IconMoveDown=true" (mouseleave)="IconMoveDown=false" [src]="ImgPath.IconMoveDown[0]"
+                    alt="" style="position: absolute;left: 7%;top: 54%;">
+                <img [src]="ImgPath.IconAdd[1]" alt="" style="position: absolute;left: 7%;top: 65%;">
+                <div id="MacroContentArea" style="width: 49vw; margin-left: 12vw;height: 28vh;overflow-y: scroll;">
+                </div>
+                <div id="RBtn1" class="RBtn1cs" style="position: absolute;left: 52px;top: -12%;    
+           height: 11%; width: 3%;background-size: 100% 100%;">
+                </div>
+                <div id="RBtn2" class="RBtn2cs" style="position: absolute;left: 85px;top: -12%;
+           height: 11%;width: 3%;background-size: 100% 100%;">
+                </div>
+                <div id="RBtn3" class="RBtn3cs" style="position: absolute;left: 117px;top: -12%;height: 11%;
+           width: 3%;background-size: 100% 100%;">
+                </div>
+                <div id="RBtn4" class="RBtn4cs" style="position: absolute;left: 148px;top: -12%;height: 11%;
+               width: 3%;background-size: 100% 100%;">
+                </div>
+                <div id="RBtn5" class="RBtn5cs" style="position: absolute;left: 180px;top: -12%;     height: 11%;
+               width: 3%;background-size: 100% 100%;">
+                </div>
+            </div>
+
+
+        </section>
+
+        <section *ngIf="CurrentPageIndex==4" id="ProgramPage" style="margin-top: 11vh;">
+            <div id="PGSelectTitle" style="
+                    position: absolute;
+                    height: 4.1vh;
+                    width: 21.2vw;
+                    background-color: #00ffcd0f;
+                    margin-top: 3vh;
+                    line-height: 4.1vh;
+                   ">
+                <img style="float: left;margin-top: 1vh;margin-left: 5px;" src="./image/P7/PGIcon.png">
+                <div style="float: left;color: #fff;margin-left: 3%;height: 100%;font-size: 1.9vh;font-weight: bold;
+                                        ">{{this.i18nManager.getTarget().Share.RELATEDPROGRAM}}
+                </div>
+            </div>
+
+            <div id="程序關聯選單" class="ProjectSelect" style="margin-top: 7vh;height: 63.5vh;">
+
+                <div class="ProjectItem" *ngFor="let item of AssociateManager.AssociateArr ;let i = index"
+                    (click)="AssociateManager.currentChooseIndex=i;"
+                    [style.background-color]="AssociateManager.currentChooseIndex==i?'#0066F1':'transparent'">
+                    <input (blur)="clickEdit=false"
+                        [style.pointer-events]="AssociateManager.currentChooseIndex==i&&clickEdit?'auto':'none'"
+                        class="CustomInputText" type="text" placeholder="" [(ngModel)]="item.name">
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div id="ProgramBottomArea" style="position: absolute;
+                margin-left: 28.5%;
+                margin-top: 41.8vh;
+                height: 29vh;
+                width: 58.3vw;
+                background-size: 100% 100%;">
+                <div *ngIf="AssociateManager.has()" id="ProgramDownSelect1" class="SelectTemplate" style="height: 100%;
+                                       width: 50%;
+                                       margin-top: 0;">
+
+                    <div class="ProjectItem" *ngFor="let item of KeyBoardManager.KeyBoardArray ;let i = index"
+                        (click)="AssociateManager.setAssignKeyboardProfile(i);setDBDataToServer('AssociateProg');"
+                        [style.background-color]="AssociateManager.getClass().assignKeyboardProfile==i?'#0066F1':'transparent'">
+                        <input (blur)="clickEdit=false"
+                            [style.pointer-events]="AssociateManager.getClass().assignKeyboardProfile==i&&clickEdit?'auto':'none'"
+                            class="CustomInputText" type="text" placeholder="" [(ngModel)]="item.projectName">
+                    </div>
+                </div>
+                <div *ngIf="AssociateManager.has()" id="ProgramDownSelect2" class="SelectTemplate" style="left: 50%;
+                                                   height: 100%;
+                                                   width: 50%;
+                                                   margin-top: 0;">
+                    <div class="ProjectItem"
+                        *ngFor="let item of KeyBoardManager.getAssignTarget(AssociateManager.getClass().assignKeyboardProfile).fiveDefaultLedCode ;let i = index">
+                        <div style="position: absolute;color: #f00;">{{item.projectName}}
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="!AssociateManager.has()" id="ProgramDownSelect1" class="SelectTemplate" style="height: 100%;
+                        width: 50%;
+                        margin-top: 0;">
+                </div>
+                <div *ngIf="!AssociateManager.has()" id="ProgramDownSelect2" class="SelectTemplate" style="left: 50%;
+                                    height: 100%;
+                                    width: 50%;
+                                    margin-top: 0;">
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- <router-outlet></router-outlet-->
+
+    </div>
+
+    <section *ngIf="CurrentPageIndex==1" id="ColorPage">
+        <div id="LedModeSelect" style="left: 4.5vw;" class="SelectTemplate">
+            <div class="LEDModeSelect" (click)="LEDModeSelect($event,i);"
+                *ngFor="let item of Led.recordModeArr ;let i = index"
+                [style.background-color]="(Led.currentModeIndex==i)?'#0066F1':'transparent'"
+                [style.color]="(Led.currentModeIndex==i)?'#000':'#DFE4E1'">
+                <img style="float: left;
+                                                vertical-align: middle;
+                                                text-align: center;
+                                                margin-left: 5px;
+                                                width: 22px;
+                                                height: 100%;
+                                                object-fit: none;"
+                    [src]="(Led.currentModeIndex==i)?item.iconpath[1]:item.iconpath[0]">
+    
+                <div style="float: left;line-height: 3.3vh;margin-left: 8px;">
+                    {{Led.mode_name[Led.recordModeArr[i].sortPosition]}}
+                </div>
+    
+    
+                <img (click)="OpenLeftDropDownListUI($event,i)" style="float: right;margin-top: 0.2vh;margin-right: 2px;"
+                    [src]="(Led.currentModeIndex==i)?ImgPath.SwitchIcon[1]:ImgPath.SwitchIcon[0]">
+    
+                <img [src]="LEDModeEyeStatus(i)" (click)="RGBEyeClose(i);" style="float: right;
+                            margin-right: 0.2vw;">
+    
+            </div>
+        </div>
+    
+        <div class="BottomArea" style="background-image: url(./image/ColorSet/BottomAreaBG.png);
+            position: absolute;
+            margin-left: 28%;
+            margin-top: 54vh;
+            height: 27.9vh;
+            width: 63.7vw;
+            background-size: 100% 100%;">
+            <div id="Btn1" style="height:27px;width:77px;text-align: center;line-height: 26px;
+                            color: white;display: inline-block;font-size: 13px;" (click)="boxSelectionStart()"
+                [style.background-image]="this.Led.BSApage1.EventCanBoxSelect? ImgPath.BoxState[1]:ImgPath.BoxState[0]">
+                {{i18nManager.getTarget().P1.SELECT}}
+            </div>
+            <div id="EffectCenterBtn" style="height:27px;width:77px;text-align: center;line-height: 26px;display: inline-block;
+                            color: white;font-size: 13px;" (click)="boxEffectStart()"
+                [style.display]="this.RGBMode.canEffectCenter?'inline-block': 'none'"
+                [style.background-image]="EffectCenter.selectEffectCenter?ImgPath.BoxState[1]:ImgPath.BoxState[0]">
+                {{i18nManager.getTarget().P1.CENTERTHEEFFECT}}
+            </div>
+            <div id="LedAdjustable" style="font-size: 1.1vw;">
+                <div class="InputObject" [style.display]="RGBMode.showlimit[0]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.OPACITY}} </div>
+                    <input class="LedInputTxtStyle" type="number" max="100" min="0" (keypress)="EM.regexOnlyNumber($event);"
+                        (change)="setColorDataToServer('RGBMode.opacity')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>100){value=100};" [(ngModel)]="RGBMode.opacity"
+                        (keyup)="setColorDataToServer('RGBMode.opacity')">
+                    <!-- <img src="./image/ColorSet/MinusIcon.png"> -->
+                    <input class="LedOptionInputRange" type="range" max="100" min="0"
+                        (change)="setColorDataToServer('range')" [(ngModel)]="RGBMode.opacity">
+                </div>
+                <div class="InputObject" [style.display]="RGBMode.showlimit[1]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.SPEED}} </div>
+                    <input class="LedInputTxtStyle" type="number" max="10" min="1"
+                        (change)="setColorDataToServer('RGBMode.speed')" [(ngModel)]="RGBMode.speed"
+                        (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>10){value=10};if(value<1){value=1}">
+                    <input class="LedOptionInputRange" type="range" max="10" min="1"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.speed">
+                </div>
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[2]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.BANDWIDTH}}</div>
+                    <input class="LedInputTxtStyle" type="number" max="500" min="50"
+                        (change)="setColorDataToServer('RGBMode.bandwidth')" [(ngModel)]="RGBMode.bandwidth"
+                        (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>500){value=500};if(value<50){value=50}">
+                    <input class="LedOptionInputRange" type="range" max="500" min="50"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.bandwidth">
+                </div>
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[3]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.ANGLE}} </div>
+                    <input class="LedInputTxtStyle" type="number" max="360" min="0"
+                        (change)="setColorDataToServer('RGBMode.angle')" [(ngModel)]="RGBMode.angle"
+                        (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>360){value=360} else if(value<1){value=0}">
+                    <input class="LedOptionInputRange" type="range" max="360" min="0"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.angle">
+                </div>
+                <div class="InputObject" [style.display]="RGBMode.showlimit[4]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.NUMBER}}</div>
+                    <input class="LedInputTxtStyle" type="number" max="10" min="0"
+                        (change)="setColorDataToServer('RGBMode.number')" [(ngModel)]="RGBMode.number"
+                        (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>10){value=10} else if(value<1){value=0}">
+                    <input class="LedOptionInputRange" type="range" max="10" min="0"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.number">
+                </div>
+                <div class="InputObject" [style.display]="RGBMode.showlimit[5]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.FIRE}}</div>
+                    <input class="LedInputTxtStyle" type="number" max="10" min="0"
+                        (change)="setColorDataToServer('RGBMode.fire')" [(ngModel)]="RGBMode.fire"
+                        (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>10){value=10}">
+                    <input class="LedOptionInputRange" type="range" max="10" min="0"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.fire">
+                </div>
+                <div class="InputObject" [style.display]="RGBMode.showlimit[6]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.GAP}}</div>
+                    <input class="LedInputTxtStyle" type="number" max="500" min="0"
+                        (change)="setColorDataToServer('RGBMode.gap')" [(ngModel)]="RGBMode.gap"
+                        (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>500){value=500}">
+                    <input class="LedOptionInputRange" type="range" max="500" min="0"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.gap">
+                </div>
+    
+    
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[8]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.RANDOMSPEED}}</div>
+                    <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.randomspeed')"
+                        [(ngModel)]="RGBMode.randomspeed" (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>360){value=360}">
+                    <input class="LedOptionInputRange" type="range" max="360" min="0"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.randomspeed">
+                </div>
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[9]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.TIME}}</div>
+                    <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.time')"
+                        [(ngModel)]="RGBMode.time" (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>3){value=3}">
+                    <input class="LedOptionInputRange" type="range" max="3" min="0.5"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.time">
+                </div>
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[10]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.RADIUS}}</div>
+                    <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.radius')"
+                        [(ngModel)]="RGBMode.radius" (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>300){value=300}">
+                    <input class="LedOptionInputRange" type="range" max="300" min="0"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.radius">
+                </div>
+    
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[11]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.AMPLITUDE}} </div>
+                    <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.amplitude')"
+                        [(ngModel)]="RGBMode.amplitude" (keyup)="setColorDataToServer('LedInputTxt')"
+                        onkeyup="value=value.replace(/[^\d]/g,'');if(value>8000){value=8000};if(value<200){value=200}">
+                    <input class="LedOptionInputRange" type="range" max="8000" min="200" step="100"
+                        (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.amplitude">
+                </div>
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[7]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.BUMP}} </div>
+    
+                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                        [style.background-image]="RGBMode.bump?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                        (click)="RGBMode.bump=!RGBMode.bump;setColorDataToServer('RGB')">
+                    </div>
+                </div>
+    
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[12]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.SEPARATE}} </div>
+                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                        [style.background-image]="RGBMode.separate?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                        (click)="RGBMode.separate=!RGBMode.separate;setColorDataToServer('RGB')">
+                    </div>
+                </div>
+    
+    
+                <div [style.display]="RGBMode.showlimit[13]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.GRADIENT}} </div>
+    
+                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                        [style.background-image]="RGBMode.gradient?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                        (click)="RGBMode.gradient=!RGBMode.gradient;setColorDataToServer('RGB')">
+                    </div>
+                </div>
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[14]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.DIRECTION}}</div>
+                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                        [style.background-image]="RGBMode.direction?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                        (click)="RGBMode.direction=!RGBMode.direction;setColorDataToServer('RGB')">
+                    </div>
+    
+                </div>
+    
+                <div class="InputObject" [style.display]="RGBMode.showlimit[15]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.SOFT}} </div>
+    
+                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                        [style.background-image]="RGBMode.soft?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                        (click)="RGBMode.soft=!RGBMode.soft;setColorDataToServer('RGB')">
+                    </div>
+                </div>
+                <div class="InputObject" [style.display]="RGBMode.showlimit[16]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;  width: 28%;">{{i18nManager.getTarget().P1.FIXED}} </div>
+    
+                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                        [style.background-image]="RGBMode.fixed?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                        (click)="RGBMode.fixed=!RGBMode.fixed;setColorDataToServer('RGB')">
+                    </div>
+                </div>
+                <div class="InputObject" [style.display]="RGBMode.showlimit[17]==1?'block': 'none'"
+                    style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
+                    <div style="display: inline-block;  width: 32%;">{{i18nManager.getTarget().P1.BIDIRECTIONAL}}
+                    </div>
+                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                        [style.background-image]="RGBMode.bidirectional?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
+                        (click)="RGBMode.bidirectional=!RGBMode.bidirectional;setColorDataToServer('RGB')">
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+        <div [style.display]="RGBMode.name!='Fire'?'block': 'none'" id="color-picker-container" style="    left: 67%;
+                position: absolute;
+                z-index: 2;
+                top: 65.7%;
+                height: 27.5%;
+                width: 24.7%;
+                display: block;">
+    
+            <div id="LedColorPickingArea" class="PickingArea" style="
+                                        position: absolute;
+                                        height: 55%;
+                                        width: 50%;
+                                        background-size: 100% 100%;
+                                        border-radius: 3px;
+                                        " [style.background-color]="LedColor.gradientBGcolor">
+                <div id="LedColorCircle" class="circle">
+    
+    
+                </div>
+    
+            </div>
+            <input id="ColorSliderH" type="range" min="0" max="359" step="1" [(ngModel)]="LedColor.Hue"
+                (ngModelChange)='LedColorhueChange()'>
+    
+            <div style="position: absolute;
+                 top: 60%;
+                 color: #fff;
+                 width: 21%;"> {{i18nManager.getTarget().P1.COLORS}}</div>
+            <input class="color_quantity" type="number" max="20" min="1"
+                [style.pointer-events]="RGBMode.color_ShowLimit!=1?'auto':'none'" [(ngModel)]="RGBMode.color_quantity"
+                (change)="setColorDataToServer('插色數量')"
+                onkeyup="value=value.replace(/[^\d]/g,'');if(value>20){value=20};if(value<1){value=1}">
+            <div id="colorBase0" class="colorBase" (click)="LedColor.onclickColorDefault($event.target,0)"
+                [style.background-color]="Led.getTarget().color[0]" style="top: 76%; left: 0px;">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase1" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,1)" [style.background-color]="Led.getTarget().color[1]"
+                style="position: absolute; top:76%;left:5%;">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase2" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,2)" [style.background-color]="Led.getTarget().color[2]"
+                style="position: absolute; top:76%;left:10%;">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase3" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,3)" [style.background-color]="Led.getTarget().color[3]"
+                style="position: absolute; top:76%;left:15%; ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase4" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,4)" [style.background-color]="Led.getTarget().color[4]"
+                style="position: absolute; top:76%;left:20%;">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase5" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,5)" [style.background-color]="Led.getTarget().color[5]"
+                style="position: absolute; top:76%;left:25%;">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase6" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,6)" [style.background-color]="Led.getTarget().color[6]"
+                style="position: absolute; top:76%;left:30%; ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase7" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,7)" [style.background-color]="Led.getTarget().color[7]"
+                style="position: absolute; top:76%;left:35%; ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase8" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,8)" [style.background-color]="Led.getTarget().color[8]"
+                style="position: absolute; top:76%;left:40%;">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase9" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,9)" [style.background-color]="Led.getTarget().color[9]"
+                style="position: absolute; top:76%;left:45%;  ">
+    
+    
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase10" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,10)"
+                [style.background-color]="Led.getTarget().color[10]" style="position: absolute; top:84%;left:0%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase11" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,11)"
+                [style.background-color]="Led.getTarget().color[11]" style="position: absolute; top:84%;left:5%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase12" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,12)"
+                [style.background-color]="Led.getTarget().color[12]" style="position: absolute; top:84%;left:10%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase13" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,13)"
+                [style.background-color]="Led.getTarget().color[13]" style="position: absolute; top:84%;left:15%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase14" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,14)"
+                [style.background-color]="Led.getTarget().color[14]" style="position: absolute; top:84%;left:20%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase15" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,15)"
+                [style.background-color]="Led.getTarget().color[15]" style="position: absolute; top:84%;left:25%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase16" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,16)"
+                [style.background-color]="Led.getTarget().color[16]" style="position: absolute; top:84%;left:30%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase17" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,17)"
+                [style.background-color]="Led.getTarget().color[17]" style="position: absolute; top:84%;left:35%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase18" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,18)"
+                [style.background-color]="Led.getTarget().color[18]" style="position: absolute; top:84%;left:40%;  ">
+            </div>
+            <div [style.display]="RGBMode.color_ShowLimit!=1?'block': 'none'" id="colorBase19" class="colorBase"
+                (click)="LedColor.onclickColorDefault($event.target,19)"
+                [style.background-color]="Led.getTarget().color[19]" style="position: absolute; top:84%;left:45%;  ">
+            </div>
+        </div>
+    
+    
+    
+    
+    </section>
+    
+    <div id="EventCanBoxSelectRange" class="EventCanBoxSelectRange"
+        [style.pointer-events]="Led.BSApage1.EventCanBoxSelect ||LCFM.BSApage7.EventCanBoxSelect?'auto':'none'">
+    
+        <div *ngIf="CurrentPageIndex==1" id="APModeKBUI" class="KBUICommon"
+            [style.pointer-events]="EffectCenter.selectEffectCenter?'auto':'none'">
+    
+            <div id="RGBEffectCenter" style="width:15px;
+                            height: 15px;z-index: 9990;
+                            background: transparent;
+                            position: absolute;
+                            pointer-events: none;
+                            background-image: url('./image/ColorSet/IconEffectCenter.png');"
+                [style.display]="EffectCenter.selectEffectCenter?'block': 'none'" [style.background-color]="'transparent'">
+    
+            </div>
+    
+            <div *ngFor="let item of KeyBoardStyle.getTarget().target ;let i = index" class="RGBColorBlockStyle"
+                [style.background-color]="Led.AllBlockColor[i].color" [attr.data-index]="i">
+            </div>
+            <div id="RGBKeyBoardUITransparent" data-UITransparent="RGBTransparent"
+                style="position: absolute;height: 100%;width: 100%;pointer-events: none;"
+                [style.pointer-events]="EffectCenter.selectEffectCenter?'auto':'none'">
+            </div>
+        </div>
+        <div *ngIf="CurrentPageIndex==7" id="CustomRGBKB61" class="KBUICommon"
+            [style.pointer-events]="EffectCenter.selectEffectCenter?'auto':'none'">
+    
+            <div *ngFor="let item of KeyBoardStyle.getTarget().target ;let i = index" class="RGBColorBlockP7"
+                [style.background-color]="LCFM.AllBlockColor[i].color" [attr.data-index]="i">
+            </div>
+            <div id="RGBKeyBoardUITransparent" data-UITransparent="RGBTransparent"
+                style="position: absolute;height: 100%;width: 100%;pointer-events: none;">
+            </div>
+        </div>
+        <div *ngIf="CurrentPageIndex==2" id="KeyAssignKBUI" class="KBUICommon" style="pointer-events: auto;">
+            <div [style.display]="ShowPrompt?'block': 'none'" id="KeyAssignPrompt">
+    
+    
+                <div data-img="KeyNoteIcon" style="width: 20px;
+                        float: left;
+                        height: 20px;
+                        padding-top: 2px;
+                        background-image: url(./image/Keyboard/KeyNoteIcon.png);
+                        background-size: 100% 100%;
+                        background-repeat: no-repeat;
+                        pointer-events: auto;
+                        margin-left: 0.5vw;">
+                </div>
+    
+                <div data-txt="KeyTxt" style="float: left;
+                        line-height: 3vh;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        ">{{KeyBoardManager.getTarget().get_assign_promptText()}}
+                </div>
+    
+                <div data-img="CRUD_Delete" style="
+                        width: 11px;
+                        height: 12px;
+                        float: right;
+                        background-image: url(./image/Share/CRUD_Delete.png);
+                        background-repeat: no-repeat;
+                        pointer-events: auto;
+                        margin-top: 0.7vh;
+                        padding-right: 2.7px;"
+                    (click)="KeyBoardManager.getTarget().reset_assign_default('key');setDBDataToServer('KeyAssign');">
+                </div>
+    
+                <br>
+    
+                <div data-img="KeyNoteIcon" style="width: 20px;
+                        float: left;
+                        height: 20px;
+                        padding-top: 2px;
+                        background-image: url(./image/Keyboard/KeyNoteLightIcon.png);
+                        background-size: 100% 100%;
+                        background-repeat: no-repeat;
+                        pointer-events: auto;
+                        margin-left: 0.5vw;">
+                </div>
+    
+    
+    
+                <div data-txt="KeyTxt" style="padding-left: 5px;
+                        padding-right: 5px;
+                        display: inline-block;
+                        text-align: left;">
+    
+                    {{KeyBoardManager.getTarget().get_Led_promptText()}}</div>
+                <div id="KeyLedRecycle" style="width: 10px;
+                        height: 23px;
+                        float: right;
+                        background-image: url(./image/Share/CRUD_Delete.png);
+                        pointer-events: auto;
+                        background-repeat: no-repeat;
+                        padding-right: 4px;
+                        margin-top: 0.6vh;
+                        "
+                    (click)="KeyBoardManager.getTarget().reset_assign_default('led');setDBDataToServer('KeyAssign');">
+                </div>
+                <div data-img="KeyAddLEDIcon" style="width: 1.3vw;
+                        height: 1.4vw;
+                        float: right;
+                        background-image: url(./image/Keyboard/KeyAddLEDIcon.png);
+                        pointer-events: auto;
+                        padding-right: 6px;
+                        margin-top: 0.1vh;
+                            " (click)="checkLimit()">
+                </div>
+    
+    
+            </div>
+            <div id="RGBKeyBoardUITransparent" data-UITransparent="KEYASSIGNTransparent"
+                style="position: absolute;height: 100%;width: 100%;pointer-events: none;">
+            </div>
+            <div *ngFor="let item of KeyBoardStyle.getTarget().target ;let i = index" class="KeyAssignUIStyle">
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
