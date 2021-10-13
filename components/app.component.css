@@ -10,61 +10,61 @@
   background-image: url("./image/Advanced/Off/LAdd.png"); }
 
 #AdvancedBtnL0:hover {
-  background-image: url("./image/Advanced/On/LAdd.png"); }
+  background-image: url("./image/Advanced/Off/LAdd.png"); }
 
 #AdvancedBtnL1 {
   background-image: url("./image/Advanced/Off/LDelete.png"); }
 
 #AdvancedBtnL1:hover {
-  background-image: url("./image/Advanced/On/LDelete.png"); }
+  background-image: url("./image/Advanced/Off/LDelete.png"); }
 
 #AdvancedBtnL2 {
   background-image: url("./image/Advanced/Off/LUp.png"); }
 
 #AdvancedBtnL2:hover {
-  background-image: url("./image/Advanced/On/LUp.png"); }
+  background-image: url("./image/Advanced/Off/LUp.png"); }
 
 #AdvancedBtnL3 {
   background-image: url("./image/Advanced/Off/LDown.png"); }
 
 #AdvancedBtnL3:hover {
-  background-image: url("./image/Advanced/On/LDown.png"); }
+  background-image: url("./image/Advanced/Off/LDown.png"); }
 
 #AdvancedBtnL4 {
   background-image: url("./image/Advanced/Off/LCopy.png"); }
 
 #AdvancedBtnL4:hover {
-  background-image: url("./image/Advanced/On/LCopy.png"); }
+  background-image: url("./image/Advanced/Off/LCopy.png"); }
 
 #AdvancedBtnR0 {
   background-image: url("./image/Advanced/Off/RAdd.png"); }
 
 #AdvancedBtnR0:hover {
-  background-image: url("./image/Advanced/On/RAdd.png"); }
+  background-image: url("./image/Advanced/Off/RAdd.png"); }
 
 #AdvancedBtnR1 {
   background-image: url("./image/Advanced/Off/RDelete.png"); }
 
 #AdvancedBtnR1:hover {
-  background-image: url("./image/Advanced/On/RDelete.png"); }
+  background-image: url("./image/Advanced/Off/RDelete.png"); }
 
 #AdvancedBtnR2 {
   background-image: url("./image/Advanced/Off/RUp.png"); }
 
 #AdvancedBtnR2:hover {
-  background-image: url("./image/Advanced/On/RUp.png"); }
+  background-image: url("./image/Advanced/Off/RUp.png"); }
 
 #AdvancedBtnR3 {
   background-image: url("./image/Advanced/Off/RDown.png"); }
 
 #AdvancedBtnR3:hover {
-  background-image: url("./image/Advanced/On/RDown.png"); }
+  background-image: url("./image/Advanced/Off/RDown.png"); }
 
 #AdvancedBtnR4 {
   background-image: url("./image/Advanced/Off/RCopy.png"); }
 
 #AdvancedBtnR4:hover {
-  background-image: url("./image/Advanced/On/RCopy.png"); }
+  background-image: url("./image/Advanced/Off/RCopy.png"); }
 
 #CloseProgram {
   background-image: url("./image/Share/Off/CloseProgram.png"); }
@@ -179,11 +179,10 @@
 /*#region Select*/
 .SelectTemplate {
   position: absolute;
-  height: 68vh;
-  overflow-y: scroll;
+  height: 325px;
   overflow-x: hidden;
-  margin-top: 14.5vh;
-  width: 21.3vw;
+  margin-top: 4vh;
+  width: 257px;
   background: url(./image/ColorSet/SelectBG.png);
   background-size: 100% 100%; }
 
@@ -201,7 +200,7 @@
   background-color: #4C4C4C; }
 
 .SelectTemplate::-webkit-scrollbar {
-  width: 15px; }
+  width: 15px;}
 
 .SelectTemplate::-webkit-scrollbar-button:vertical:decrement {
   background-image: url("./image/ColorSet/UpArrow.png");
@@ -382,7 +381,8 @@
   top: 31.8%;
   left: 46%;
   width: 11.8vw;
-  background-color: #13101082;
+  background-color: black;
+  opacity: 0.9;
   text-align: center; }
 
 #SystemSettingDrop::-webkit-scrollbar-track {
@@ -488,9 +488,8 @@ input[type="range"].LedOptionInputRange::-webkit-slider-thumb {
   background-size: 100% 100%; }
 
 #LedAdjustable {
-  overflow-y: scroll;
   height: 80%;
-  width: 35%; }
+  width: 65%; }
 
 #LedAdjustable::-webkit-scrollbar-thumb {
   border-radius: 10px;
@@ -797,10 +796,10 @@ input[type="range"]#ColorSliderV::-webkit-slider-thumb {
 
 #ColorSliderH {
   position: absolute;
-  top: 23%;
-  left: 39%;
-  width: 9.5VW;
-  height: 1.1vw;
+  top: 42%;
+  left: 30%;
+  width: 16VW;
+  height: 1.2vw;
   background-color: #0000;
   transform: rotate(-90deg);
   background-image: url(./image/skin/colorBarH.png);
@@ -916,8 +915,34 @@ input[type="range"]#ColorSliderV::-webkit-slider-thumb {
   #main-app .dragableArea {
     position: absolute;
     height: 93px;
+    width: 45%;
+    margin-left: 45vw;
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
+    -webkit-app-region: drag;
+    background-color: #f00; }
+  #main-app .dragableArea2 {
+    position: absolute;
+    height: 17px;
     width: 80%;
-    margin-left: 10vw;
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
+    -webkit-app-region: drag;
+    background-color: #f00; }
+  #main-app .dragableArea3 {
+    position: absolute;
+    height: 93px;
+    width: 60px;
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
+    -webkit-app-region: drag;
+    background-color: #f00; }
+  #main-app .dragableArea4 {
+    position: absolute;
+    height: 59px;
+    width: 130px;
+	top: 34px;
+	left: 1150px;
     /* margin-left: 5%; */
     /* margin-right: 5%; */
     -webkit-app-region: drag;
@@ -935,3 +960,25 @@ input[type="range"]#ColorSliderV::-webkit-slider-thumb {
       width: 1166px;
       height: 285px;
       background-color: #00f; }
+	  
+.InputObjectTextStyle {
+	display: inline-block;
+	width: 57%;
+	font-family: Manrope;
+	font-weight: regular;
+}
+
+.InputObjectStyle {
+	position: relative;
+	left: 210px;
+	bottom: 22px;
+}
+
+.InputObjectStyleBt {
+	position: relative;
+	left: 10px;
+	display: inline-flex;
+	width:25px;
+	height:14px;
+	vertical-align: middle;
+}

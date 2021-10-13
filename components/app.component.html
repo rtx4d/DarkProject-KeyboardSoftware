@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 <div id="ShowLoadingMessage" style="position: absolute;height: 100vh;z-index: 9999;width: 100vw;  
 margin-top: 0;background: #0000008a;" [style.display]="onLoading?'block':'none'">
     <img src="./image/Share/Loading.gif" alt="Loading.gif" style="position: absolute;left: 48vw;top: 47vh;"/>
@@ -33,14 +26,14 @@ margin-top: 0;background: #0000008a;" [style.display]="onLoading?'block':'none'"
 
 <div *ngIf="this.P_S_OSetting" id="ProfileSettingOption"
     style="position: absolute;height: 100vh;z-index: 9999;width: 100vw;  margin-top: 0;background: rgba(0, 0, 0, 0.78);">
-    <div id="RecordPSOUI" style="height: 33vh;
-    width: 23vw;
+    <div id="RecordPSOUI" style="height: 312px;
+    width: 327px;
     margin-top: 33vh;
     left: 42vw;
     position: absolute;
     background-size: 100% 100%;
-    background: rgba(0, 0, 0, 0.78);">
-    <div style="position: absolute;line-height: 2.3vh;margin-right: 25.5vw;width: 100%;margin-top: 1vh;text-align: center;color: white;">
+    background: url(./image/Share/ReportRateBG.png);">
+    <div style="position: absolute;line-height: 2.3vh;margin-right: 25.5vw;width: 100%;margin-top: 1vh;text-align: center;color: white;font-family: Manrope;font-weight: regular;">
         {{this.i18nManager.getTarget().P2.POLLINGRATE}}
     </div>
         <div id="ReportRateUI"
@@ -53,30 +46,30 @@ margin-top: 0;background: #0000008a;" [style.display]="onLoading?'block':'none'"
             color: #fff;
             font-size: 1.8vh;">
             <img [src]="KeyBoardManager.getTarget().reportRateIndex==0? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
-            (click)="KeyBoardManager.getTarget().reportRateIndex=0" style="width: 1.3vw;height: 1.3vw;float: left;">
+            (click)="KeyBoardManager.getTarget().reportRateIndex=0" style="width: 1.3vw;height: 1.3vw;float: left;position:relative; right: 5px;">
             <div style="line-height: 2.3vh;
-            float: left;margin-right: 0.5vw;">
+            margin-right: 0.5vw;font-family: Manrope;font-weight: regular;">
                 125HZ</div>
             <img [src]="KeyBoardManager.getTarget().reportRateIndex==1? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
-            (click)="KeyBoardManager.getTarget().reportRateIndex=1" style="width: 1.3vw;height: 1.3vw;float: left;">
+            (click)="KeyBoardManager.getTarget().reportRateIndex=1" style="width: 1.3vw;height: 1.3vw;float: left;position:relative; right: 5px;">
             <div style="    line-height: 2.3vh;
-            float: left;margin-right: 0.5vw;">
+            margin-right: 0.5vw;font-family: Manrope;font-weight: regular;">
                 250HZ</div>
             <img [src]="KeyBoardManager.getTarget().reportRateIndex==2? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
-            (click)="KeyBoardManager.getTarget().reportRateIndex=2" style="width: 1.3vw;height: 1.3vw;float: left;"> 
+            (click)="KeyBoardManager.getTarget().reportRateIndex=2" style="width: 1.3vw;height: 1.3vw;float: left;position:relative; right: 5px;"> 
             <div style="    line-height: 2.3vh;
-            float: left;margin-right: 0.5vw;">
+            margin-right: 0.5vw;font-family: Manrope;font-weight: regular;">
                 500HZ</div>
             <img [src]="KeyBoardManager.getTarget().reportRateIndex==3? ImgPath.ReportRate[1]:ImgPath.ReportRate[0]"
-            (click)="KeyBoardManager.getTarget().reportRateIndex=3" style="width: 1.3vw;height: 1.3vw;float: left;">
+            (click)="KeyBoardManager.getTarget().reportRateIndex=3" style="width: 1.3vw;height: 1.3vw;float: left;position:relative; right: 5px;">
             <div style="    line-height: 2.3vh;
-            float: left;margin-right: 0.5vw;">
-                1000HZ</div>     
+            margin-right: 0.5vw;font-family: Manrope;font-weight: regular;">
+                1000HZ</div>
         </div>
     </div>
     <input data-index="確定index" class="InputBtnStyle" type="button" value="保存" (click)="this.P_S_OSetting=false"
         [value]="i18nManager.getTarget().Warning.Apply"
-        style="top: 66.3vh;left: 51.3vw;width: 5.1vw;position: absolute;background-color: #77609729;color: white;">
+        style="top: 66.3vh;left: 663px;width: 6.0vw;position: absolute;background: url(./image/Share/ReportRateBtn.png);color: white;font-family: Manrope;font-weight: regular;">
 </div>
 
 <div id="ImportExportMask" [style.display]="onAppImportExport?'block':'none'" style="
@@ -84,7 +77,7 @@ position: absolute;
 z-index: 9999;
 height: 100vh;
 width: 100vw;
-background-color:rgba(0, 0, 0, 0.54);
+background-color:rgba(0, 0, 0, 0.78);
 ">
 </div>
 <div id="ShowAlertMessage" style="position: absolute;height: 100vh;z-index: 9999;width: 100vw;  
@@ -112,7 +105,7 @@ height: 100vh;">
     <img  alt="不存在" src="./image/Share/SystemSettingBG.png" 
     style="position: absolute;top: 50%;left: 50%;margin-top: -222px;margin-left: -163px;">  
     <div  style="position: absolute;margin-left: 39.2vw;margin-top: 24.9vh;color: white;">
-        {{i18nManager.getTarget().System.VERSION+" :"+this.FWManager.version}}
+        {{i18nManager.getTarget().System.VERSION+": "+this.FWManager.version}}
     </div>
     
     <div id="updateContent" class="SelectTemplate" 
@@ -170,14 +163,29 @@ background-color:rgba(0, 0, 0, 0.78);;
     height: auto;
     top: 72.2%;
     left: 38.4%;
-    width: 122px;
+    width: 84px;
     text-align: center;
     line-height: 29px;
     color: rgb(255, 255, 255);
-    font-size: 13px;" 
+    font-size: 13px;
+	font-family: Manrope;
+	font-weight: regular;" 
         (mouseenter)="isActive='mouseenter'" (mouseup)="isActive='mouseup'" (mouseleave)="isActive='mouseleave'"
         [style.background-image]="this.ReturnBackBtnImage(isActive)" (click)="i18nManager.recovery[0]=!i18nManager.recovery[0]">
         {{this.i18nManager.getTarget().System.DEFAULT}}
+    </div>
+
+    
+    <div style="
+    position: absolute;
+    margin-left: 43vw;
+    margin-top: 36.5vh;
+    color: white;
+    font-size: 1vw;
+	font-family: Manrope;
+	font-weight: regular;
+    ">
+        {{i18nManager.getTarget().System.AUTOSTART}}
     </div>
 
     <div class="autoStartCheckBox" data-index="Kcombination"
@@ -190,32 +198,21 @@ background-color:rgba(0, 0, 0, 0.78);;
         (click)="i18nManager.autoStart[0]=!i18nManager.autoStart[0]">
     </div>
 
-    
-    <div style="
-    position: absolute;
-    margin-left: 43vw;
-    margin-top: 36.5vh;
-    color: white;
-    font-size: 1vw;
-    ">
-        {{i18nManager.getTarget().System.AUTOSTART}}
-    </div>
-
 
     <div id="SystemSettingDrop" [style.display]="pulldownable?'block':'none'">
-        <div *ngFor="let item of i18nManager.langList;let i = index" style=" margin-top: 4%;margin-left: 5%;"
+        <div *ngFor="let item of i18nManager.langList;let i = index" style=" margin-top: 4%;"
             (click)="pulldownable=false;this.i18nManager.chooseLangindex = i;" (mouseover)="chooseLangindex=i"
             [style.background-color]="chooseLangindex==i?'#c8cabb4f':'transparent'">
-            <div style="display: inline-block; color: white;vertical-align: middle;">
+            <div style="display: inline-block; color: white;vertical-align: middle;font-family: Manrope;font-weight: regular;">
                 {{i18nManager.getTempTarget().name[i]}}</div>
         </div>
     </div>
 
 
-    <div style="position: absolute;margin-left: 39.2vw;margin-top: 24.9vh;color: white;">
+    <div style="position: absolute;margin-left: 39.2vw;margin-top: 24.9vh;color: white;font-family: Manrope;font-weight: regular;">
         {{i18nManager.getTarget().System.SETTING}}
     </div>
-    <div style="position: absolute;margin-left: 39.2vw;margin-top: 28.9vh;color: white;
+    <div style="position: absolute;margin-left: 39.2vw;margin-top: 28.9vh;color: white;font-family: Manrope;font-weight: regular;
     ">{{i18nManager.getTarget().System.LANGUAGES}}
     </div>
     <input style="
@@ -223,12 +220,14 @@ background-color:rgba(0, 0, 0, 0.78);;
             margin-top: 15.4vh;
             position: absolute;
             top: 57%;
-            left: 37.3%;
+            left: 33.3%;
             color: white;
             height: 26px;
             background: url(./image/Share/SystemSettingBtn.png);
-            width: 71px;
+            width: 77px;
             border: 0;
+			font-family: Manrope;
+			font-weight: regular;
             " type="button" (click)="i18nSave();" [value]="i18nManager.getTarget().System.SAVE" value="Save">
     <input style="
             margin-left: 11.7vw;
@@ -241,14 +240,15 @@ background-color:rgba(0, 0, 0, 0.78);;
             background: url(./image/Share/SystemSettingBtn.png);
             width: 71px;
             border: 0;
+			font-family: Manrope;
+			font-weight: regular;
             " type="button" (click)="i18nManager.back();onSystemSetting=false"
         [value]="i18nManager.getTarget().System.CANCEL" value="Cancel">
 
 </div>
 <div id="main-app" (mousemove)="EM.movelog($event)" (click)="customMouseEventClickLog($event)">
 
-
-    <div id="Bell" style="position: absolute;
+ <div id="Bell" style="position: absolute;
         margin-top: 0.6%;
         height: 19px;
         width: 26px;
@@ -257,8 +257,6 @@ background-color:rgba(0, 0, 0, 0.78);;
         [style.background-image]="this.FWManager.hasUpdate?'url(./image/Share/On/Bell.png)':'url(./image/Share/Off/Bell.png)'"
         (click)="this.FWManager.onFireWareUI=true;">
     </div>
-
-
 
     <div *ngIf="this.FWManager.hasUpdate" id="BellTIP" style="height: 3.5vh;
     position: absolute;
@@ -275,8 +273,6 @@ background-color:rgba(0, 0, 0, 0.78);;
     font-size: 1vw;">
         {{i18nManager.getTarget().System.HASNEWVERSION}}
     </div>
-
-
 
     <div id="SystemSettingIcon" style="position: absolute;
             margin-top: 0.6%;height: 19px;width: 26px;right: 5.5vw;" (click)="onSystemSetting=true">
@@ -301,6 +297,62 @@ background-color:rgba(0, 0, 0, 0.78);;
     margin-left: 5vw;
     margin-top: 2.1vh;" (click)="setPageIndex(1)">
     </div>
+	<div id="swicthPage" style="
+    position: absolute;
+    margin-top: 2.1vh;">
+            <div id="Page1"  class="PageBtnStyle" (click)="setPageIndex(1)" style="
+			margin-left: 15vw;
+			height: 76px;
+			width: 76px;"
+				(mouseover)="pageMouseoverStatus[0]=1" (mouseleave)="pageMouseoverStatus[0]=0"
+                [ngStyle]="{'background-image': CurrentPageIndex==1 ? ImgPath.Page1New[2]:ImgPath.Page1New[pageMouseoverStatus[0]]}">
+            </div>
+            <div id="Page2" class="PageBtnStyle" (click)="setPageIndex(2)" style="
+			margin-left: 21vw;
+			height: 76px;
+			width: 76px;"
+                (mouseover)="pageMouseoverStatus[1]=1" (mouseleave)="pageMouseoverStatus[1]=0"
+                [ngStyle]="{'background-image': CurrentPageIndex==2 ? ImgPath.Page2New[2]:ImgPath.Page2New[pageMouseoverStatus[1]]}">
+            </div>
+
+            <div id="Page3" class="PageBtnStyle" (click)="setPageIndex(3)" style="
+			margin-left: 27vw;
+			height: 76px;
+			width: 76px;"
+                (mouseover)="pageMouseoverStatus[2]=1" (mouseleave)="pageMouseoverStatus[2]=0"
+                [ngStyle]="{'background-image': CurrentPageIndex==3 ? ImgPath.Page3New[2]:ImgPath.Page3New[pageMouseoverStatus[2]]}">
+            </div>
+            <div id="Page4" class="PageBtnStyle" (click)="setPageIndex(4)" style="
+			left: 423px;
+			height: 76px;
+			width: 76px;"
+				(mouseover)="pageMouseoverStatus[3]=1" (mouseleave)="pageMouseoverStatus[3]=0" 
+				[ngStyle]="{'background-image': CurrentPageIndex==4 ? ImgPath.Page4New[2]:ImgPath.Page4New[pageMouseoverStatus[3]]
+                }">
+            </div>
+            <div id="Page5" class="PageBtnStyle" (click)="setPageIndex(7)" style="
+			left: 499px;
+			height: 76px;
+			width: 76px;"
+				(mouseover)="pageMouseoverStatus[3]=1" (mouseleave)="pageMouseoverStatus[7]=0" 
+				[ngStyle]="{'background-image': CurrentPageIndex==7 ? ImgPath.Page5New[2]:ImgPath.Page5New[pageMouseoverStatus[3]]
+                }">
+            </div>
+        </div>
+		<!-- <div id="TitleCH" style="
+            position: absolute;
+            height:30px;
+            width: 30vw;
+			top: 35px;
+            margin-left: 55%;
+            line-height: 23px;
+            color: #0066F1;
+			font-family: Manrope;
+            font-size: 30px;
+            font-weight: extrabold;
+            text-transform: uppercase;
+            ">{{getPageTitleText()}}
+        </div> -->
     <div id="MacroPageMask" [style.display]="onRecord ||macroContentInEdit?'block':'none'" style="
         position: absolute;
         z-index: 9990;
@@ -311,6 +363,15 @@ background-color:rgba(0, 0, 0, 0.78);;
     </div>
 
     <div id="拖曳視窗" class="dragableArea" style="background-color: transparent;">
+    </div>
+	
+	<div id="拖曳視窗2" class="dragableArea2" style="background-color: transparent;">
+    </div>
+	
+	<div id="拖曳視窗3" class="dragableArea3" style="background-color: transparent;">
+    </div>
+	
+	<div id="拖曳視窗4" class="dragableArea4" style="background-color: transparent;">
     </div>
 
     <div id="畫格隔離" style="height: 93px;background-color: transparent;">
@@ -455,12 +516,13 @@ background-color:rgba(0, 0, 0, 0.78);;
         </video>
 
     </div>
+	<!-- Выпадающее меню с эффектами -->
     <div (mouseleave)="switchEffectUI=false" [style.display]="switchEffectUI?'block':'none'" id="LightModeList" style="z-index: 9990; background-color: #151516;   
         color: #FFF; box-sizing: border-box;display: none;
-        position: absolute;width: 8vw;height: auto;border: 1px solid #91A9BF;">
+        position: absolute;width: 14vw;height: auto;border: 1px solid #91A9BF;">
         <div *ngFor="let item of Led.mode_name ;let i = index" (mouseenter)="ActiveInt=i" (click)="switchEffectMode(i)"
             [style.background-color]="(i==ActiveInt)?'#0066F1':'transparent'"
-            style="border-bottom: 1px solid #3E5C72;height: 3vh;">
+            style="border-bottom: 1px solid #3E5C72;height: 3vh;font-family: Manrope;font-weight: regular;">
             <img style="float: left;vertical-align: middle;text-align: center;margin-left: 5px;
                             width: 14%;height: 22px;object-fit: none;"
                 [src]="(i==ActiveInt)?Led.modeClassArr[i].iconpath[1]:Led.modeClassArr[i].iconpath[0]">
@@ -494,21 +556,21 @@ background-color:rgba(0, 0, 0, 0.78);;
     <div id="MainFrame" *ngIf="CurrentPageIndex>0"
         style="/* background-color: #fff; */position: absolute;height: 89%;width: 91%;margin-left: 4.5%;">
 
-        <div id="CRUD" [style.display]="CRUDCheck?'block': 'none'" style="z-index: 9991;
+        <div id="CRUD" style="z-index: 9991;
         background-color: #141414;
         color: #fff;
         position: absolute;
-        left: 24.3%;
+		top: 40px;
+        left: -38px;
         width: 2.3%;
         background-repeat: repeat;
         background-size: 100% 100%;
         background-image: url(./image/Share/CRUDBG.png);
         display: block;">
             <div style=" width: 12px; 
-        margin-top: 17%;
+        margin-top: 26%;
         margin-left: 26%;
         height:12px;
-        background-repeat: repeat;
         background-image: url(./image/Share/CRUD_Add.png);" (click)="newHtmlDomElement();CRUDCheck=!CRUDCheck;"
                 [style.display]="pageIconSet[0]?'block': 'none'"></div>
             <div style="width: 12px;
@@ -535,7 +597,7 @@ background-color:rgba(0, 0, 0, 0.78);;
             </div>
         </div>
 
-        <div id="SettingBG" style="position: absolute;width: 277px;height: 36px;
+        <!-- <div id="SettingBG" style="position: absolute;width: 277px;height: 36px;
         background-image: url('./image/Share/SettingBG.png');background-size: 100%;">
             <div id="BGTitleCH" style="
             position: absolute;
@@ -550,8 +612,8 @@ background-color:rgba(0, 0, 0, 0.78);;
             font-weight: bold;
             ">{{i18nManager.getTarget().Share.CONFIGURATION}}</div>
         </div>
-        <div id="swicthPage">
-            <div id="Page1" class="PageBtnStyle" (click)=" setPageIndex(1)" (mouseover)="pageMouseoverStatus[0]=1"
+       <div id="swicthPage">
+            <div id="Page1"  class="PageBtnStyle" (click)=" setPageIndex(1)" (mouseover)="pageMouseoverStatus[0]=1"
                 (mouseleave)="pageMouseoverStatus[0]=0"
                 [ngStyle]="{'background-image': CurrentPageIndex==1 ? ImgPath.Page1[2]:ImgPath.Page1[pageMouseoverStatus[0]]}">
             </div>
@@ -569,22 +631,23 @@ background-color:rgba(0, 0, 0, 0.78);;
                     'background-image': CurrentPageIndex==4 ? ImgPath.Page4[2]:ImgPath.Page4[pageMouseoverStatus[3]]
                 }">
             </div>
-        </div>
+        </div> -->
 
+<!-- Кнопка Сохранить -->
         <div *ngIf="this.CurrentPageIndex!=1" id="SaveToKeyBoard" (click)="setDeviceToServer()" style="margin-left: 25.9vw;
-        margin-top: 3.6vh;
+        margin-top: 1px;
         position: absolute;
         height: 5.7vh;
         background: url(./image/Keyboard/Off/SaveCN.png);
-        width: 3.7vw;" (mousedown)="stb='mouseenter'" (mouseenter)="stb='mouseenter'" (mouseup)="stb='mouseup'"
+        width: 6.25vw;" (mousedown)="stb='mouseenter'" (mouseenter)="stb='mouseenter'" (mouseup)="stb='mouseup'"
             (mouseleave)="stb='mouseleave'"
-            [style.background-image]="stb=='mouseenter'?i18nManager.getTarget().saveImg[1]:i18nManager.getTarget().saveImg[0]">
+            [style.background-image]="i18nManager.getTarget().saveImg[0]">
         </div>
 
-
-        <div class="ModeBG" style="position: absolute;
+		<!-- СКРЫТО Меню клавиатуры -->
+      <div class="ModeBG" style="position: absolute;
                                 width: 181px;height: 61px;
-                                margin-left: 80.5%;margin-bottom: 10%;
+                                margin-left: 1%;margin-top: 30%;
                                 ">
             <div [style.display]="hasMultipleDevice?'block': 'none'" class="ModeL" style="
                                         position: absolute;
@@ -600,8 +663,9 @@ background-color:rgba(0, 0, 0, 0.78);;
                                         right: -19%; top: 30%;
                                         ">
             </div>
-            <!-- <div id="KeyboardName" style="
-                height: 33px;
+		 	<!-- СКРЫТО Имя клавиатуры -->
+             <!-- <div id="KeyboardName" style="
+                height: 43px;
                 width: 99px;
                 line-height: 20px;
                 color: #0066F1;
@@ -611,31 +675,36 @@ background-color:rgba(0, 0, 0, 0.78);;
                 margin-left: 12%;
                 word-break: break-word;
                 display: inline-block;
-                ">KEYBOARDRGB
+				font-family: Manrope;
+				font-weight: regular;
+                ">Dark Project KD3b
         </div> -->
-            <!-- <div (click)="setPageIndex(0)" class="DemoUI" style="
+		<!-- СКРЫТО Картинка клавиатуры -->
+           <!--  <div (click)="setPageIndex(0)" class="DemoUI" style="
         position: absolute;
-        width: 100%;
-        height: 100%;
-        background-image: url(./image/Share/AlternateKB1.png);">
+        width: 288px;
+        height: 288px;
+        background-image: url(./image/Share/AlternateKB1.png);"
+		[style.background-image]="MultipleDeviceConnectStatus[1]?'url(./image/FirstPage/KB3Connect.png)':'url(./image/FirstPage/KB3Disconnect.png)' ">
             </div> -->
         </div>
 
-        <div id="TitleCH" style="
+        <!-- <div id="TitleCH" style="
             position: absolute;
             height:27px;
             width: 20vw;
             margin-left: 28.4%;
             line-height: 23px;
             color: #0066F1;
+			font-family: Manrope;
             font-size: 19px;
             font-weight: bold;
             text-transform: uppercase;
             ">{{getPageTitleText()}}
-        </div>
+        </div> -->
 
 
-        <div id="高級編輯" style="
+        <!--<div id="高級編輯" style="
             position: absolute;height: auto;left: 65%;width:105px;
             padding-left: 1.5%;text-align: center;line-height:29px;
             color: rgb(255, 255, 255);font-size: 13px;" (mousedown)="isActive='mousedown'"
@@ -643,7 +712,7 @@ background-color:rgba(0, 0, 0, 0.78);;
             [style.background-image]="this.ReturnAdvancedBtnImage(isActive)" (click)="setPageIndex(7)">
             {{this.i18nManager.getTarget().Share.EDIT}}
 
-        </div>
+        </div>-->
 
         <!--  [style.pointer-events]="(LCFM.currentChooseIndex==i&&InEdit)?'auto':'none'"-->
         <section *ngIf="CurrentPageIndex==7" id="AdvancedEditColorPage">
@@ -656,9 +725,9 @@ background-color:rgba(0, 0, 0, 0.78);;
                     <img (click)="InEdit=true;LCFM.updeteEditName();"
                         (mouseleave)="EM.ForceFocusUIByClass('AdvancedClassName',i);"
                         [src]="(LCFM.currentChooseIndex==i)?ImgPath.EditNameIcon[1]:ImgPath.EditNameIcon[0]" Alt="找不到圖片"
-                        style="margin-top: 1%;float: right;margin-right: 1vw;">
+                        style="margin-top: 1%;float: right;margin-right: 1vw;left: 10px;">
 
-                    <div style="width: 17.1vw;position: absolute;color: #FFFFFF;" (blur)="InEdit=false">
+                    <div style="width: 17.1vw;position: absolute;color: #FFFFFF; left: 10px;" (blur)="InEdit=false">
                         {{item.projectName}}</div>
 
                     <input class="AdvancedClassName" style="width: 17.1vw;position: absolute;" maxlength="15"
@@ -690,15 +759,15 @@ background-color:rgba(0, 0, 0, 0.78);;
                         line-height: 23px;color: white;font-size: 13px;
                         background-color: rgba(0, 0, 0, 0);">
                     <div
-                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 9%;">
+                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 11%;top: 2px;">
                         {{this.i18nManager.getTarget().P7.NO_}}
                     </div>
                     <div
-                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 48%;background-color: rgba(0, 0, 0, 0);">
+                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 48%;background-color: rgba(0, 0, 0, 0);top: 2px;">
                         {{this.i18nManager.getTarget().P7.NAME}}
                     </div>
                     <div
-                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 80%;background-color: rgba(0, 0, 0, 0);">
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 80%;background-color: rgba(0, 0, 0, 0);top: 2px;">
                         {{this.i18nManager.getTarget().P7.MS100}}
                     </div>
                 </div>
@@ -713,17 +782,17 @@ background-color:rgba(0, 0, 0, 0.78);;
                         margin-left: 44.5%;
                         background-color: rgba(0, 0, 0, 0);">
                     <div
-                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 8%;">
+                        style="position: absolute;line-height: 23px;/* display: inline-block; */font-size: 13px;margin-left: 8%;top: 2px;">
                         {{this.i18nManager.getTarget().P7.NO_}}
                     </div>
                     <div
-                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 30%;background-color: rgba(0, 0, 0, 0);">
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 30%;background-color: rgba(0, 0, 0, 0);top: 2px;">
                         {{this.i18nManager.getTarget().P7.EFFECT}}</div>
                     <div
-                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 52%;background-color: rgba(0, 0, 0, 0);">
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 55%;background-color: rgba(0, 0, 0, 0);top: 2px;">
                         {{this.i18nManager.getTarget().P7.COLORSETTING}}</div>
                     <div
-                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 78%;background-color: rgba(0, 0, 0, 0);">
+                        style="position: absolute;line-height: 23px;font-size: 13px;margin-left: 78%;background-color: rgba(0, 0, 0, 0);top: 2px;">
                         {{this.i18nManager.getTarget().P7.LIGHTINGSPEED}}</div>
                 </div>
 
@@ -740,7 +809,7 @@ background-color:rgba(0, 0, 0, 0.78);;
                             {{LCFM.getClass().matrix_frames[i].name}}</div>
                         <input id="Frames"
                             style="position: absolute;right: 1vw;width: 3vw;
-                            text-align: center;background: #0000;color: #fff;margin-top: 0vh;border: #5618637a 2px solid;" type="tel"
+                            text-align: center;background: #0000;color: #fff;margin-top: 1.1px;border: #5618637a 2px solid;" type="tel"
                             min="1" max="655" step="1" [(ngModel)]="LCFM.getClass().matrix_frames[i].frame_time"
                             (keypress)='EM.regexOnlyNumber($event)' (blur)='customLedFrameChange($event)'
                             (keyup)="EM.onkeyupEnter($event)? customLedFrameChange($event):' '; ">
@@ -759,7 +828,7 @@ background-color:rgba(0, 0, 0, 0.78);;
                         <div style="position: absolute;color: #ffffff;left: 9.6vw;">
                             {{LCFM.getClass().matrix_ColorMode[i].modeName}}</div>
                         <div id="AdvancedDownSelectColor" style="left: 15.8vw;position: absolute;color:yellow;width: 6vw;height: 2.5vh;
-                                             background-color: red;text-align: center;margin-top: 0.3vh;"
+                                             background-color: red;text-align: center;margin-top: 0.2vh;"
                             [style.background-color]="LCFM.getClass().matrix_ColorMode[i].color"
                             [style.display]="LCFM.getClass().matrix_ColorMode[i].adjustable[0]>0?'block':'none'">
                         </div>
@@ -790,7 +859,7 @@ background-color:rgba(0, 0, 0, 0.78);;
                                                                         width: 2.6vw;
                                                                         text-align: center;
                                                                         background: #0000;
-                                                                        margin-top: 0vh;
+                                                                        margin-top: 1.1px;
                                                                         color: #fff;
                                                                         border: 2px solid #5618637a;
                                                                         display: block;
@@ -803,44 +872,44 @@ background-color:rgba(0, 0, 0, 0.78);;
                             (blur)="customColorParameterChange($event,'speed2',i)"
                             (keyup)="EM.onkeyupEnter($event)? customColorParameterChange($event,'speed2',i):' '; "
                             step="1" style="position: absolute;right: 0.4vw;width: 2.6vw;text-align: center;
-                            background: #0000;margin-top: 0vh;color: #fff;border: 2px solid #5618637a;display: block;
+                            background: #0000;margin-top: 1.1px;color: #fff;border: 2px solid #5618637a;display: block;
                             " type="tel">
                     </div>
                 </div>
                 <div id="AdvancedBtnL0" (click)="LCFM.getClass().framesOrder('Add');LCFM.frame_item_Auto_Switch();"
-                    alt="" style="position: absolute;left: 0%;top: 92%;width: 5vw;height: 3.4vh;">
+                    alt="" style="position: absolute;left: 0%;top: 95%;width: 5vw;height: 3.4vh;">
                 </div>
                 <div id="AdvancedBtnL1" (click)="LCFM.getClass().framesOrder('Delete');LCFM.frame_item_Auto_Switch();"
-                    alt="" style="position: absolute;left: 5.1vw;top: 92%;width: 5vw;height: 3.4vh;">
+                    alt="" style="position: absolute;left: 5.0vw;top: 95%;width: 5vw;height: 3.4vh;">
                 </div>
                 <div id="AdvancedBtnL2" (click)="LCFM.getClass().framesOrder('moveUp')" alt=""
-                    style="position: absolute;left: 10.2vw;top: 92%;width: 5vw;height: 3.4vh;">
+                    style="position: absolute;left: 10.0vw;top: 95%;width: 5vw;height: 3.4vh;">
                 </div>
                 <div id="AdvancedBtnL3" (click)="LCFM.getClass().framesOrder('moveDown')" alt=""
-                    style="position: absolute;left: 15.3vw;top: 92%;width: 5vw;height: 3.4vh;">
+                    style="position: absolute;left: 15.0vw;top: 95%;width: 5vw;height: 3.4vh;">
                 </div>
                 <div id="AdvancedBtnL4" (click)="LCFM.getClass().framesOrder('clone');LCFM.frame_item_Auto_Switch();"
-                    alt="" style="position: absolute;left: 20.4vw;top: 92%;width: 5vw;height: 3.4vh;">
+                    alt="" style="position: absolute;left: 20.0vw;top: 95%;width: 5vw;height: 3.4vh;">
                 </div>
 
 
 
 
-                <div id="AdvancedBtnR0" (click)="LCFM.showAddColorUI=!LCFM.showAddColorUI" alt="" style="position: absolute;left: 26vw;top: 92%;width: 6.5vw;
+                <div id="AdvancedBtnR0" (click)="LCFM.showAddColorUI=!LCFM.showAddColorUI" alt="" style="position: absolute;left: 26vw;top: 95%;width: 6.5vw;
                height: 3.4vh;">
                 </div>
                 <div id="AdvancedBtnR1" (click)="LCFM.getClass().colorModeOrder('Delete');LCFM.color_Auto_Switch();"
-                    alt="" style="position: absolute;left: 32.4vw;top: 92%;width: 6.5vw;
+                    alt="" style="position: absolute;left: 32.4vw;top: 95%;width: 6.5vw;
                height: 3.4vh;">
                 </div>
-                <div id="AdvancedBtnR2" (click)="LCFM.getClass().colorModeOrder('moveUp')" alt="" style="position: absolute;left: 38.8vw;top: 92%;width: 6.5vw;
+                <div id="AdvancedBtnR2" (click)="LCFM.getClass().colorModeOrder('moveUp')" alt="" style="position: absolute;left: 38.8vw;top: 95%;width: 6.5vw;
                height: 3.4vh;">
                 </div>
-                <div id="AdvancedBtnR3" (click)="LCFM.getClass().colorModeOrder('moveDown')" alt="" style="position: absolute;left: 45.1vw;top: 92%;width: 6.5vw;
+                <div id="AdvancedBtnR3" (click)="LCFM.getClass().colorModeOrder('moveDown')" alt="" style="position: absolute;left: 45.1vw;top: 95%;width: 6.5vw;
                height: 3.4vh;">
                 </div>
                 <div id="AdvancedBtnR4" (click)="LCFM.getClass().colorModeOrder('clone');LCFM.color_Auto_Switch();"
-                    alt="" style="position: absolute;left: 51.5vw;top: 92%;
+                    alt="" style="position: absolute;left: 51.5vw;top: 95%;
                width: 6.4vw;
                height: 3.4vh;">
                 </div>
@@ -937,37 +1006,40 @@ background-color:rgba(0, 0, 0, 0.78);;
         </section>
 
 
-        <section *ngIf="CurrentPageIndex==2" id="KeyBoardPage" style="margin-top: 9vh;">
+        <section *ngIf="CurrentPageIndex==2" id="KeyBoardPage" style="margin-top: 5vh;">
 
             <img id="FNModeUI1"
             (click)="KeyBoardManager.getTarget().setFnModeMartrix(0);" alt=""
-            style="position: absolute; left: 29.8vw;top: 4.6vh;" (mousedown)="FActive1='mouseenter'" (mouseenter)="FActive1='mouseenter'"
+            style="	margin-top: 1px;
+					position: absolute;
+					left: 33.0vw;
+					top: 4.5vh;" (mousedown)="FActive1='mouseenter'" (mouseenter)="FActive1='mouseenter'"
             (mouseup)="FActive1='mouseup'" (mouseleave)="FActive1='mouseleave'"
             [src]="KeyBoardManager.getTarget().fnModeMartrix[0]||FActive1=='mouseenter'?ImgPath.FNIcon[1]:ImgPath.FNIcon[0]">
 
 
             <div id="KeyBoardMacroSearchSettingTitle" style="position: absolute;
-        height: 3.7vh;width: 21.3vw;left: 0vw;
-        background-color: #00ffcd0f;margin-top: 40vh;
+        height: 3.7vh;width: 20vw;left: 0vw;
+        background-color: #00ffcd0f;margin-top: 35vh;
                             ">
                 <div style="color: #fff;
                             margin-left: 5%;
                             margin-top: 2%;
-                            height: 100%;">{{i18nManager.getTarget().Share.MACROSETTINGS}}
+                            height: 100%;
+							font-family: Manrope;font-weight: regular;">{{i18nManager.getTarget().Share.MACROSETTINGS}}
                 </div>
             </div>
 
 
             <div id="KeyBoardProjectSelect" style="height: 15vh;
-                    margin-top: 5vh;
                     position: absolute;
-                    width: 21.3vw;
+                    width: 20vw;
                     background-color: #0066F1;
                     background: url(./image/ColorSet/SelectBG.png);border-bottom: 2px solid #0066F1;">
                 <div style="width: 100%;" class="ProjectItem"
                     *ngFor="let item of KeyBoardManager.KeyBoardArray ;let i = index" (click)="project_select($event,i)"
                     [style.background-color]="KeyBoardManager.currentChooseKeyBoard==i?'#0066F1':'transparent'">
-                    <img style="float: left;margin-top: 0.7vh;margin-left: 5px;" src="./image/Keyboard/pointIcon.png">
+                    <img style="position: relative; left: 4px;" src="./image/Keyboard/pointIcon.png">
                     <input (blur)="clickEdit=false"
                         [style.pointer-events]="KeyBoardManager.currentChooseKeyBoard==i&&clickEdit?'auto':'none'"
                         class="CustomInputText" type="text" placeholder="" [(ngModel)]="item.projectName">
@@ -978,16 +1050,16 @@ background-color:rgba(0, 0, 0, 0.78);;
                 </div>
             </div>
 
-            <div id="KeyBoardFiveLedProject" style="height: 19vh;
-                                margin-top: 20.4vh;
+            <div id="KeyBoardFiveLedProject" style="height: 18vh;
+                                margin-top: 15.4vh;
                                 position: absolute;
-                                width: 21.3vw;
+                                width: 20vw;
                                 background-color: #ff0;
                                 background: url(./image/ColorSet/SelectBG.png);">
             
                             <div class="ProjectItem"
                                 *ngFor="let item of KeyBoardManager.getTarget().fiveDefaultLedCode ;let i = index">
-                                <div style="position: absolute;color: #f00;">{{item.projectName}}
+                                <div style="position: absolute;left: 10px;color: #f00;font-family: Manrope;font-weight: regular;">{{item.projectName}}
                                 </div>
                                 <div id="KeybordFiveRecycle" style="width: 1vw;
                                 margin-top: 0.3vw;
@@ -1008,35 +1080,42 @@ background-color:rgba(0, 0, 0, 0.78);;
             </div>
 
 
-
+			<!-- Настрйока макросов\список -->
             <div *ngIf="!MacroManager.hasClass()" id="KeyBoardMacroSearchSetting">
             </div>
-            <div *ngIf="MacroManager.hasClass()" id="KeyBoardMacroSearchSetting">
+            <div *ngIf="MacroManager.hasClass()" id="KeyBoardMacroSearchSetting" style="width: 20vw; top: 1px;">
                 <div *ngFor="let item of MacroManager.getClass().MacroFiletItem;let i = index"
                     style=" margin-top: 4%;margin-left: 5%;" (click)="macro_assign_click(i)"
                     [style.background-color]="MacroManager.getClass().currentChooseMacro==i?'#c8cabb4f':'transparent'">
-                    <img [src]="ImgPath.FileSmallIcon[0]" style="vertical-align: middle;" Alt="找不到圖片">
-                    <div style="display: inline-block; color: white;vertical-align: middle;"> {{item.name}}</div>
+                    <img [src]="ImgPath.FileSmallIcon[0]" style="vertical-align: middle; position:relative; right: 5px;" Alt="找不到圖片">
+                    <div style="display: inline-block; color: white;vertical-align: middle; font-family: Manrope;font-weight: regular;"> {{item.name}}</div>
                 </div>
             </div>
 
             <div class="MacroSettingOption" style="
-        position: absolute;height: 3vh;width: 21.3vw;top: 615px; left: 0.1%;
+        position: absolute;
+		height: 3vh;
+		width: 21.3vw;
+		top: 540px;
+		left: 0.1%;
         color: white;
-        background-color: #141414;">
+        background-color: #141414;
+		font-family: Manrope;font-weight: regular;">
 
-                <input type="radio" name="次數" (change)="customConsolelog('KeyBoardManager',MacroManager.radioOptions);"
-                    [(ngModel)]="KeyBoardManager.radioOptions" [value]="65534">
+                <input type="radio" name="次數" (change)="customConsolelog('KeyBoardManager',MacroManager.radioOptions);" 
+                    [(ngModel)]="KeyBoardManager.radioOptions" [value]="65534">{{this.i18nManager.getTarget().P3.TIMESTOSTOP}} <br>
 
+                <div style="color: #FFF;"></div>
                 <input id="CustomFrequency" placeholder="次數" style="
-                         width: 17%;color: #FFF;
-                         height: 2vh;text-align: center;
-                         background-color: transparent;
-                         border: 0; " type="text" [(ngModel)]="KeyBoardManager.radioOptionsFrequency"
+                        width: 17%;
+						color: #FFF;
+                        height: 2vh;
+						text-align: center;
+                        background-color: transparent;
+                        border: 0;" type="text" [(ngModel)]="KeyBoardManager.radioOptionsFrequency"
                     [style.pointer-events]="KeyBoardManager.radioOptions==65534?'auto':'none'"
                     onkeyup="value=value.replace(/[^\d]/g,'');if(value>=65535){value=65534} if(value<1){value=1}"
                     (keyup)="NullThenUpdateValue(KeyBoardManager,'radioOptionsFrequency',1);">
-                <div style="display: inline-block;color: #FFF;">{{this.i18nManager.getTarget().P3.TIMESTOSTOP}} </div>
                 <br>
 
                 <div style="background-color: #141414;">
@@ -1049,9 +1128,9 @@ background-color:rgba(0, 0, 0, 0.78);;
                         [(ngModel)]="KeyBoardManager.radioOptions"
                         [value]="65536">{{this.i18nManager.getTarget().P3.PRESSAGAINTOSTOP}} <br>
 
-                    <input class="InputBtnStyle" style="leFt: 17.6vw;top: 2.1vw;position: absolute;color: #FFF;
-                      background-repeat: no-repeat;border: none;width: 2.9vw;height: 3.6vh;font-size: 1.6vh;
-                      box-sizing: border-box;background-color: #4C4C4C;" type="button"
+                    <input class="InputBtnStyle" style="left: 4.5vw;top: 6.0vw;position: absolute;color: #FFF;
+                      background-repeat: no-repeat;border: none;width: 10vw;height: 3.6vh;font-size: 1.6vh;
+                      box-sizing: border-box;background-color: #4C4C4C;font-family: Manrope;font-weight: regular;" type="button"
                         [style.pointer-events]="MacroManager.hasClass()?'auto':'none'" (click)="setSelectionKeyMacro()"
                         value="使用" [value]="i18nManager.getTarget().P2.USE">
                 </div>
@@ -1456,8 +1535,8 @@ background-color:rgba(0, 0, 0, 0.78);;
                     <input data-index="K64" (click)="prohibit_btn_KB1Data('Num')" class="InputBtnStyle"
                         style="width: 11%;TOP: 17%;LEFT: 0%;" type="button" value="禁用數字鍵"
                         [value]="i18nManager.getTarget().P2.DISABLENUMKEYS">
-                    <!-- <input data-index="K65" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 17%;LEFT: 12%;" type="button" value="禁用pad"> -->
-                    <!-- <input data-index="K66" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 17%;LEFT: 24%;" type="button" value="禁用F1-F12">  -->
+                     <!-- <input data-index="K65" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 34%;LEFT: 12%;" type="button" value="禁用pad"> -->
+                     <!-- <input data-index="K66" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 34%;LEFT: 24%;" type="button" value="禁用F1-F12">  -->
                     <input data-index="K67" (click)="prohibit_btn_KB1Data('ABC')" class="InputBtnStyle"
                         style="width: 11%;TOP: 17%;LEFT: 24%;" type="button" value="禁用字母"
                         [value]="i18nManager.getTarget().P2.DISABLELETTERS">
@@ -1467,8 +1546,8 @@ background-color:rgba(0, 0, 0, 0.78);;
                     <input data-index="K69" (click)="prohibit_btn_KB1Data('Control')" class="InputBtnStyle"
                         style="width: 11%;TOP: 17%;LEFT: 12%;" type="button" value="禁用控制鍵"
                         [value]="i18nManager.getTarget().P2.DISABLECONTROLKEYS">
-                    <!-- <input data-index="K610" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 34%;LEFT: 24%;" type="button" value="禁用九鍵">  -->
-                    <!-- <input data-index="K611" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 34%;LEFT: 36%;" type="button" value="禁用方向鍵"> -->
+                    <!-- <input data-index="K610" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 51%;LEFT: 24%;" type="button" value="禁用九鍵">  -->
+                    <!-- <input data-index="K611" (click)="setSelectionKeyData($event)" class="InputBtnStyle" style="width: 11%;TOP: 51%;LEFT: 36%;" type="button" value="禁用方向鍵"> -->
                 </div>
                 <div id="層順時開關" [style.display]="KeyBoardSetPageBtn==7?'block': 'none'"
                     style="position: absolute;width: 100%; height: 100%;">
@@ -1547,7 +1626,7 @@ background-color:rgba(0, 0, 0, 0.78);;
                                     color: #FFF;
                                     background-repeat: no-repeat;
                                     border: none;
-                                    width: 2.9vw;
+                                    width: 10vw;
                                     height: 3.9vh;
                                     margin-top: 2.1vh;
                                     margin-left: 1vw;
@@ -1582,12 +1661,12 @@ background-color:rgba(0, 0, 0, 0.78);;
                         (click)="switchMacroClass(i)"
                         [style.background-color]="MacroManager.currentChooseMacroClass==i?'#0066F1':'transparent'">
 
-                        <div style="width: 17.1vw;position: absolute;color: #FFFFFF;" (blur)="MacroCsInEdit=false">
+                        <div style="width: 17.1vw;position: absolute;color: #FFFFFF; left: 10px;" (blur)="MacroCsInEdit=false">
                             {{item.className}}
                         </div>
 
 
-                        <input class="MacroCSName" type="text" placeholder="" style="width: 17.1vw;position: absolute;"
+                        <input class="MacroCSName" type="text" placeholder="" style="width: 17.1vw;position: absolute; left: 10px;"
                             maxlength="15" (keypress)='EM.regexCustom($event)'
                             [style.display]="(MacroManager.currentChooseMacroClass==i&&MacroCsInEdit)?'block': 'none'"
                             [(ngModel)]="MacroManager.onEditCSName"
@@ -1597,7 +1676,7 @@ background-color:rgba(0, 0, 0, 0.78);;
                         <img (click)="MacroManager.currentChooseMacroClass==i?MacroCsInEdit=true:MacroCsInEdit=false;
                             MacroManager.updeteEditClassName()" (mouseleave)="EM.ForceFocusUIByClass('MacroCSName',i);"
                             [src]="MacroManager.currentChooseMacroClass==i?ImgPath.EditNameIcon[1]:ImgPath.EditNameIcon[0]"
-                            Alt="找不到圖片" style="margin-left: 85%;margin-top: 1.3%; ">
+                            Alt="找不到圖片" style="margin-left: 90%;margin-top: 1.3%; ">
                     </div>
                 </div>
                 <div id="MacroSetting">
@@ -1631,13 +1710,14 @@ background-color:rgba(0, 0, 0, 0.78);;
                         <input type="radio" name="毫秒"
                             (change)="customConsolelog('MacroRadio',MacroManager.radioOptions);"
                             [(ngModel)]="MacroManager.radioOptions" [value]="2">
+                        <div style="display: inline-block;color: #FFF; position: absolute; left: 20px;">{{i18nManager.getTarget().P3.MSDELAY}}</div>
                         <input id="customMs" placeholder="" style="
+					position: absolute; left: 130px;
                     width: 17%;color: #FFF;
                     height: 2vh;text-align: center;
                     background-color: transparent;
                     border: 0; " type="text" value="0"
                             onkeyup="value=value.replace(/[^\d]/g,'');if(value>32767){value=32767}if(value<1){value=0}">
-                        <div style="display: inline-block;color: #FFF;">{{i18nManager.getTarget().P3.MSDELAY}}</div>
                     </div>
                 </div>
             </section>
@@ -1845,6 +1925,7 @@ background-color:rgba(0, 0, 0, 0.78);;
                 </div>
             </div>
 
+<!-- Доп. Программы -->
             <div id="程序關聯選單" class="ProjectSelect" style="margin-top: 7vh;height: 63.5vh;">
 
                 <div class="ProjectItem" *ngFor="let item of AssociateManager.AssociateArr ;let i = index"
@@ -1855,7 +1936,6 @@ background-color:rgba(0, 0, 0, 0.78);;
                         class="CustomInputText" type="text" placeholder="" [(ngModel)]="item.name">
                 </div>
             </div>
-
 
 
 
@@ -1911,7 +1991,8 @@ background-color:rgba(0, 0, 0, 0.78);;
         <!-- <router-outlet></router-outlet-->
 
     </div>
-
+	
+ <!-- Настрйока цвета-->
     <section *ngIf="CurrentPageIndex==1" id="ColorPage">
         <div id="LedModeSelect" style="left: 4.5vw;" class="SelectTemplate">
             <div class="LEDModeSelect" (click)="LEDModeSelect($event,i);"
@@ -1927,28 +2008,61 @@ background-color:rgba(0, 0, 0, 0.78);;
                                                 object-fit: none;"
                     [src]="(Led.currentModeIndex==i)?item.iconpath[1]:item.iconpath[0]">
     
-                <div style="float: left;line-height: 3.3vh;margin-left: 8px;">
+                <div style="float: left;position:relative; bottom: 2px;line-height: 3.3vh;margin-left: 8px;font-family: Manrope;font-weight: regular;">
                     {{Led.mode_name[Led.recordModeArr[i].sortPosition]}}
                 </div>
     
-    
+				<!-- Стрелка для выпадающего меню с эффектами -->
                 <img (click)="OpenLeftDropDownListUI($event,i)" style="float: right;margin-top: 0.2vh;margin-right: 2px;"
                     [src]="(Led.currentModeIndex==i)?ImgPath.SwitchIcon[1]:ImgPath.SwitchIcon[0]">
-    
+				<!-- Глаз для эффектов -->
                 <img [src]="LEDModeEyeStatus(i)" (click)="RGBEyeClose(i);" style="float: right;
                             margin-right: 0.2vw;">
     
             </div>
         </div>
     
+            <div id="Btn1" style="
+			height:27px;
+			width:118px;
+			text-align: center;
+			line-height: 26px;
+			position: absolute;
+			top: 55%;
+			left: 35%;
+            color: white;
+			font-size: 13px;
+			display: inline-block;
+            font-family: Manrope;
+            font-weight: regular;"
+			(click)="boxSelectionStart()"[style.background-image]="this.Led.BSApage1.EventCanBoxSelect? ImgPath.BoxStateNew[1]:ImgPath.BoxStateNew[0]">
+                {{i18nManager.getTarget().P1.SELECT}}
+            </div>
+            <div id="EffectCenterBtn" style="
+			height:27px;
+			width:120px;
+			text-align: center;
+			line-height: 26px;
+			display: inline-block;
+			position: absolute;
+			top: 55%;
+			left: 50%;
+            color: white;
+			font-size: 13px;
+            font-family: Manrope;
+            font-weight: regular;"
+			(click)="boxEffectStart()" [style.display]="this.RGBMode.canEffectCenter?'inline-block': 'none'"
+                [style.background-image]="EffectCenter.selectEffectCenter?ImgPath.BoxStateNew[1]:ImgPath.BoxStateNew[0]">
+                {{i18nManager.getTarget().P1.CENTERTHEEFFECT}} 
+            </div>
         <div class="BottomArea" style="background-image: url(./image/ColorSet/BottomAreaBG.png);
             position: absolute;
-            margin-left: 28%;
-            margin-top: 54vh;
+            margin-left: 32%;
+            margin-top: 50vh;
             height: 27.9vh;
-            width: 63.7vw;
+            width: 58vw;
             background-size: 100% 100%;">
-            <div id="Btn1" style="height:27px;width:77px;text-align: center;line-height: 26px;
+            <!-- <div id="Btn1" style="height:27px;width:77px;text-align: center;line-height: 26px;
                             color: white;display: inline-block;font-size: 13px;" (click)="boxSelectionStart()"
                 [style.background-image]="this.Led.BSApage1.EventCanBoxSelect? ImgPath.BoxState[1]:ImgPath.BoxState[0]">
                 {{i18nManager.getTarget().P1.SELECT}}
@@ -1957,152 +2071,147 @@ background-color:rgba(0, 0, 0, 0.78);;
                             color: white;font-size: 13px;" (click)="boxEffectStart()"
                 [style.display]="this.RGBMode.canEffectCenter?'inline-block': 'none'"
                 [style.background-image]="EffectCenter.selectEffectCenter?ImgPath.BoxState[1]:ImgPath.BoxState[0]">
-                {{i18nManager.getTarget().P1.CENTERTHEEFFECT}}
-            </div>
-            <div id="LedAdjustable" style="font-size: 1.1vw;">
+                {{i18nManager.getTarget().P1.CENTERTHEEFFECT}} 
+            </div>  -->
+            <div id="LedAdjustable" style="position: absolute; left: 10px;">
                 <div class="InputObject" [style.display]="RGBMode.showlimit[0]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.OPACITY}} </div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.OPACITY}} </div>
                     <input class="LedInputTxtStyle" type="number" max="100" min="0" (keypress)="EM.regexOnlyNumber($event);"
                         (change)="setColorDataToServer('RGBMode.opacity')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>100){value=100};" [(ngModel)]="RGBMode.opacity"
                         (keyup)="setColorDataToServer('RGBMode.opacity')">
                     <!-- <img src="./image/ColorSet/MinusIcon.png"> -->
-                    <input class="LedOptionInputRange" type="range" max="100" min="0"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="100" min="0"
                         (change)="setColorDataToServer('range')" [(ngModel)]="RGBMode.opacity">
                 </div>
                 <div class="InputObject" [style.display]="RGBMode.showlimit[1]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.SPEED}} </div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.SPEED}} </div>
                     <input class="LedInputTxtStyle" type="number" max="10" min="1"
                         (change)="setColorDataToServer('RGBMode.speed')" [(ngModel)]="RGBMode.speed"
                         (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>10){value=10};if(value<1){value=1}">
-                    <input class="LedOptionInputRange" type="range" max="10" min="1"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="10" min="1"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.speed">
                 </div>
     
                 <div class="InputObject" [style.display]="RGBMode.showlimit[2]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.BANDWIDTH}}</div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.BANDWIDTH}}</div>
                     <input class="LedInputTxtStyle" type="number" max="500" min="50"
                         (change)="setColorDataToServer('RGBMode.bandwidth')" [(ngModel)]="RGBMode.bandwidth"
                         (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>500){value=500};if(value<50){value=50}">
-                    <input class="LedOptionInputRange" type="range" max="500" min="50"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="500" min="50"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.bandwidth">
                 </div>
     
                 <div class="InputObject" [style.display]="RGBMode.showlimit[3]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.ANGLE}} </div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.ANGLE}} </div>
                     <input class="LedInputTxtStyle" type="number" max="360" min="0"
                         (change)="setColorDataToServer('RGBMode.angle')" [(ngModel)]="RGBMode.angle"
                         (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>360){value=360} else if(value<1){value=0}">
-                    <input class="LedOptionInputRange" type="range" max="360" min="0"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="360" min="0"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.angle">
                 </div>
+				
                 <div class="InputObject" [style.display]="RGBMode.showlimit[4]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.NUMBER}}</div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.NUMBER}}</div>
                     <input class="LedInputTxtStyle" type="number" max="10" min="0"
                         (change)="setColorDataToServer('RGBMode.number')" [(ngModel)]="RGBMode.number"
                         (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>10){value=10} else if(value<1){value=0}">
-                    <input class="LedOptionInputRange" type="range" max="10" min="0"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="10" min="0"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.number">
                 </div>
                 <div class="InputObject" [style.display]="RGBMode.showlimit[5]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.FIRE}}</div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.FIRE}}</div>
                     <input class="LedInputTxtStyle" type="number" max="10" min="0"
                         (change)="setColorDataToServer('RGBMode.fire')" [(ngModel)]="RGBMode.fire"
                         (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>10){value=10}">
-                    <input class="LedOptionInputRange" type="range" max="10" min="0"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="10" min="0"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.fire">
                 </div>
                 <div class="InputObject" [style.display]="RGBMode.showlimit[6]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.GAP}}</div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.GAP}}</div>
                     <input class="LedInputTxtStyle" type="number" max="500" min="0"
                         (change)="setColorDataToServer('RGBMode.gap')" [(ngModel)]="RGBMode.gap"
                         (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>500){value=500}">
-                    <input class="LedOptionInputRange" type="range" max="500" min="0"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="500" min="0"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.gap">
                 </div>
     
-    
-    
                 <div class="InputObject" [style.display]="RGBMode.showlimit[8]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.RANDOMSPEED}}</div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.RANDOMSPEED}}</div>
                     <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.randomspeed')"
                         [(ngModel)]="RGBMode.randomspeed" (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>360){value=360}">
-                    <input class="LedOptionInputRange" type="range" max="360" min="0"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="360" min="0"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.randomspeed">
                 </div>
     
                 <div class="InputObject" [style.display]="RGBMode.showlimit[9]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.TIME}}</div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.TIME}}</div>
                     <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.time')"
                         [(ngModel)]="RGBMode.time" (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>3){value=3}">
-                    <input class="LedOptionInputRange" type="range" max="3" min="0.5"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="3" min="0.5"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.time">
                 </div>
     
                 <div class="InputObject" [style.display]="RGBMode.showlimit[10]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.RADIUS}}</div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.RADIUS}}</div>
                     <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.radius')"
                         [(ngModel)]="RGBMode.radius" (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>300){value=300}">
-                    <input class="LedOptionInputRange" type="range" max="300" min="0"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="300" min="0"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.radius">
                 </div>
-    
-    
+ 
                 <div class="InputObject" [style.display]="RGBMode.showlimit[11]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;width: 28%;">{{i18nManager.getTarget().P1.AMPLITUDE}} </div>
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.AMPLITUDE}} </div>
                     <input class="LedInputTxtStyle" type="number" (change)="setColorDataToServer('RGBMode.amplitude')"
                         [(ngModel)]="RGBMode.amplitude" (keyup)="setColorDataToServer('LedInputTxt')"
                         onkeyup="value=value.replace(/[^\d]/g,'');if(value>8000){value=8000};if(value<200){value=200}">
-                    <input class="LedOptionInputRange" type="range" max="8000" min="200" step="100"
+                    <input class="LedOptionInputRange InputObjectStyle" type="range" max="8000" min="200" step="100"
                         (ngModelChange)="setColorDataToServer('range')" [(ngModel)]="RGBMode.amplitude">
                 </div>
     
                 <div class="InputObject" [style.display]="RGBMode.showlimit[7]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.BUMP}} </div>
-    
-                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.BUMP}} </div>
+                    <div class="InputObjectStyleBt"
                         [style.background-image]="RGBMode.bump?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
                         (click)="RGBMode.bump=!RGBMode.bump;setColorDataToServer('RGB')">
                     </div>
                 </div>
     
-    
                 <div class="InputObject" [style.display]="RGBMode.showlimit[12]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.SEPARATE}} </div>
-                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.SEPARATE}} </div>
+                    <div class="InputObjectStyleBt"
                         [style.background-image]="RGBMode.separate?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
                         (click)="RGBMode.separate=!RGBMode.separate;setColorDataToServer('RGB')">
                     </div>
                 </div>
     
     
-                <div [style.display]="RGBMode.showlimit[13]==1?'block': 'none'"
+                <div class="InputObject" [style.display]="RGBMode.showlimit[13]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.GRADIENT}} </div>
-    
-                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.GRADIENT}} </div>
+                    <div class="InputObjectStyleBt"
                         [style.background-image]="RGBMode.gradient?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
                         (click)="RGBMode.gradient=!RGBMode.gradient;setColorDataToServer('RGB')">
                     </div>
@@ -2110,8 +2219,8 @@ background-color:rgba(0, 0, 0, 0.78);;
     
                 <div class="InputObject" [style.display]="RGBMode.showlimit[14]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.DIRECTION}}</div>
-                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.DIRECTION}}</div>
+                    <div class="InputObjectStyleBt"
                         [style.background-image]="RGBMode.direction?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
                         (click)="RGBMode.direction=!RGBMode.direction;setColorDataToServer('RGB')">
                     </div>
@@ -2120,39 +2229,37 @@ background-color:rgba(0, 0, 0, 0.78);;
     
                 <div class="InputObject" [style.display]="RGBMode.showlimit[15]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-flex;  width: 28%;">{{i18nManager.getTarget().P1.SOFT}} </div>
-    
-                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.SOFT}} </div>
+                    <div class="InputObjectStyleBt"
                         [style.background-image]="RGBMode.soft?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
                         (click)="RGBMode.soft=!RGBMode.soft;setColorDataToServer('RGB')">
                     </div>
                 </div>
                 <div class="InputObject" [style.display]="RGBMode.showlimit[16]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;  width: 28%;">{{i18nManager.getTarget().P1.FIXED}} </div>
-    
-                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.FIXED}} </div>
+                    <div class="InputObjectStyleBt"
                         [style.background-image]="RGBMode.fixed?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
                         (click)="RGBMode.fixed=!RGBMode.fixed;setColorDataToServer('RGB')">
                     </div>
                 </div>
                 <div class="InputObject" [style.display]="RGBMode.showlimit[17]==1?'block': 'none'"
                     style="height: 21px;width: 261px;margin-top: 2%;color: #fff;">
-                    <div style="display: inline-block;  width: 32%;">{{i18nManager.getTarget().P1.BIDIRECTIONAL}}
-                    </div>
-                    <div style="display: inline-flex;width:25px;height:14px;vertical-align: middle;"
+                    <div class="InputObjectTextStyle">{{i18nManager.getTarget().P1.BIDIRECTIONAL}} </div>
+                    <div class="InputObjectStyleBt"
                         [style.background-image]="RGBMode.bidirectional?ImgPath.ShareOption[1]:ImgPath.ShareOption[0]"
                         (click)="RGBMode.bidirectional=!RGBMode.bidirectional;setColorDataToServer('RGB')">
                     </div>
                 </div>
             </div>
-    
+
         </div>
-    
-        <div [style.display]="RGBMode.name!='Fire'?'block': 'none'" id="color-picker-container" style="    left: 67%;
+	<!-- Панель выбора цвета -->
+        <div [style.display]="RGBMode.name!='Fire'?'block': 'none'" id="color-picker-container" style="
+				left: 65%;
                 position: absolute;
                 z-index: 2;
-                top: 65.7%;
+                top: 62.7%;
                 height: 27.5%;
                 width: 24.7%;
                 display: block;">
@@ -2162,8 +2269,10 @@ background-color:rgba(0, 0, 0, 0.78);;
                                         height: 55%;
                                         width: 50%;
                                         background-size: 100% 100%;
-                                        border-radius: 3px;
-                                        " [style.background-color]="LedColor.gradientBGcolor">
+                                        border-radius: 3px;  
+                                        border: 2px #2b342b solid;
+                                        box-sizing: border-box;" 
+										[style.background-color]="LedColor.gradientBGcolor">
                 <div id="LedColorCircle" class="circle">
     
     
@@ -2176,8 +2285,10 @@ background-color:rgba(0, 0, 0, 0.78);;
             <div style="position: absolute;
                  top: 60%;
                  color: #fff;
-                 width: 21%;"> {{i18nManager.getTarget().P1.COLORS}}</div>
-            <input class="color_quantity" type="number" max="20" min="1"
+                 width: 21%;
+				 font-family: Manrope;
+				 font-weight: regular;"> {{i18nManager.getTarget().P1.COLORS}}</div>
+            <input class="color_quantity" type="number" max="20" min="1" style="width: 15%"
                 [style.pointer-events]="RGBMode.color_ShowLimit!=1?'auto':'none'" [(ngModel)]="RGBMode.color_quantity"
                 (change)="setColorDataToServer('插色數量')"
                 onkeyup="value=value.replace(/[^\d]/g,'');if(value>20){value=20};if(value<1){value=1}">
@@ -2269,7 +2380,7 @@ background-color:rgba(0, 0, 0, 0.78);;
     
     </section>
     
-    <div id="EventCanBoxSelectRange" class="EventCanBoxSelectRange"
+    <div id="EventCanBoxSelectRange" class="EventCanBoxSelectRange" 
         [style.pointer-events]="Led.BSApage1.EventCanBoxSelect ||LCFM.BSApage7.EventCanBoxSelect?'auto':'none'">
     
         <div *ngIf="CurrentPageIndex==1" id="APModeKBUI" class="KBUICommon"
@@ -2284,10 +2395,11 @@ background-color:rgba(0, 0, 0, 0.78);;
                 [style.display]="EffectCenter.selectEffectCenter?'block': 'none'" [style.background-color]="'transparent'">
     
             </div>
-    
+    <!-- Желтое выделение кнопок и подсветка -->
             <div *ngFor="let item of KeyBoardStyle.getTarget().target ;let i = index" class="RGBColorBlockStyle"
                 [style.background-color]="Led.AllBlockColor[i].color" [attr.data-index]="i">
             </div>
+	<!-- Расположение кнопок для подсветки -->
             <div id="RGBKeyBoardUITransparent" data-UITransparent="RGBTransparent"
                 style="position: absolute;height: 100%;width: 100%;pointer-events: none;"
                 [style.pointer-events]="EffectCenter.selectEffectCenter?'auto':'none'">
@@ -2372,6 +2484,7 @@ background-color:rgba(0, 0, 0, 0.78);;
                 <div data-img="KeyAddLEDIcon" style="width: 1.3vw;
                         height: 1.4vw;
                         float: right;
+						position: relative
                         background-image: url(./image/Keyboard/KeyAddLEDIcon.png);
                         pointer-events: auto;
                         padding-right: 6px;
@@ -2381,6 +2494,7 @@ background-color:rgba(0, 0, 0, 0.78);;
     
     
             </div>
+			<!-- Клавиатура в меню Keys -->
             <div id="RGBKeyBoardUITransparent" data-UITransparent="KEYASSIGNTransparent"
                 style="position: absolute;height: 100%;width: 100%;pointer-events: none;">
             </div>

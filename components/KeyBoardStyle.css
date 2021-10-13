@@ -54,7 +54,7 @@ input.KeyAssignUIStyle:focus {
 .EventCanBoxSelectRange {
   position: absolute;
   left: 28%;
-  top: 21%;
+  top: 15%;
   height: 320px;
   width: 825px;
   background: rgba(255, 255, 255, 0); }

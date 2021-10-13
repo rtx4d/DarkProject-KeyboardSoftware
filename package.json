@@ -33,7 +33,7 @@
     "request": "2.81.0",
     "rxjs": "^5.0.1",
     "systemjs": "^0.19.39",
-    "zone.js": "^0.7.2"
+    "zone.js": "0.7.2"
   },
   "devDependencies": {
     "@types/core-js": "0.9.35",
@@ -64,7 +64,7 @@
     "skip-taskbar": false,
     "show": true,
     "resizable": false,
-    "transparent": false
+    "transparent": true
   },
   "BuiltType": 1
 }
