@@ -49,6 +49,8 @@ var m_SyncIndexID = -1;
 
 var m_DeviceProfile = [1,2,3,4];
 
+var m_iCustomLEDNum = 0;
+
 var iPID_Turing = 0x2061;
 var iVID_Turing = 0x195D;
 
@@ -160,25 +162,22 @@ var Matrix_key =  ["esc"   , "f1"  , "f2" , "f3" , "f4"  , "f5"  , "f6"  , "f7" 
 "lshift", "z"  , "x"  , "c"   , "v"   , "b"   , "n"   , "m"  ,"comma","dot"  ,"qmark","rshift", "up"    ,
 "lctrl" , "win" ,"lalt","space","ralt", "fn"  ,"book" ,"rctrl", "left", "down" , "right" ,
 ];
-       
 var KeyMatrix_Default = //KeyMatrix For KD3-87
 [ 
-  0x00 ,0x35 ,0x2b ,0x39 ,0xe1 ,0xe0 ,0x29 ,0x1e ,0x14 ,0x04 ,0x00 ,0xe3 ,
-  0x3a ,0x1f ,0x1a ,0x16 ,0x1d ,0xe2 ,0x3b ,0x20 ,0x08 ,0x07 ,0x1b ,0x00 ,0x3c ,0x21 ,0x15 ,0x09,
-  0x06 ,0x00 ,0x3d ,0x22 ,0x17 ,0x0a ,0x19 ,0x2c ,0x3e ,0x23 ,0x1c ,0x0b ,0x05 ,0x00 ,0x3f ,0x24,
-  0x18 ,0x0d ,0x11 ,0x00 ,0x40 ,0x25 ,0x0c ,0x0e ,0x10 ,0xe6 ,0x41 ,0x26 ,0x12 ,0x0f ,0x36 ,0xac,
-  0x42 ,0x27 ,0x13 ,0x33 ,0x37 ,0x65 ,0x43 ,0x2d ,0x2f ,0x34 ,0x38 ,0x00 ,0x44 ,0x2e ,0x30 ,0x00,
-  0x00 ,0xe4 ,0x45 ,0x2a ,0x31 ,0x28 ,0xe5 ,0x00 ,0x46 ,0x49 ,0x4c ,0x00 ,0x00 ,0x50 ,0x47 ,0x4a,
-  0x4d ,0x00 ,0x52 ,0x51 ,0x48 ,0x4b ,0x4e ,0x00 ,0x00 ,0x4f ,0x00 ,0x29 ,0x2b ,0x39 ,0xe1 ,0xe0,
-  0x29 ,0x1e ,0x14 ,0x04 ,0x00 ,0xb1 ,0xa9 ,0x1f ,0x1a ,0x16 ,0x1d ,0xe2 ,0xaa ,0x3b ,0x08 ,0x07,
-  0x1b ,0x00 ,0xab ,0xb0 ,0x15 ,0x09 ,0x06 ,0x00 ,0xa5 ,0x22 ,0x17 ,0x0a ,0x19 ,0x2c ,0xb7 ,0x23,
-  0x1c ,0x0b ,0x05 ,0x00 ,0xb8 ,0x24 ,0x18 ,0x0d ,0x11 ,0x00 ,0xb6 ,0x25 ,0x0c ,0x0e ,0x10 ,0xe6,
-  0xb5 ,0x26 ,0x12 ,0x0f ,0x36 ,0xac ,0x42 ,0x27 ,0x13 ,0x33 ,0x37 ,0x65 ,0x43 ,0xd7 ,0x2f ,0x34,
-  0x38 ,0x00 ,0x44 ,0xd6 ,0x30 ,0x00 ,0x00 ,0xe4 ,0x45 ,0x2a ,0x31 ,0x28 ,0xe5 ,0x00 ,0x46 ,0x49,
-  0x4c ,0x00 ,0x00 ,0x50 ,0x47 ,0x4a ,0x4d ,0x00 ,0xdf ,0xde ,0xba ,0x4b ,0x4e ,0x00 ,0x00 ,0x4f,
-];       
-
-
+    0x00 ,0x35 ,0x2b ,0x39 ,0xe1 ,0xe0 ,0x29 ,0x1e ,0x14 ,0x04 ,0x00 ,0xe3 ,
+    0x3a ,0x1f ,0x1a ,0x16 ,0x1d ,0xe2 ,0x3b ,0x20 ,0x08 ,0x07 ,0x1b ,0x00 ,0x3c ,0x21 ,0x15 ,0x09,
+    0x06 ,0x00 ,0x3d ,0x22 ,0x17 ,0x0a ,0x19 ,0x2c ,0x3e ,0x23 ,0x1c ,0x0b ,0x05 ,0x00 ,0x3f ,0x24,
+    0x18 ,0x0d ,0x11 ,0x00 ,0x40 ,0x25 ,0x0c ,0x0e ,0x10 ,0xe6 ,0x41 ,0x26 ,0x12 ,0x0f ,0x36 ,0xac,
+    0x42 ,0x27 ,0x13 ,0x33 ,0x37 ,0x65 ,0x43 ,0x2d ,0x2f ,0x34 ,0x38 ,0x00 ,0x44 ,0x2e ,0x30 ,0x00,
+    0x00 ,0xe4 ,0x45 ,0x2a ,0x31 ,0x28 ,0xe5 ,0x00 ,0x46 ,0x49 ,0x4c ,0x00 ,0x00 ,0x50 ,0x47 ,0x4a,
+    0x4d ,0x00 ,0x52 ,0x51 ,0x48 ,0x4b ,0x4e ,0x00 ,0x00 ,0x4f ,0x00 ,0x29 ,0x2b ,0x39 ,0xe1 ,0xe0,
+    0x29 ,0x1e ,0x14 ,0x04 ,0x00 ,0xb1 ,0xad ,0x1f ,0x1a ,0x16 ,0x1d ,0xe2 ,0xae ,0x3b ,0x08 ,0x07,
+    0x1b ,0x00 ,0xaf ,0xb0 ,0x15 ,0x09 ,0x06 ,0x00 ,0xb0 ,0x22 ,0x17 ,0x0a ,0x19 ,0x2c ,0xb7 ,0x23,
+    0x1c ,0x0b ,0x05 ,0x00 ,0xb8 ,0x24 ,0x18 ,0x0d ,0x11 ,0x00 ,0xb6 ,0x25 ,0x0c ,0x0e ,0x10 ,0xe6,
+    0xb5 ,0x26 ,0x12 ,0x0f ,0x36 ,0xac ,0x42 ,0x27 ,0x13 ,0x33 ,0x37 ,0x65 ,0x43 ,0xd7 ,0x2f ,0x34,
+    0x38 ,0x00 ,0x44 ,0xd6 ,0xf8 ,0x00 ,0x00 ,0xe4 ,0x45 ,0x2a ,0x31 ,0x28 ,0xe5 ,0x00 ,0x46 ,0xa7,
+    0xa9 ,0x00 ,0x00 ,0x50 ,0x47 ,0xa8 ,0xa6 ,0x00 ,0xdf ,0xde ,0xba ,0xab ,0xaa ,0x00 ,0x00 ,0x4f,
+];    
 var Profileinfo_Default =  
 [   0x00 ,0x00 ,0x00 ,0x00 ,0x14 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x00 ,0x20 ,
     0x05 ,0x05 ,0x3c ,0x64 ,0x32 ,0x32 ,0x32 ,0x32 ,0x1e ,0x1e ,0x1e ,0x00 ,0x01 ,0x01 ,0x01 ,0x00,
@@ -256,29 +255,33 @@ var DeviceApi_Turing = function(EmitAPI,hid,AudioControl,VirtualKey,SyncProgram)
     
         var bPlug=Obj.bPlug;
 
-        return new Promise(function (resolve, reject) {
-              
-                //clearInterval(m_timerAudioMode);
-
-                if (bPlug) 
-                {
-                    _thisDevice_Turing.SendEnableEP2().then(function() {
-                        
-                        m_bOpen = bPlug;
-                        env.log('Device: 51U68','Plug: ',bPlug);
-                        resolve(0);
-                    });
-                }
-                else
-                {
-                    m_bOpen = bPlug;
-                    env.log('Device: 51U68','Plug: ',bPlug);
-                    resolve(0);
-
-                }
+        if (bPlug) 
+        {
+            _thisDevice_Turing.SendEnableEP2().then(function() {
+                _thisDevice_Turing.GetDeviceType().then(function() {
+                    if (iDeviceType == 0x01) {//KD3-87
+                            iDeviceType = 0;
+                            m_bOpen = bPlug;
+                            env.log('Device: 51U68','Plug: ',bPlug);
+                            callback(bPlug);
+                    }
+                    else
+                    {
+                        m_bOpen = false;
+                        bPlug = false;
+                        env.log('Device: 51U68','Not This Device',bPlug);
+                        callback(bPlug);
+                    }
+                });
+            });
+        }
+        else
+        {
+            m_bOpen = bPlug;
+            env.log('Device: 51U68','Plug: ',bPlug);
+            callback(bPlug);
+        }
                 
-        });
-
     };
 
     DeviceApi_Turing.prototype.CloseDevice = function (callback) {
@@ -287,13 +290,19 @@ var DeviceApi_Turing = function(EmitAPI,hid,AudioControl,VirtualKey,SyncProgram)
             return new Promise(function (resolve) {
                 if (m_bOpen) 
                 {
-                    var ObjEffect = {
-                        iLEDMode: 0
+                    var curprofile = m_iCurProfile;
+                    var profile2 = (m_iCurProfile+1)%4;
+                    var ObjProfile = {
+                        Profile: profile2
                     };                    
-                    _thisDevice_Turing.SetLEDEffect(ObjEffect).then(function () 
-                    {
-                        resolve();
+                    _thisDevice_Turing.SetProfile(ObjProfile,function (){
+                        ObjProfile.Profile = curprofile;
+                        _thisDevice_Turing.SetProfile(ObjProfile,function (){
+                            resolve();
+                        });
+
                     });
+
                 } 
                 else 
                 {
@@ -746,10 +755,7 @@ DeviceApi_Turing.prototype.SetCustomLEDProfile = function (obj, callback)
         }
     }
     //------------------------------------
-    // for (var i=0;i < CustomLEDNames.length;i++)
-    // {
-
-    // }
+    
     
     (function SetCustomAP1(i){
        
@@ -805,51 +811,78 @@ DeviceApi_Turing.prototype.SetCustomLEDAssignment = function (obj)
     
     var CustomLEDNames = [];
     //--------------------------------------
+    var Data = new Buffer(new Array(264));
+    var bCustomLED = false;
+    var iCustomLEDCount = 0;
 
     var targetArr=KeyAssignment.assignedKeyboardKeys[0];
     for(var i = 0; i < targetArr.length; i++)
     {          
-        if (targetArr[i].projectCode != 0) //Custom Assign
+        if (targetArr[i].projectCode != 0 && iCustomLEDCount<11) //Custom Assign
         {
+            bCustomLED = true;
             CustomLEDNames.push(targetArr[i].projectCode);
+              
+            var iIndex =  Matrix_LEDCode_DarkProject.indexOf(Matrix_key[i]);
+            Data[4+iIndex] = iCustomLEDCount+5;
+            iCustomLEDCount++;
         }
     }
-    
+
+
+    //--------
     return new Promise(function (resolve, reject) 
     {
-    (function SetCustomAP1(i){
-       
-        if (i < CustomLEDNames.length)
-        {
-            var bCustomLED = false;
-            var CustomData;
-            for (var j=0;j < m_CustomDataConfig.length;j++)
-            {
-                if (CustomLEDNames[i] ==  m_CustomDataConfig[j].projectCode) 
-                {
-                    CustomData = m_CustomDataConfig[j];
-                    bCustomLED = true;
-
-                    break;
-                }
-            }
-            if (bCustomLED) 
-            {
-                
-                CustomData.iProfile = iProfile;
-                CustomData.iCustomNum = i+5;
-                _thisDevice_Turing.SetCustomLED(CustomData).then(function () {
-
-                    SetCustomAP1(i+1);
-                });
-            } 
+        if (!bCustomLED) {
+            resolve("SetCustomLEDAssignment Refuse");
+            return;
         }
-        else
-        {
-            resolve("SetCustomLEDAssignment Done");
-        } 
+
+    //------------------------------------
+    
+    Data[0] = 0x08;
+    Data[1] = 0x0c;
+    Data[2] = iProfile;
+    Data[3] = 0x00;
+
+    _thisDevice_Turing.HidWrite(Data,150).then(function () {
+        //------------------------------------
+        (function SetCustomAP1(i){
         
-    })(0);
+            if (i < CustomLEDNames.length)
+            {
+                var bCustomLED = false;
+                var CustomData;
+                for (var j=0;j < m_CustomDataConfig.length;j++)
+                {
+                    if (CustomLEDNames[i] ==  m_CustomDataConfig[j].projectCode) 
+                    {
+                        CustomData = m_CustomDataConfig[j];
+                        bCustomLED = true;
+
+                        break;
+                    }
+                }
+                if (bCustomLED) 
+                {
+
+                    CustomData.iProfile = iProfile;
+                    CustomData.iCustomNum = i+5;
+                    _thisDevice_Turing.SetCustomLED(CustomData).then(function () {
+
+                        SetCustomAP1(i+1);
+                    });
+                } 
+            }
+            else
+            {
+                resolve("SetCustomLEDAssignment Done");
+            } 
+
+        })(0);
+
+    });
+
 });
     
 }
@@ -866,7 +899,6 @@ DeviceApi_Turing.prototype.SetKeyMatrix = function (obj, callback)
     DataBuffer = KeyMatrix_Default.slice();
 
     var bMacro = false;
-    var bCustomLED = false;
     var iCustomLEDCount = 0;
     var iProfile = obj.Profile;
     var bMacroSet = Buffer.alloc(264);
@@ -892,19 +924,6 @@ DeviceApi_Turing.prototype.SetKeyMatrix = function (obj, callback)
         csAssign = targetArr[i].keyAssignType;
         iAssign = funcVar.FuncKeyCode.indexOf(csAssign);
                
-        if (targetArr[i].projectCode != 0 && iCustomLEDCount<11) //Custom Assign
-        {            
-            for(var iIndex = 0; iIndex < Matrix_LEDCode_DarkProject.length; iIndex++)
-            {
-                if (Matrix_LEDCode_DarkProject[iIndex] == Matrix_key[i])
-                {
-                    bCustomLED = true;
-                    DataBuffer[iDataLength*2+iIndex] = iCustomLEDCount+5;
-                    iCustomLEDCount++;
-                    break;
-                }
-            }
-        } 
         if (csAssign == "KCombination") //KCombination
         {
             bMacro = true;
@@ -991,75 +1010,54 @@ DeviceApi_Turing.prototype.SetKeyMatrix = function (obj, callback)
     //-------------------------------------
     m_bSetHWDevice = true;
     //-----------Set Report Rate-----------------
-
     m_iDeviceReportRate = KeyAssignment.reportRateIndex;
-
     //-------------------------------------
     var ObjSleepAndDir = {
         iProfile: iProfile,
         SyncProgramData: KeyAssignment
     }
-    _thisDevice_Turing.SetProfileInfo2Device(ObjSleepAndDir).then(function() {
-        _thisDevice_Turing.SetSleepAndDir(ObjSleepAndDir).then(function() {
-        //-------------------------------------
-            var Obj3 = {
-                iProfile: iProfile,
-                DataBuffer: DataBuffer
-            }
-            _thisDevice_Turing.SendKeyMatrix2Device(Obj3).then(function() {
-                if (bMacro && bCustomLED) 
-                {
-                    var ObjCustomLED = {
-                        iProfile: iProfile,
-                        iCustomLEDCount:iCustomLEDCount,
-                        KeyAssignment:KeyAssignment
+    setTimeout(function(){
+        _thisDevice_Turing.SetProfileInfo2Device(ObjSleepAndDir).then(function() {
+            _thisDevice_Turing.SetSleepAndDir(ObjSleepAndDir).then(function() {
+            //-------------------------------------
+                var Obj3 = {
+                    iProfile: iProfile,
+                    DataBuffer: DataBuffer
+                }
+                _thisDevice_Turing.SendKeyMatrix2Device(Obj3).then(function() {
+                    if (bMacro){
+                        var ObjCustomLED = {
+                            iProfile: iProfile,
+                            iCustomLEDCount:iCustomLEDCount,
+                            KeyAssignment:KeyAssignment
+                        }
+                        var ObjMacro = {
+                            iProfile: iProfile,
+                            bMacroSet:bMacroSet
+                        }
+                        _thisDevice_Turing.SetMacroKey(ObjMacro).then(function() {
+                            _thisDevice_Turing.SetCustomLEDAssignment(ObjCustomLED).then(function() {
+                                m_bSetHWDevice = false;
+                                callback("SendDevice Done");
+                            });
+                        });
                     }
-                    var ObjMacro = {
-                        iProfile: iProfile,
-                        bMacroSet:bMacroSet
-                    }
-                    _thisDevice_Turing.SetMacroKey(ObjMacro).then(function() {
+                    else{
+                        var ObjCustomLED = {
+                            iProfile: iProfile,
+                            iCustomLEDCount:iCustomLEDCount,
+                            KeyAssignment:KeyAssignment
+                        }
                         _thisDevice_Turing.SetCustomLEDAssignment(ObjCustomLED).then(function() {
                             m_bSetHWDevice = false;
                             callback("SendDevice Done");
                         });
-                    });
-
-                }
-                else if (bCustomLED) 
-                {
-                    var ObjCustomLED = {
-                        iProfile: iProfile,
-                        iCustomLEDCount:iCustomLEDCount,
-                        KeyAssignment:KeyAssignment
                     }
-                    _thisDevice_Turing.SetCustomLEDAssignment(ObjCustomLED).then(function() {
-
-                        m_bSetHWDevice = false;
-                        callback("SendDevice Done");
-                    });
-
-                }
-                else if (bMacro) 
-                {
-                    var ObjMacro = {
-                        iProfile: iProfile,
-                        bMacroSet:bMacroSet
-                    }
-                    _thisDevice_Turing.SetMacroKey(ObjMacro).then(function() {
-
-                        m_bSetHWDevice = false;
-                        callback("SendDevice Done");
-                    });
-                }
-                else
-                {
-                    m_bSetHWDevice = false;
-                    callback("SendDevice Done");
-                }
+                });
             });
         });
-    });
+
+    },100);
 };
 
 DeviceApi_Turing.prototype.SetMacroKey = function (Obj, callback) 
@@ -1168,7 +1166,7 @@ DeviceApi_Turing.prototype.MacroToData = function (Obj)
         if (targetArr[iKey].keyAssignType == "KCombination") 
         {
             bCombination = true;
-            csCombinationKey = m_ApplyConfig.profile_info[iProfile].targetArr[iKey].value;
+            csCombinationKey = targetArr[iKey].value;
         } 
         else 
         {
@@ -1381,10 +1379,10 @@ DeviceApi_Turing.prototype.SetCustomLED = function (Obj) {
     var iProfile=Obj.iProfile;//Profile 1
     var iCustomNum = Obj.iCustomNum;//CustomNum 1
 
-    var DataBuffer = new Buffer(new Array(264));
-    DataBuffer.fill(0xff, 72*0, 72*3);//All white
-
+    var DataBuffer = new Buffer(new Array(512));
     var iMatrixLength = Device_KeyMatrixNum;//104KEYS:126
+
+    DataBuffer.fill(0x00, iMatrixLength*0, iMatrixLength*3);//All black
     if (m_bOpen == 0)
     {
         return new Promise(function (resolve, reject) {
@@ -1426,7 +1424,7 @@ DeviceApi_Turing.prototype.SetCustomLED = function (Obj) {
     }
     //-------------Send Custom Frame to Data------------------
     
-    DataBuffer = new Buffer(new Array(264));
+    DataBuffer = new Buffer(new Array(512));
     DataBuffer[0] = MatrixFrames.length;
 
 
@@ -1434,8 +1432,8 @@ DeviceApi_Turing.prototype.SetCustomLED = function (Obj) {
     { 
         var Frametime = parseInt(MatrixFrames[iFrame].frame_time);
 
-        DataBuffer[181+iFrame*2+0] = Frametime >> 0x08;
-        DataBuffer[181+iFrame*2+1] = Frametime & 0xFF;
+        DataBuffer[341+iFrame*2+0] = Frametime >> 0x08;
+        DataBuffer[341+iFrame*2+1] = Frametime & 0xFF;
 
         for(var iIndex = 0; iIndex < Matrix_LEDCode_DarkProject.length; iIndex++)
         { 
@@ -1444,10 +1442,10 @@ DeviceApi_Turing.prototype.SetCustomLED = function (Obj) {
                 if (Matrix_LEDCode_DarkProject[iIndex] == Matrix_LED[i] && MatrixFrames[iFrame].frame_selection_range[i])
                 {
                     //var bFrameSet = MatrixFrames[iFrame].frame_selection_range[i]
-                    var iIndexGroup = parseInt(iIndex/8);
-                    var iIndexQuotient = iIndex%8;
+                    var iIndexGroup = parseInt(iIndex/6);
+                    var iIndexQuotient = iIndex%6;
                     //var iGroupNum = DataBuffer[1+iIndexGroup];
-                    DataBuffer[1+iFrame*9+iIndexGroup] |= Math.pow(2,iIndexQuotient);//Binary To Byte By OR method
+                    DataBuffer[1+iFrame*17+iIndexGroup] |= Math.pow(2,iIndexQuotient);//Binary To Byte By OR method
                     break;
                 }
             }
@@ -1463,8 +1461,8 @@ DeviceApi_Turing.prototype.SetCustomLED = function (Obj) {
     }
     //-------------Send Custom Effect to Data------------------
     var EffectArray = [2,0,1,1];
-    DataBuffer = new Buffer(new Array(264));
-    DataBuffer.fill(2, 72*0, 72*1);//Static
+    DataBuffer = new Buffer(new Array(512));
+    DataBuffer.fill(2, iMatrixLength*0, iMatrixLength*1);//Static
     for(var iColorMode = 0; iColorMode < MatrixColorMode.length; iColorMode++)
     { 
 
@@ -1493,6 +1491,7 @@ DeviceApi_Turing.prototype.SetCustomLED = function (Obj) {
                 ColorStage = 0;
             }
 
+            //var iKey =  Matrix_key.indexOf(Matrix_LEDCode_DarkProject[obj]);
             for(var iIndex = 0; iIndex < Matrix_LEDCode_DarkProject.length; iIndex++)
             { 
                 for(var i = 0; i < Matrix_LED.length; i++)
@@ -1513,8 +1512,8 @@ DeviceApi_Turing.prototype.SetCustomLED = function (Obj) {
                 {
                     if (MatrixColorMode[iColorMode].colorMode == 3 && Matrix_LEDCode_DarkProject[iIndex] == Matrix_LED[i] && MatrixColorMode[iColorMode].frame_selection_range[i])
                     {
-                        var iIndexGroup = parseInt(iIndex/8);
-                        var iIndexQuotient = iIndex%8;
+                        var iIndexGroup = parseInt(iIndex/6);
+                        var iIndexQuotient = iIndex%6;
                         DataBuffer[iMatrixLength*3+iIndexGroup] |= Math.pow(2,iIndexQuotient);//Binary To Byte By OR method
                         break;
                     }
@@ -1561,18 +1560,28 @@ DeviceApi_Turing.prototype.SendCustomLEDColor2Device = function (Obj) {
                  
     //-----------------------------------
     return new Promise(function (resolve) {
-        
-       Data = new Buffer(new Array(264));
-       Data[0] = 0x08;
-       Data[1] = 0x08;
-       Data[2] = m_DeviceProfile[iProfile];
-       Data[3] = iCustomNum;
+               
+       (function SetAp(j) {
+            if (j < 2) {
+                Data = new Buffer(new Array(264));
+                Data[0] = 0x08;
+                Data[1] = 0x08;
+                Data[2] = m_DeviceProfile[iProfile];
+                Data[3] = iCustomNum;
+                Data[4] = j; //DataNum
 
-       for (var i = 0; i < 251; i++)
-           Data[4 + i] = DataBuffer[i];
-           _thisDevice_Turing.HidWrite(Data,150).then(function () {
-              resolve("12");
-       });
+                for (var i = 0; i < 251; i++)
+                    Data[5 + i] = DataBuffer[251 * j + i];
+                    _thisDevice_Turing.HidWrite(Data,50).then(function () {
+                    SetAp(j + 1);
+                });
+            } else {
+                Sleep(100).then(function() {
+                   resolve("12");
+                });
+            }
+        })(0);
+
     });
 }
 DeviceApi_Turing.prototype.SendCustomLEDFrame2Device = function (Obj) {
@@ -1585,18 +1594,27 @@ DeviceApi_Turing.prototype.SendCustomLEDFrame2Device = function (Obj) {
                  
     //-----------------------------------
     return new Promise(function (resolve) {
-        
-       Data = new Buffer(new Array(264));
-       Data[0] = 0x08;
-       Data[1] = 0x09;
-       Data[2] = m_DeviceProfile[iProfile];
-       Data[3] = iCustomNum;
+               
+        (function SetAp(j) {
+            if (j < 2) {
+                Data = new Buffer(new Array(264));
+                Data[0] = 0x08;
+                Data[1] = 0x09;
+                Data[2] = m_DeviceProfile[iProfile];
+                Data[3] = iCustomNum;
+                Data[4] = j; //DataNum
 
-       for (var i = 0; i < 251; i++)
-           Data[4 + i] = DataBuffer[i];
-           _thisDevice_Turing.HidWrite(Data,150).then(function () {
-              resolve("12");
-       });
+                for (var i = 0; i < 251; i++)
+                    Data[5 + i] = DataBuffer[251 * j + i];
+                    _thisDevice_Turing.HidWrite(Data,50).then(function () {
+                    SetAp(j + 1);
+                });
+            } else {
+                Sleep(100).then(function() {
+                   resolve("12");
+                });
+            }
+        })(0);
     });
 }
 DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
@@ -1609,18 +1627,27 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
                  
     //-----------------------------------
     return new Promise(function (resolve) {
-        
-       Data = new Buffer(new Array(264));
-       Data[0] = 0x08;
-       Data[1] = 0x0a;
-       Data[2] = m_DeviceProfile[iProfile];
-       Data[3] = iCustomNum;
-
-       for (var i = 0; i < 251; i++)
-           Data[4 + i] = DataBuffer[i];
-           _thisDevice_Turing.HidWrite(Data,150).then(function () {
-              resolve("12");
-       });
+               
+       (function SetAp(j) {
+           if (j < 2) {
+                Data = new Buffer(new Array(264));
+                Data[0] = 0x08;
+                Data[1] = 0x0a;
+                Data[2] = m_DeviceProfile[iProfile];
+                Data[3] = iCustomNum;
+                Data[4] = j; //DataNum
+            
+                for (var i = 0; i < 251; i++)
+                    Data[5 + i] = DataBuffer[251 * j + i];
+                    _thisDevice_Turing.HidWrite(Data,50).then(function () {
+                    SetAp(j + 1);
+                });
+            } else {
+                Sleep(100).then(function() {
+                   resolve("12");
+                });
+            }
+        })(0);
     });
 }
 //--------------------------------------------------------------------
@@ -1658,20 +1685,35 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
      }
     DeviceApi_Turing.prototype.SetLEDEffect = function (Obj,callback) 
     {
-        var iProfile = m_iCurProfile;//Profile 1
+        var iProfile = Obj.iProfile;//Profile 1
         var Data = new Buffer(new Array(265));
         m_iDeviceEffect = Obj.iLEDMode;
         m_iCustomLEDNum = Obj.iCustomLEDNum;
         
+        if (iProfile == undefined)
+            iProfile = m_iCurProfile;
+
+        if (Obj.iCustomLEDNum == undefined) {
+            var iCustomLEDNum = 0;
+            for(var i = 0; i<m_ApplyConfig.profile_info[iProfile].fiveDefaultLedCode.length; i++)
+            {
+                if (m_ApplyConfig.profile_info[iProfile].fiveDefaultLedCode[i].projectCode!=0)
+                    iCustomLEDNum++;
+            }
+            m_iCustomLEDNum = iCustomLEDNum;
+            
+        }
         //-----------------------------------
         
         let ObjProfile = {
-            iProfile: m_iCurProfile
+            iProfile: iProfile
         }
 
          return new Promise(function (resolve) {
-            _thisDevice_Turing.SetProfileInfo2Device(ObjProfile).then(function () {
-                resolve("12");
+            Sleep(100).then(function() {
+                _thisDevice_Turing.SetProfileInfo2Device(ObjProfile).then(function () {
+                    resolve("12");
+                });
             });
 
         });
@@ -1699,17 +1741,17 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
         Data[4+0] = ReportRateArr[m_iDeviceReportRate]; 
 
         Data[4+3] = m_iDeviceEffect; 
-        if (m_iDeviceEffect == 15) //Custom Mode
+        
+        Data[4+136] = 0; //Coustom_Mode
+        if (m_iCustomLEDNum>0)
         {
-            Data[4+127] = m_iCustomLEDNum; //Total coustom num 1~5
-            Data[4+128] = 1; //Current coustom num
-            Data[4+129] = 1; //LED_Status
-        } 
-        else 
+            Data[4+137] = m_iCustomLEDNum; //Current coustom num
+            Data[4+138] = m_iCustomLEDNum; //Total coustom num 1~5
+        }
+        else
         {
-            Data[4+127] = 0xff; //Total coustom num 1~5
-            Data[4+128] = 1; //Current coustom num
-            Data[4+129] = 1; //LED_Status
+            Data[4+137] = 1; //Current coustom num
+            Data[4+138] = 0xff; //Total coustom num 1~5
         }
 
         //-----------------------------------
@@ -1791,6 +1833,26 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
                     // if(j!=0)
                     
             _thisDevice_Turing.HidWrite(Data,100).then(function () {
+                resolve("SendEnableEP2 Done");
+            });
+
+        });
+        //-----------------------------------
+
+    }
+    DeviceApi_Turing.prototype.GetDeviceType = function () {
+     
+        iEP2DataType = 0xf8;
+        var Data = new Buffer(new Array(264));
+    
+        Data[0] = 0x08;
+        Data[1] = 0x20;
+        Data[2] = 0x87;
+                     
+        //-----------------------------------   
+        return new Promise(function (resolve) {
+                    
+            _thisDevice_Turing.HidWrite(Data,200).then(function () {
                 resolve("SendEnableEP2 Done");
             });
 
@@ -2094,6 +2156,11 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
                 }
                 else
                 {
+                    for (let index = 0; index < doc.KeyBoardArray.length; index++) {
+                        m_ApplyConfig.profile_info[index].assignedKeyboardKeys = doc.KeyBoardArray[index].assignedKeyboardKeys;
+                        m_ApplyConfig.profile_info[index].fiveDefaultLedCode = doc.KeyBoardArray[index].fiveDefaultLedCode;
+                        
+                    }
                     
                     today2 =new Date();
                     var ResultTime = today2.getTime() - CountTime; 
@@ -2259,25 +2326,30 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
                     {
                         AppDataPath = env.appRoot+"\\FWUpdate\\Releasenote_lang1.txt";
                     }
+                    
+                    _thisDevice_Turing.ReadAllReleasenote(0,function (strReleasenote) {
+
+                        if (NewFWVersion > OldFWVersion) 
+                        {
+                            Obj2 = {
+                                Type: funcVar.FuncType.Device,
+                                Func: evtType.SendNotification,
+                                Param: {Text:"New Version Detected!",Device:0,FWUpdate:true,OldVersion:OldFWVersion,NewVersion:NewFWVersion,strReleasenote:strReleasenote}
+                            };
+                        }
+                        else
+                        {
+                            Obj2 = {
+                                Type: funcVar.FuncType.Device,
+                                Func: evtType.SendNotification,
+                                Param: {Text:"You Already Have Latest Version",Device:0,FWUpdate:false,OldVersion:OldFWVersion,NewVersion:NewFWVersion,strReleasenote:strReleasenote}
+                            };
+                        }
+                        _thisDevice_Turing.EmitAPI(Obj2);
+                        resolve(NewFWVersion);
+                        
+                    });
          
-                    if (NewFWVersion > OldFWVersion) 
-                    {
-                        Obj2 = {
-                            Type: funcVar.FuncType.Device,
-                            Func: evtType.SendNotification,
-                            Param: {Text:"New Version Detected!",Device:0,FWUpdate:true,OldVersion:OldFWVersion,NewVersion:NewFWVersion}
-                        };
-                    }
-                    else
-                    {
-                        Obj2 = {
-                            Type: funcVar.FuncType.Device,
-                            Func: evtType.SendNotification,
-                            Param: {Text:"You Already Have Latest Version",Device:0,FWUpdate:false,OldVersion:OldFWVersion,NewVersion:NewFWVersion}
-                        };
-                    }
-                    _thisDevice_Turing.EmitAPI(Obj2);
-                    resolve(NewFWVersion);
 
                     //---------Releasenote_lang--------
 
@@ -2288,6 +2360,43 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
         });
     }    
 
+    DeviceApi_Turing.prototype.ReadAllReleasenote = function (Obj,callback) {
+        
+        var langNum = 4;
+        var Data = [];
+
+        (function ReadReleasenote(i){
+            
+            if (i < langNum)
+            {
+                var iLang  = i+1;
+                var ReleasenotePath = env.appRoot+"\\FWUpdate\\Releasenote_lang" + iLang +".txt";
+                
+                fs.exists(ReleasenotePath, function (bexists) 
+                {
+                    if (bexists) 
+                    {
+                        fs.readFile(ReleasenotePath,'utf8', function (err,data){
+                            if (err)throw err;
+                            Data.push(data);
+                        
+                            ReadReleasenote(i+1);
+                        });
+                    } 
+                    else 
+                    {
+                        ReadReleasenote(i+1);
+                    }
+                
+                });
+            }
+            else
+            {
+                callback(Data);
+            }
+    
+        })(0);
+    };
     
     DeviceApi_Turing.prototype.LaunchFWUpdate = function (Obj,callback) //RunAppUntilTerminate
     {
@@ -2298,7 +2407,10 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
 
         // _thisDevice_Turing.RunAppUntilTerminate(AppPath);
         env.log("DeviceApi","FWUpdate-AppPath:",AppPath);
-        _thisDevice_Turing.RunApplication(AppPath,callback);
+        _thisDevice_Turing.RunApplication(AppPath,function(){
+
+            
+        });
         //var win = window.exec(AppPath);
         
         //env.log("DeviceApi","FWUpdate-win:",win);
@@ -2364,7 +2476,13 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
 
     DeviceApi_Turing.prototype.HIDEP2Data_Turing = function (ObjEP2Data) 
     {    
-        if (ObjEP2Data[0]== 0x04  && iEP2DataType == 0x81) //EP2 GetDeviceProfieID
+        if (ObjEP2Data[0]== 0x04 && ObjEP2Data[1]== 0xf8 && ObjEP2Data[2]== 0x20  && ObjEP2Data[3]== 0x87&& iEP2DataType == 0xf8)
+        {   
+            iEP2DataType = 0;  
+            iDeviceType = ObjEP2Data[7];
+
+        }
+        else if (ObjEP2Data[0]== 0x04  && iEP2DataType == 0x81) //EP2 GetDeviceProfieID
         {       
             iEP2DataType = 0;   
             var iProfile = m_DeviceProfile.indexOf(ObjEP2Data[1]);
@@ -2381,9 +2499,6 @@ DeviceApi_Turing.prototype.SendCustomLEDEffect2Device = function (Obj) {
             };
             _thisDevice_Turing.EmitAPI(Obj2);
         }
-
-        
-
     } 
     
     //DeviceApi_Turing.prototype.AppDB = false;

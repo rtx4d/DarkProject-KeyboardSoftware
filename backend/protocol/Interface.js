@@ -168,7 +168,7 @@ var ProtocolInterface = (function (_super) {
         //-------------SpecEffects---------------------
         if (_this.SpecEffects == undefined)
         {
-            _this.SpecEffects = new SpecEffects.SpecEffects();
+            _this.SpecEffects =  SpecEffects.getInstance();
         }   
         //-------------CustomKeyEffects---------------------
         if (_this.CustomKeyEffects == undefined)
@@ -181,14 +181,15 @@ var ProtocolInterface = (function (_super) {
         {
             _this.InitDevice();
         }
-        _this.ReadSyncEffectDB();//Only For DarkProject
+        //-------------SwitchSyncLEDPreview---------------------
 
         var ObjSync = {
             iMode: 1,
             bStart: 1
         };
         _this.SwitchSyncLEDPreview(ObjSync);
-        //-------------InitDevice---------------------
+        //_this.ReadSyncEffectDB();//Only For DarkProject
+        //-------------SwitchSyncLEDPreview---------------------
 
                    
         } catch (ex) {
@@ -227,22 +228,26 @@ var ProtocolInterface = (function (_super) {
                         var rtn = _this.hiddevice.DeviceDataCallback(0xff00, 0xff00,iVID_Turing,iPID_Turing, _this.HIDEP2Data_Turing);
                         env.log('Interface', 'Init DeviceDataCallback : ', rtn);
                    
-                        _this.DeviceApi_Turing.DevicePlug(Obj3);
                     }
                     else
                     {
                         var rtn = _this.hiddevice.DeviceDataCallback(0xff00, 0xff00,iVID_Turing,iPID_Turing, _this.HIDEP2Data_Turing);
-                        _this.DeviceApi_Turing.DevicePlug(Obj3);
                     }
-                    //----------------GetDeviceProfieID--------------
-                    _this.DeviceApi_Turing.ReadFWVersion();
-                    setTimeout(function () {
-                       _this.DeviceApi_Turing.GetDeviceProfieID().then(function () {
-                           
-                           
-                       });
-                    }, 2000);
-                    //----------GetDeviceProfieID--------------
+                    _this.DeviceApi_Turing.DevicePlug(Obj3, function(param0) {
+                        if (param0) {
+                            
+                            //----------------GetDeviceProfieID--------------
+                            _this.DeviceApi_Turing.ReadFWVersion();
+                            setTimeout(function () {
+                               _this.DeviceApi_Turing.GetDeviceProfieID().then(function () {
+
+
+                               });
+                            }, 2000);
+                            //----------GetDeviceProfieID--------------
+                        }
+
+                    });
 
                     // //-------Device Plug-------------
                     // var Obj3 = {
@@ -426,24 +431,26 @@ var ProtocolInterface = (function (_super) {
                             iDevice: 0,
                             bPlug: InitDeviceFlag[0]
                         };
-                        _this.DeviceApi_Turing.DevicePlug(Obj3);
-
-                        var Obj2 = 
-                        {
-                            Type: funcVar.FuncType.System,
-                            Func: evtType.RefreshDevice,
-                            Param: InitDeviceFlag
-                        };
-                        _this.emit(evtType.ProtocolMessage, Obj2);
-                        
-                        _this.DeviceApi_Turing.ReadFWVersion();
-                        //----------------GetDeviceProfieID--------------
-                        setTimeout(function () {
-                            _this.DeviceApi_Turing.GetDeviceProfieID().then(function () 
-                            {
-
-                            });
-                        }, 2000);
+                        _this.DeviceApi_Turing.DevicePlug(Obj3, function(param0) {
+                            if (param0) {
+                                var Obj2 = 
+                                {
+                                    Type: funcVar.FuncType.System,
+                                    Func: evtType.RefreshDevice,
+                                    Param: InitDeviceFlag
+                                };
+                                _this.emit(evtType.ProtocolMessage, Obj2);
+                                
+                                _this.DeviceApi_Turing.ReadFWVersion();
+                                //----------------GetDeviceProfieID--------------
+                                setTimeout(function () {
+                                    _this.DeviceApi_Turing.GetDeviceProfieID().then(function () 
+                                    {
+        
+                                    });
+                                }, 2000);
+                            }
+                        });
                         //----------------GetDeviceProfieID--------------
                         
                         clearInterval(DeviceFlags);
@@ -482,7 +489,8 @@ var ProtocolInterface = (function (_super) {
                 iDevice: 0,
                 bPlug: InitDeviceFlag[0]
             };
-            _this.DeviceApi_Turing.DevicePlug(Obj3);
+            _this.DeviceApi_Turing.DevicePlug(Obj3, function(param0) {
+            });
             //_this.Deviceswitch(Obj3);
             //-------Device Unplug-------------
             
@@ -908,9 +916,9 @@ var ProtocolInterface = (function (_super) {
                 G: parseInt(result[2], 16),
                 B: parseInt(result[3], 16)
                 } 
-            }
+            }: null;
             //[parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16) ]
-            : null;
+             
         }
         catch{
             return 1;

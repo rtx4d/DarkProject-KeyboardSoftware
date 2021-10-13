@@ -20,28 +20,55 @@ var g_DataAudio;
 'use strict';
 //------------coordinate.js-------------
 //[0]:左上角 [1]:右上角 [2]:右下角 [3]:左下角
-var keyboard =  [//Device1:Turing_Kemove
+var keyboard =  [//Device1:DarkProject-KD3_104
 
-	//Esc~Bksp
+	//Esc~Pause
 	{ X1: 8, X2: 35, Y1: 50, Y2: 77 },
-	{ X1: 41, X2: 68, Y1: 50, Y2: 77 },
-	{ X1: 75, X2: 102, Y1: 50, Y2: 77 },
+	{ X1: 73, X2: 100, Y1: 50, Y2: 77 },
 	{ X1: 107, X2: 134, Y1: 50, Y2: 77 },
-	{ X1: 141, X2: 168, Y1: 50, Y2: 77 },
-	{ X1: 173, X2: 200, Y1: 50, Y2: 77 },
-	{ X1: 207, X2: 234, Y1: 50, Y2: 77 },
-	{ X1: 239, X2: 273, Y1: 50, Y2: 77 },
-	{ X1: 272, X2: 299, Y1: 50, Y2: 77 },
-	{ X1: 305, X2: 332, Y1: 50, Y2: 77 },
-	{ X1: 339, X2: 366, Y1: 50, Y2: 77 },
-	{ X1: 372, X2: 399, Y1: 50, Y2: 77 },
+	{ X1: 140, X2: 167, Y1: 50, Y2: 77 },
+	{ X1: 174, X2: 201, Y1: 50, Y2: 77 },
+	{ X1: 222, X2: 249, Y1: 50, Y2: 77 },
+	{ X1: 255, X2: 282, Y1: 50, Y2: 77 },
+	{ X1: 289, X2: 316, Y1: 50, Y2: 77 },
+	{ X1: 323, X2: 350, Y1: 50, Y2: 77 },
+	{ X1: 371, X2: 398, Y1: 50, Y2: 77 },
 	{ X1: 405, X2: 432, Y1: 50, Y2: 77 },
-	{ X1: 437, X2: (437 + 62), Y1: 50, Y2: 77 },
+	{ X1: 438, X2: 465, Y1: 50, Y2: 77 },
+	{ X1: 470, X2: 504, Y1: 50, Y2: 77 },
+	{ X1: 505, X2: 532, Y1: 50, Y2: 77 },
+	{ X1: 539, X2: 566, Y1: 50, Y2: 77 },
+	{ X1: 572, X2: 599, Y1: 50, Y2: 77 },
 
-	//Tab~K29Slash
-	{ X1: 8, X2: (8 + 44), Y1: 83, Y2: (83 + 27) },
-	{ X1: 58, X2: (58 + 27), Y1: 83, Y2: (83 + 27) },
-	{ X1: 91, X2: (91 + 27), Y1: 83, Y2: (83 + 27) },
+	//Period~NumMinus
+	{ X1: 8,   X2: (35  + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 41,  X2: (68  + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 75,  X2: (102 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 107, X2: (134 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 141, X2: (168 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 173, X2: (200 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 207, X2: (234 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 239, X2: (273 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 272, X2: (299 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 305, X2: (332 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 339, X2: (366 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 372, X2: (399 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 405, X2: (432 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 437, X2: (437 + 62), Y1: 50, Y2: (50 + 27) },
+
+	{ X1: 505, X2: (505 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 537, X2: (537 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 571, X2: (571 + 27), Y1: 50, Y2: (50 + 27) },
+
+	{ X1: 570, X2: (570 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 600, X2: (600 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 630, X2: (630 + 27), Y1: 50, Y2: (50 + 27) },
+	{ X1: 660, X2: (660 + 27), Y1: 50, Y2: (50 + 27) },
+
+	//Tab~NumPlus
+	{ X1: 8,   X2: (8 + 44)  , Y1: 83, Y2: (83 + 27) },
+	{ X1: 58,  X2: (58 + 27) , Y1: 83, Y2: (83 + 27) },
+	{ X1: 91,  X2: (91 + 27) , Y1: 83, Y2: (83 + 27) },
 	{ X1: 125, X2: (125 + 27), Y1: 83, Y2: (83 + 27) },
 	{ X1: 157, X2: (157 + 27), Y1: 83, Y2: (83 + 27) },
 	{ X1: 190, X2: (190 + 27), Y1: 83, Y2: (83 + 27) },
@@ -53,6 +80,15 @@ var keyboard =  [//Device1:Turing_Kemove
 	{ X1: 388, X2: (388 + 27), Y1: 83, Y2: (83 + 27) },
 	{ X1: 421, X2: (421 + 27), Y1: 83, Y2: (83 + 27) },
 	{ X1: 453, X2: (453 + 45), Y1: 83, Y2: (83 + 27) },
+
+	{ X1: 460, X2: (460 + 27), Y1: 83, Y2: (83 + 27) },
+	{ X1: 490, X2: (490 + 27), Y1: 83, Y2: (83 + 27) },
+	{ X1: 520, X2: (520 + 27), Y1: 83, Y2: (83 + 27) },
+	
+	{ X1: 570, X2: (570 + 27), Y1: 83, Y2: (83 + 27) },
+	{ X1: 600, X2: (600 + 27), Y1: 83, Y2: (83 + 27) },
+	{ X1: 630, X2: (630 + 27), Y1: 83, Y2: (83 + 27) },
+	{ X1: 660, X2: (660 + 27), Y1: 83, Y2: (83 + 27) },
 	//Caplock~Enter
 
 	{ X1: 8, X2: (8 + 53), Y1: 116, Y2: (116 + 27) },
@@ -68,6 +104,10 @@ var keyboard =  [//Device1:Turing_Kemove
 	{ X1: 364, X2: (364 + 27), Y1: 116, Y2: (116 + 27) },
 	{ X1: 397, X2: (397 + 27), Y1: 116, Y2: (116 + 27) },
 	{ X1: 431, X2: (431 + 66), Y1: 116, Y2: (116 + 27) },
+	
+	{ X1: 570, X2: (570 + 27), Y1: 116, Y2: (116 + 27) },
+	{ X1: 600, X2: (600 + 27), Y1: 116, Y2: (116 + 27) },
+	{ X1: 630, X2: (630 + 27), Y1: 116, Y2: (116 + 27) },
 	//LShift~RShift
 	{ X1: 8, X2: (8 + 70), Y1: 149, Y2: (149 + 27) },
 	{ X1: 83, X2: (83 + 27), Y1: 149, Y2: (149 + 27) },
@@ -81,6 +121,13 @@ var keyboard =  [//Device1:Turing_Kemove
 	{ X1: 347, X2: (347 + 27), Y1: 149, Y2: (149 + 27) },
 	{ X1: 380, X2: (380 + 27), Y1: 149, Y2: (149 + 27) },
 	{ X1: 413, X2: (413 + 85), Y1: 149, Y2: (149 + 27) },
+	
+	{ X1: 537, X2: (537 + 27), Y1: 149, Y2: (149 + 27) },
+
+	{ X1: 604, X2: (604 + 27), Y1: 149, Y2: (149 + 27) },
+	{ X1: 638, X2: (638 + 27), Y1: 149, Y2: (149 + 27) },
+	{ X1: 671, X2: (671 + 27), Y1: 149, Y2: (149 + 27) },
+	{ X1: 704, X2: (704 + 27), Y1: 149, Y2: (149 + 61) },
 	//Lctrl~FN
 	{ X1: 8, X2: (8 + 44), Y1: 182, Y2: (182 + 27) },
 	{ X1: 56, X2: (56 + 27), Y1: 182, Y2: (182 + 27) },
@@ -90,21 +137,23 @@ var keyboard =  [//Device1:Turing_Kemove
 	{ X1: 386, X2: (386 + 27), Y1: 182, Y2: (182 + 27) },
 	{ X1: 421, X2: (421 + 27), Y1: 182, Y2: (182 + 27) },
 	{ X1: 453, X2: (453 + 45), Y1: 182, Y2: (182 + 27) },
+	
+	{ X1: 504, X2: (504 + 27), Y1: 182, Y2: (182 + 27) },
+	{ X1: 537, X2: (537 + 27), Y1: 182, Y2: (182 + 27) },
+	{ X1: 571, X2: (571 + 27), Y1: 182, Y2: (182 + 27) },
+
+	{ X1: 605, X2: (605 + 62), Y1: 182, Y2: (182 + 27) },
+	{ X1: 671, X2: (671 + 27), Y1: 182, Y2: (182 + 27) },
   ];
 
-var keycodes = [
-	"esc"   , "n1"  , "n2" , "n3" , "n4"  , "n5"  , "n6"  , "n7"  , "n8" , "n9"  , "n0"  ,"minus", "plus","bksp"  ,
-  	"tab"   , "q"   , "w"  , "e"  , "r"   , "t"   , "y"   , "u"   , "i"  , "o"   , "p"   , "lqu" , "rqu" , "k29"  ,
-  	"caps"  , "a"   , "s"  , "d"  , "f"   , "g"   , "h"   , "j"   , "k"  , "l"   , "sem" , "quo" ,"enter" ,
-  	"lshift", "z"  , "x"   , "c"   , "v"  , "b"   , "n"   , "m"  ,"comma","dot"  ,"qmark","rshift",
-  	"lctrl" ,"win", "lalt" ,"space","ralt","book" ,"rctrl", "fn"  , 
-    // "Escape","F1","F2","F3","F4","F5","F6","F7","F8","F9","F10","F11","F12","PrintScreen","ScrollLock","Pause","Backquote","Digit1","Digit2","Digit3","Digit4","Digit5","Digit6","Digit7","Digit8","Digit9","Digit0",
-    // "Minus","Equal","Backspace","Insert","Home","PageUp","NumLock","NumpadDivide","NumpadMultiply","NumpadSubtract",
-    // "Tab","KeyQ","KeyW","KeyE","KeyR","KeyT","KeyY","KeyU","KeyI","KeyO","KeyP","BracketLeft","BracketRight","Backslash","Delete","End","PageDown","Numpad7","Numpad8","Numpad9","NumpadAdd",
-    // "CapsLock","KeyA","KeyS","KeyD","KeyF","KeyG","KeyH","KeyJ","KeyK","KeyL","Semicolon","Quote","Enter","Numpad4","Numpad5","Numpad6",
-    // "ShiftLeft","KeyZ","KeyX","KeyC","KeyV","KeyB","KeyN","KeyM","Comma","Period","Slash","ShiftRight","ArrowUp","Numpad1","Numpad2","Numpad3","NumpadEnter",
-	// "ControlLeft","OSLeft","AltLeft","Space","AltRight","Function","ContextMenu","ControlRight","ArrowLeft","ArrowDown","ArrowRight","Numpad0","NumpadDecimal"
-];
+  var keycodes = [
+	"esc"   , "f1"  , "f2" , "f3" , "f4"  , "f5"  , "f6"  , "f7"  , "f8"  , "f9" , "f10" , "f11" , "f12" , "print", "scroll", "pause" ,
+	"period", "n1"  , "n2" , "n3" , "n4"  , "n5"  , "n6"  , "n7"  , "n8" , "n9"  , "n0"  ,"minus", "plus","bksp"  , "insert", "home" , "pup" ,
+	"tab"   , "q"   , "w"  , "e"  , "r"   , "t"   , "y"   , "u"   , "i"  , "o"   , "p"   , "lqu" , "rqu" , "k29"  , "delete", "end"   , "pdown",
+	"caps"  , "a"   , "s"  , "d"  , "f"   , "g"   , "h"   , "j"   , "k"  , "l"   , "sem" , "quo" ,"enter" ,
+	"lshift", "z"  , "x"  , "c"   , "v"   , "b"   , "n"   , "m"  ,"comma","dot"  ,"qmark","rshift", "up"    ,
+	"lctrl" , "win" ,"lalt","space","ralt", "fn"  ,"book" ,"rctrl", "left", "down" , "right" ,
+	];
 
 
 var m_EffectName =  ['Cycle','Breathing','Static'];
@@ -798,9 +847,9 @@ class Manager {
 		if (this.effect) this.effect.draw(ctx);
 	}
 	renderAll() {
-		// for (let i=0; i<this.devices.length; ++i)
-		// 	for (let j=0; j<this.outputs[i].length; ++j)
-		// 		assigncolor(this.outputs[i][j], [0,0,0]);
+		for (let i=0; i<this.devices.length; ++i)
+			for (let j=0; j<this.outputs[i].length; ++j)
+				assigncolor(this.outputs[i][j], [0,0,0]);
 
 		for (let i=0; i<this.devices.length; ++i) {
 			var device = this.devices[i];

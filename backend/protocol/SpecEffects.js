@@ -14,7 +14,6 @@ var exec = require('child_process').exec;//execFile->exec
 
 var AppObj = require("../dbapi/AppDB");
 
-var m_AudioCap;
 var g_bGetAudioCap = false;
 var g_GetAudioCap = {};
 
@@ -22,6 +21,7 @@ var g_DataAudio;
 //var HID = require('node-hid');
 
 'use strict';
+var _thisSpecEffects;
 //------------coordinate.js-------------
 //[0]:左上角 [1]:右上角 [2]:右下角 [3]:左下角
 var keyboard =  [//Device1:DarkProject-KD3_104
@@ -309,8 +309,15 @@ function hsl2rgb(h, s, l) {
 }
 
 function assigncolor(color, color1) {
-	for (let i=0; i<3; ++i)
-		color[i] = color1[i];
+	
+	try{  
+		for (let i=0; i<3; ++i)
+			color[i] = color1[i];
+
+	} catch(e) {
+		env.log('SpecEffects','assigncolor',`Error:${e}`);
+	}
+
 }
 
 function addcolor(color, color1) {
@@ -523,7 +530,7 @@ class Static extends Effect {
 class AudioCap extends Effect {
 	constructor() {
 		super();
-		this.description = "Wave";
+		this.description = "AudioCap";
 		this.speed = 5;
 		this.bandwidth = 300;
 		this.angle = 0;		// degree
@@ -539,31 +546,34 @@ class AudioCap extends Effect {
 	}
 	render(lights, region, outputs, selects) {
 
-		if (g_DataAudio != null) 
-		{
+		try{  
+			if(_thisSpecEffects.AudioData != undefined){
+				var AudioData = _thisSpecEffects.AudioData;
 
-			for (var i=0; i<lights.length; i++) {
-				if (!selects[i]) continue;
+				for (var i=0; i<lights.length; i++) {
+					if (!selects[i]) continue;
+
+					var light = lights[i];
+					var xAXis = Math.floor((light.x-region.x)*255/(region.width));
+					var yAXis = Math.floor((light.y-region.y)*63/(region.height));
+					// if (AudioData[yAXis][xAXis] == undefined) {
+					// 	var fgdxg = 0;
+					// }
+
 				
-				var light = lights[i];
-				var xAXis = Math.floor((light.x-region.x)*256/(region.width));
-				var yAXis = Math.floor((light.y-region.y)*64/(region.height));
-				// if (g_DataAudio[yAXis][xAXis] == undefined) {
-				// 	var fgdxg = 0;
-				// }
-				
-	
-				var col = [g_DataAudio[yAXis][xAXis].R,g_DataAudio[yAXis][xAXis].G,g_DataAudio[yAXis][xAXis].B];
-				var output = [0,0,0];
-				if (col[0] >0 || col[1] >0 || col[2] >0) {
-					
-					output = this.Color1;
-					this.blendColor(outputs[i], output);
+					var col = [AudioData[yAXis][xAXis].R,AudioData[yAXis][xAXis].G,AudioData[yAXis][xAXis].B];
+					var output = [0,0,0];
+					if (col[0] >0 || col[1] >0 || col[2] >0) {
+
+						output = this.Color1;
+						this.blendColor(outputs[i], output);
+					}
 				}
 			}
+		} catch(e) {
+			env.log('SpecEffects','AudioCap',`Error:${e}`);
 		}
 
-		
 		
 	}
 }
@@ -876,7 +886,7 @@ class Fire extends Effect {
 		for (let i=0; i<lights.length; ++i) {
 			if (!selects[i]) continue;
 			var light = lights[i];
-			var output = [255, 7, 0];
+			var output = [255, 0, 0];
 			var x = (light.x - region.x) / this.size + 0.5;
 			var y = (light.y - region.y) / this.size + 0.5;
 			var x0 = x | 0;  var x1 = x0 + 1;
@@ -895,11 +905,10 @@ class Fire extends Effect {
 	}
 }
 
-
 class LinearWave extends Effect {
 	constructor() {
 		super();
-		this.description = "直線波紋(晴朗)";
+		this.description = "LinearWave";
 		this.speed = 10;
 		this.bandwidth = 100;
 		this.gap = 0;
@@ -1036,7 +1045,7 @@ class LinearWave extends Effect {
 class Ripple extends Effect {
 	constructor() {
 		super();
-		this.description = "擴散波紋";
+		this.description = "Ripple";
 		this.speed = 10;
 		this.bandwidth = 50;
 		this.gap = 0;
@@ -1600,91 +1609,22 @@ class Manager {
 var manager = new Manager();
 
 
-function init() {
-	//if (++images_count < images.length) return;
-	manager.pushDevice(new Device('Kemove', keyboard, keycodes));
-	// manager.pushDevice(new Device('M20', keyboard2, keycodes));
-	// manager.pushDevice(new Device('H6LV2', mouse, H6LV2_keycodes));
-
-	manager.pushEffect(new Wave());
-
-	if (env.isWindows) 
-	{
-
-		//----------------AudioCap-------------------
-		m_AudioCap = require(`./nodeDriver/win64/AudioCap.node`);
-		
-		var bState = 0;
-		bState = m_AudioCap.Initialization();
-		m_AudioCap.CapStart(0);
-		
-		m_AudioCap.FFTMode('Set',0);
-		m_AudioCap.ComboFrgdMode('Set',21);
-		m_AudioCap.ComboBkgdMode('Set',0);
-		m_AudioCap.SetAmplitude(1500);//3000
-		
-		var color= Buffer.alloc(18);
-		color[0] = 255;
-		color[1] = 255;
-		color[2] = 255;
-		m_AudioCap.SetCustemColor(1,color);
-		g_GetAudioCap = setInterval(AudioCapture, 50);
-		
-		//----------------AudioCap2-------------------
-	}
-	
-}
-//------------init.js---------------
-
-//------------animation.js---------------
-//var canvas = document.getElementById("canvas");
-//var ctx    = canvas.getContext('2d');
-
-// var canvas;
-// canvas.Width = 980;
-// canvas.height = 300;
-
 var scale = 0.5;
 //ctx.scale(scale, scale);
 
 var all = true;
 var draw = true;
 
-function AudioCapture() {
-
-	g_DataAudio = m_AudioCap.GetGdColor();
-}
-
-function update() {
-    // try
-    // {
-		manager.update();
-		all ? manager.renderAll() : manager.render();
-	// }
-	// catch(ex)
-	// {
-	// 	//env.log("SpecEffects","SpecEffects","New SpecEffects INSTANCE");
-    // }
-
-}
-//------------animation.js---------------
 //------------fps.js---------------
-
-
-
-//------------fps.js---------------
-var SpecEffects = function() {
+class SpecEffects{
+    constructor() {    
         try{
-            _thisSpec = this;
+			_thisSpecEffects = this;
+			
+			this.initDevice();
+			this.initAudio();
 
-            init();
-            //-----------test----------
-            //var iRGB = hsl2rgb(0,100,50);
-
-            var id;
-            if (!id) {id = setInterval(update, 10);}
-            else     {clearInterval(id); id = 0;}
-            //-----------test----------
+			this.StartTimer('update',10);
 
             env.log("SpecEffects","SpecEffects","New SpecEffects INSTANCE");
             
@@ -1692,27 +1632,93 @@ var SpecEffects = function() {
             env.log("SpecEffects Error","SpecEffects",`ex${ex.message}`);
         }
     }
-    SpecEffects.prototype.RunFunction = function (Obj,callback) {
-    	try{
-            // env.log('DeviceApi','RunFunction',`Function:${Obj.Func}`);
-	    	if (Obj.Type !== funcVar.FuncType.Device)
-	    		throw new Error('Type must be Device.');
 
-	    	var fn = _thisSpec[Obj.Func];
+    static getInstance() {
+        if (this.instance) {
+            env.log('SpecEffects', 'getInstance', `Get exist SpecEffects() INSTANCE`);
+            return this.instance;
+        }
+        else {
+            env.log('SpecEffects', 'getInstance', `New SpecEffects() INSTANCE`);
+            this.instance = new SpecEffects();
 
-	    	if (fn === undefined || !funcVar.FuncName.hasOwnProperty(Obj.Func))
-	    		throw new Error(`Func error of ${Obj.Func}`);
-	    	fn(Obj.Param, callback);
-	    }catch(ex){
-            env.log('SpecEffects','RunFunction',`SpecEffects.RunFunction error : ${ex.message}.`);
-	    	callback(errCode.ValidateError, ex);
-	    }
-    };
+            return this.instance;
+        }
+	}
+	//device
+	initDevice() {
+		manager.pushDevice(new Device('Kemove', keyboard, keycodes));
+	
+		manager.pushEffect(new Wave());
+	}
 
-    //-------------Function------------
+	//audio	
+	initAudio(){
+        try {
+            env.log('SpecEffects', 'initAudio', " New initAudio INSTANCE. ");
 
-    SpecEffects.prototype.GetRenderColors = function (Obj) 
-    {
+            if (env.isWindows) {
+				_thisSpecEffects.AudioCap = require(`./nodeDriver/win64/AudioCap.node`);
+
+				_thisSpecEffects.AudioCap.Initialization();
+				_thisSpecEffects.AudioCap.CapStart(0);
+				_thisSpecEffects.AudioCap.FFTMode('Set',0);
+				_thisSpecEffects.AudioCap.ComboFrgdMode('Set',21);
+				_thisSpecEffects.AudioCap.ComboBkgdMode('Set',0);
+				_thisSpecEffects.AudioCap.SetAmplitude(1500);//3000
+
+				var color= Buffer.alloc(18);
+				color[0] = 255;
+				color[1] = 255;
+				color[2] = 255;
+				_thisSpecEffects.AudioCap.SetCustemColor(1,color);
+				//this.StartTimer('AudioCapture',50);
+			}		        
+
+        } catch (ex) {
+            env.log('SpecEffects Error', 'initAudio', `ex:${ex.message}`);
+        }
+	}
+	SwitchTimer(bSwitch)
+	{
+		if (bSwitch) {
+			//this.StartTimer('AudioCapture',50);
+			this.StartTimer('update',10);
+			
+		} else {
+			this.StopTimer('AudioCapture',50);
+			this.StopTimer('update',10);
+		}
+	}
+	AudioCapture() {
+		_thisSpecEffects.AudioData = _thisSpecEffects.AudioCap.GetGdColor();
+	}
+	update() {
+		manager.update();
+		manager.renderAll();
+	}
+
+	StartTimer(func, time){
+		var TimerIDName = func + 'TimerID';		
+		var FunctionName = func;
+		var Time = time;
+
+		if(_thisSpecEffects[TimerIDName] != undefined)		
+			clearInterval(_thisSpecEffects[TimerIDName]);
+
+		_thisSpecEffects[TimerIDName] = setInterval(_thisSpecEffects[FunctionName], Time);
+	}
+
+	StopTimer(func){
+		var TimerIDName = func + 'TimerID';
+		
+		if(_thisSpecEffects[TimerIDName] != undefined)		
+			clearInterval(_thisSpecEffects[TimerIDName]);	
+
+		_thisSpecEffects[TimerIDName] = undefined;
+	}
+
+	GetRenderColors(Obj){
         //------------Render-----------------
         return new Promise(function (resolve) {
                    
@@ -1726,8 +1732,8 @@ var SpecEffects = function() {
         //-----------------------------------
     }
 
-    SpecEffects.prototype.SetDeviceBtnAxis = function (Obj) 
-    {
+	SetDeviceBtnAxis(Obj){
+    
 		var DeviceBtnAxis = Obj.DeviceBtnAxis;
 			
 		for (var i=0; i<manager.devices.length; ++i) 
@@ -1755,8 +1761,25 @@ var SpecEffects = function() {
 
 		manager.updateRegion();
 	}
-    SpecEffects.prototype.SetSyncLEDData = function (Obj) 
-    {
+
+	SyncLEDEvent(Obj){
+		env.log('SpecEffects', 'SyncLEDEvent', JSON.stringify(Obj));    
+		console.log('SpecEffects', 'SyncLEDEvent', JSON.stringify(Obj));   
+
+		var csType = Obj.Type;
+		var iKey = Obj.Keycode;
+
+		return new Promise((resolve)=>{
+
+			if (csType != undefined) {
+				manager.event(csType,iKey);
+			}
+
+			resolve(0);
+		});
+	}
+
+	SetSyncLEDData(Obj){
         return new Promise(function (resolve) {
 
 			var iEffectCount = Obj.EffectLibrary.length;
@@ -1790,7 +1813,8 @@ var SpecEffects = function() {
 					var iEffect = Obj.EffectLibrary[i].Effect;
 					manager.pushEffect(eval('new ' + m_EffectName[iEffect] + '()'));
 				}
-			}				   
+			}	
+			var bAudioCapture = false;			   
 			for (var i = 0; i < iEffectCount; i++) {
 				
 				//-----------Synceffect---------------
@@ -1836,12 +1860,16 @@ var SpecEffects = function() {
 				if (effectTemp.radius != undefined) 
 					effectTemp.radius = Synceffect.radius;
 
-				if (m_AudioCap != undefined && Synceffect.amplitude != undefined) 
-					m_AudioCap.SetAmplitude(Synceffect.amplitude);//3000
 					
 				if (effectTemp.gap != undefined) 
 					effectTemp.gap = Synceffect.gap;
 					
+				if (_thisSpecEffects.AudioCap != undefined && Synceffect.amplitude != undefined) 
+					_thisSpecEffects.AudioCap.SetAmplitude(Synceffect.amplitude);//3000
+				
+				if (effectTemp.description == "AudioCap" && Synceffect.check)
+					bAudioCapture = true;
+				
 				//-----------SyncColors---------------
 
 				if (effectTemp.colors != undefined) 
@@ -1900,6 +1928,10 @@ var SpecEffects = function() {
 			// }
 			
 			//------------GetAudioCap--------------
+			if (bAudioCapture)
+				_thisSpecEffects.StartTimer('AudioCapture',50);
+			else
+				_thisSpecEffects.StopTimer('AudioCapture',50);
 			//------------DeviceAxis--------------
 			var DeviceAxis = Obj.DeviceAxis;
 			
@@ -1908,32 +1940,26 @@ var SpecEffects = function() {
 				manager.moveRegionDevice(i,DeviceAxis[i].X, DeviceAxis[i].Y) ;
 				//manager.releaseDevice();
 			}
-			manager.updateRegion();
+			//manager.updateRegion();
 			//------------------------------------
 
             resolve(0);
         });
     }
 
-    SpecEffects.prototype.SyncLEDEvent = function (Obj) 
-    {
-		var csType = Obj.Type;
-		var iKey = Obj.Keycode;
-		
-        return new Promise(function (resolve) {
-			if (csType != undefined) {
-				manager.event(csType,iKey);
-			}
+	
+}
 
-			resolve(0);
-        });
-	}
-    //-------------Function------------
+    // SpecEffects.prototype.SwitchPreviewDevice = function (dev) 
+    // {
+	// 	var csType = dev;
+		
+	// }
 
 
     //-----------------------------------
-    SpecEffects.prototype.AppDB = false;
+    // SpecEffects.prototype.AppDB = false;
     
     // return SpecEffects;
 
-exports.SpecEffects = SpecEffects;
+module.exports = SpecEffects;
